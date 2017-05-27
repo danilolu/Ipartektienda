@@ -1,7 +1,7 @@
 <%@ include file="includes/cabecera.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-	<h2>Formulario de Alta de Productos</h2>
+	<h2>Formulario de Alta de Productos </h2>
 	
 	<jsp:useBean id="producto" scope="request"
 		class="com.ipartek.danilozano.Tipos.Producto" />

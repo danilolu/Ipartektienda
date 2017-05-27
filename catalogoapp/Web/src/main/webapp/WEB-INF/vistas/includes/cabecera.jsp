@@ -19,9 +19,9 @@
 			
 			<li><a href="productocrud">Mantenimiento Productos</a></li>
 	
-			<li><a href="login">Login</a></li>
 			
-			<li><a href="login?opcion=logout">Salir</a></li>
+			
+			<li><a href="/login?opcion=logout">Salir</a></li>
 			
 		</ul>
 	</nav>

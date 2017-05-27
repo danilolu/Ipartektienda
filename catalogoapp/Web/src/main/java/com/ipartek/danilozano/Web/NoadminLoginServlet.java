@@ -29,12 +29,12 @@ import com.ipartek.danilozano.DAL.IdProductoYaExistenteDALException;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/noadmin/login")
+public class NoadminLoginServlet extends HttpServlet {
 
 
 	private static final long serialVersionUID = 1L;
-	private static Logger log = Logger.getLogger(LoginServlet.class);
+	private static Logger log = Logger.getLogger(NoadminLoginServlet.class);
 	/* package */static final String RUTA = "/WEB-INF/vistas/";
 	private static final String RUTA_PRINCIPAL = "/admin/productocrud";
 	private static final String RUTA_LOGIN = RUTA + "/login.jsp";
@@ -113,7 +113,7 @@ public class LoginServlet extends HttpServlet {
 
 		} else if (esUsuarioYaRegistrado) {
 			log.info( nombresesion+" pasa por es usuarioregistrado  " );
-			request.getRequestDispatcher(RUTA_PRINCIPAL).forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
 			
 		} else if (sinParametros) {
 			log.info( nombresesion+" pasa por sinparametros  " );
@@ -138,6 +138,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("usuario", usuario);
 			request.getRequestDispatcher(RUTA_LOGIN).forward(request, response);
 			
-		}
+				}
+	
 	}
-	}
+}

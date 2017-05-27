@@ -71,7 +71,7 @@ public class FiltroUsuarios implements Filter {
 			
 		} else {
 			System.out.println("3 no soy admin");
-			httpResp.sendRedirect("/login");//.forward(request, response);
+			httpResp.sendRedirect("/noadmin/login");//.forward(request, response);
 			System.out.println("4 se ha enviado a login");
 			
 			//request.getRequestDispatcher("/WEB-INF/vistas/productocrud.jsp").forward(request,response);

@@ -1,4 +1,18 @@
-<%@ include file="includes/cabecera.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>tienda</title>
+<link rel="stylesheet" href="css/estilo.css" />
+<script src="js/funciones.js"></script>
+</head>
+<body>
+	<header>
+		<h1>TIENDA</h1>
+			</header>
+	
 
 	<h2>Login</h2>
 	
@@ -11,7 +25,7 @@
 			  required="required" minlength="4" value="${usuario.nombre}" />
 		</fieldset>
 		<fieldset>
-			<label for="pass">Contraseña</label> <input type="password" id="pass"
+			<label for="pass">ContraseÃ±a</label> <input type="password" id="pass"
 				name="pass" />
 		</fieldset>
 		<fieldset>
