@@ -13,20 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-
-
-
-
-
-
-
-
 import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.Tipos.Producto;
 
 @WebServlet("/noadmin/login")
 public class NoadminLoginServlet extends HttpServlet {
-
 
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(NoadminLoginServlet.class);
@@ -34,47 +25,48 @@ public class NoadminLoginServlet extends HttpServlet {
 	private static final String RUTA_CATALOGO = "/WEB-INF/vistas/catalogo.jsp";
 	public static final int TIEMPO_INACTIVIDAD = 30 * 60;
 	static final String USUARIOS_DAL = "dal";
+	static final String RUTA_FORMULARIO = "/WEB-INF/vistas/nuevousuario.jsp";
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		
-		//recoger datos del usuario en session
+		// recoger datos del usuario en session
 		String nombresesion = request.getParameter("nombre");
 		HttpSession session = request.getSession();
 		session.setAttribute("nombre", nombresesion);
-		nombresesion = (String) session.getAttribute("nombre");	
-		
-		//cargar base de datos de productos cargada en context
+		nombresesion = (String) session.getAttribute("nombre");
+
+		// cargar base de datos de productos cargada en context
 		ServletContext application = request.getServletContext();
 		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 		Producto[] productos = tiendaDAL.buscarTodosLosProductos();
 		request.setAttribute("productos", productos);
-		
 
-		//establecer tienmpo de inactividad de sesion
+		// establecer tienmpo de inactividad de sesion
 		session.setMaxInactiveInterval(TIEMPO_INACTIVIDAD);
 		Cookie cookie = new Cookie("JSESSIONID", session.getId());
 		cookie.setMaxAge(TIEMPO_INACTIVIDAD);
 		response.addCookie(cookie);
 
-		
-		//crear opciones de estado
+		// crear opciones de estado
 		boolean esUsuarioYaRegistrado = session.getAttribute("usuario") != null;
-
 		
-
 		// Redirigir a una nueva vista
+		if (esUsuarioYaRegistrado) {
+			log.info("Usuario enviado a catalogo sin permisos de administracion  ");
+			request.getRequestDispatcher(RUTA_CATALOGO).forward(request,
+					response);
 
-			if (esUsuarioYaRegistrado) {
-				log.info( "Usuario enviado a catalogo sin permisos de administracion  " );
-			request.getRequestDispatcher(RUTA_CATALOGO).forward(request, response);
+		} else  {
+			
+
+		}
 		
 		
-		} else {	
-				}
-	
 	}
-}
+	}

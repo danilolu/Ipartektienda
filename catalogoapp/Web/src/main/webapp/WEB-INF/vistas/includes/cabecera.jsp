@@ -24,5 +24,12 @@
 			<li><a href="/login?opcion=logout">Salir</a></li>
 			
 		</ul>
+	
+		<ul>
+			
+			<li><a href="usuarioform?op=alta">Alta usuarios</a></li>
+			
+			<li><a href="usuariocrud">Mantenimiento usuarios</a></li>
+		</ul>
 	</nav>
 	<h5 >Bienvenido ${usuario.nombre} </h5>

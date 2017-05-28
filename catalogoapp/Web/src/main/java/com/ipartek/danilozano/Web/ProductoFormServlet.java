@@ -38,7 +38,7 @@ public class ProductoFormServlet extends HttpServlet {
 				.getRequestDispatcher(ProductoCRUDServlet.RUTA_FORMULARIO);
 		// recojer la opcion que se carga en la url
 		String op = request.getParameter("opform");
-		// variables del objeto Usuario
+		// variables del objeto Producto
 		int id;
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
