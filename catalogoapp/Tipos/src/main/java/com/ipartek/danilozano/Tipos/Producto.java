@@ -1,25 +1,28 @@
 package com.ipartek.danilozano.Tipos;
 
+
 public class Producto {
 	private String nombre, descripcion, errores;
 	private int id;
 	private double precio;
+	public static int cont=1;
+	// constructor
 
 	// constructor
 
-	public Producto(int id, String nombre, String descripcion, double precio) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precio = precio;
+		public Producto(String nombre, String descripcion, double precio) {
+			super();
+			this.id = cont;
+			this.nombre = nombre;
+			this.descripcion = descripcion;
+			this.precio = precio;
 
-	}
+		}
 
-	public Producto() {
-		super();
-
-	}
+		public Producto() {
+			super();
+			this.id = cont;
+		}
 
 	// equals y equals
 	@Override

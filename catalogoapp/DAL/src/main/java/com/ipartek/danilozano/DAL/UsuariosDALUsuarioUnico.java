@@ -3,7 +3,7 @@ package com.ipartek.danilozano.DAL;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
-public class UsuariosDALUsuarioUnico implements DAL {
+public class UsuariosDALUsuarioUnico implements TiendaDAL {
 
 	private Usuario usuario;
 

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-		<h1>TIENDA</h1>
+		<h1><IMG SRC="lafruterialogo.png" width="600" height="100px" /></h1>
 			</header>
 	<nav>
 		<ul>
@@ -25,4 +25,4 @@
 			
 		</ul>
 	</nav>
-	<h4>Bienvenido ${usuario.nombre} </h4>
+	<h5 >Bienvenido ${usuario.nombre} </h5>

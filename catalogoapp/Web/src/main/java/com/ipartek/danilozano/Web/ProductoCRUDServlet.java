@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.danilozano.DAL.DAL;
+
+import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.Tipos.Producto;
 
 @WebServlet("/admin/productocrud")
@@ -30,24 +31,19 @@ public class ProductoCRUDServlet extends HttpServlet {
 		
 		
 		
-		
+		//recoger datos de la TiendaDAL cargada en contex
 		ServletContext application = getServletContext();
-		DAL dal = (DAL) application.getAttribute("dal");
+		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 
-//		if (dal == null) {
-//			dal = DALFactory.getProductosDAL();
-//
-//			dal.alta(new Producto(1, "sandia", "descripcion1", 1));
-//			dal.alta(new Producto(2, "manzana", "descripcion2", 2));
-//
-//			application.setAttribute("dal", dal);
-//		}
 
+		//recojer  la opcion que se carga en la url
 		String op = request.getParameter("op");
+		
+		//actuar en consecuencia de la opcion
 
-		if (op == null) {
-
-			Producto[] productos = dal.buscarTodosLosProductos();
+		if (op == null) {// si op el null se cargan los productos
+			// si op el null se cargan los productos
+			Producto[] productos = tiendaDAL.buscarTodosLosProductos();
 
 			request.setAttribute("productos", productos);
 
@@ -64,7 +60,7 @@ public class ProductoCRUDServlet extends HttpServlet {
 			switch (op) {
 			case "modificar":
 			case "borrar":
-				producto = dal.buscarPorId(id);
+				producto = tiendaDAL.buscarPorId(id);
 				request.setAttribute("producto", producto);
 			case "alta":
 

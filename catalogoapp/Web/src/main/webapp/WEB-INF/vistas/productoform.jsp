@@ -1,7 +1,7 @@
 <%@ include file="includes/cabecera.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-	<h2>Formulario de Alta de Productos </h2>
+	<h2>${fn:toUpperCase(param.op)} PRODUCTOS </h2>
 	
 	<jsp:useBean id="producto" scope="request"
 		class="com.ipartek.danilozano.Tipos.Producto" />
@@ -9,14 +9,15 @@
 	<form action="productoform" method="post">
 		<fieldset>
 			<label for="id">ID</label> 
-			<input type="number" step="any" id="id"
-				name="id" required="required"  value="${producto.id}"/>
+			<input id="id"	name="id" required="required"  value="${producto.id}"
+			  	Style=background-color:lightgray; readonly="readonly" 
+			  		   />
 			
 		
 		</fieldset>
 		<fieldset>
 			<label for="nombre">Nombre</label>
-			 <input id="nombre" name="nombre"			   />
+			 <input id="nombre" name="nombre"	/>
 		</fieldset>
 		<fieldset>
 			<label for="descripcion">Descripcion</label> <input type="descripcion" id="descripcion"

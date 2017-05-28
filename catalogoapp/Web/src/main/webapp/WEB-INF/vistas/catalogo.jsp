@@ -4,7 +4,7 @@
 
 <h2>Catalogo</h2>
 
-<<table border="1" style="margin: 0 auto;">
+<table border="1" style="margin: 0 auto;">
 	<thead>
 		<tr>
 			
@@ -23,7 +23,7 @@
 				<td>${producto.nombre}</td>
 				<td><IMG SRC="${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
-				<td>${producto.precio}</td>
+				<td>${producto.precio}€/Kg</td>
 				
 			</tr>
 		</c:forEach>

@@ -3,7 +3,9 @@ package com.ipartek.danilozano.DAL;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
-public interface DAL {
+public interface TiendaDAL {
+	
+	//TiendaDAL de Producto
 	public void alta(Producto producto);
 
 	public void modificar(Producto producto);
@@ -14,6 +16,8 @@ public interface DAL {
 
 	public Producto[] buscarTodosLosProductos();
 
+	
+	//TiendaDAL de Usuario
 	public void alta(Usuario usuario);
 
 	public void modificar(Usuario usuario);

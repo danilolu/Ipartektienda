@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.DAL;
-import com.ipartek.danilozano.DAL.DALFactory;
+import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDALFactory;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
@@ -40,15 +40,19 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 	public void contextInitialized(ServletContextEvent sc) {
 		log.info( "productos y usuarios creados " ); 
 		ServletContext application = sc.getServletContext();
-		 DAL dal = (DAL) application.getAttribute("dal");
+		 TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 			
-			 dal = DALFactory.getProductosDAL();
-			 dal = DALFactory.getUsuariosDAL();
-			 dal.alta(new Producto(1, "sandia", "descripcion1", 1));
-			 dal.alta(new Producto(2, "manzana", "descripcion2", 2));
-			 dal.alta(new Usuario("admin", "pass"));
-			 dal.alta(new Usuario("usuario1", "pass1"));
-			 application.setAttribute("dal", dal);
+			 tiendaDAL = TiendaDALFactory.getProductosDAL();
+			 tiendaDAL = TiendaDALFactory.getUsuariosDAL();
+			 tiendaDAL.alta(new Producto( "sandia", "descripcion1", 1.8));
+			 tiendaDAL.alta(new Producto( "manzana", "descripcion2", 0.73));
+			 tiendaDAL.alta(new Producto( "limon", "descripcion3", 0.6));
+			 tiendaDAL.alta(new Producto( "naranja", "descripcion4", 0.69));
+			 tiendaDAL.alta(new Producto( "kiwi", "descripcion5", 1.1));
+			 tiendaDAL.alta(new Producto( "pera", "descripcion6", 0.81));
+			 tiendaDAL.alta(new Usuario("admin", "pass"));
+			 tiendaDAL.alta(new Usuario("usuario1", "pass1"));
+			 application.setAttribute("dal", tiendaDAL);
 			 
 
 		

@@ -2,7 +2,7 @@ package com.ipartek.danilozano.Tipos;
 
 public class Usuario {
 	private String nombre, pass, errores;
-	private boolean admin = false;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -34,12 +34,7 @@ public class Usuario {
 		return true;
 	}
 
-	public Usuario(String nombre, String pass, boolean siAdmin) {
-		super();
-		this.nombre = nombre;
-		this.pass = pass;
-		this.admin = siAdmin;
-	}
+	
 
 	public Usuario(String nombre, String pass) {
 		super();
@@ -80,11 +75,5 @@ public class Usuario {
 		this.errores = errores;
 	}
 
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean siadmin) {
-		this.admin = siadmin;
-	}
+	
 }
