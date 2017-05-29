@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>tienda</title>
-<link rel="stylesheet" href="css/estilo.css" />
+<link rel="stylesheet" href="/css/estilo.css" />
 <script src="js/funciones.js"></script>
 </head>
 <body>
