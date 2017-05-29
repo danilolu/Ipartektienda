@@ -27,7 +27,7 @@
 				<td>${producto.nombre}</td>
 				<td><IMG SRC="${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
-				<td>${producto.precio}€/Kg</td>
+				<td>${producto.precio} &euro;/Kg</td>
 				
 			</tr>
 		</c:forEach>

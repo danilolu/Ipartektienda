@@ -23,7 +23,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/JAVA/apache-tomcat-8.0.43/lib/servlet-api.jar">
+	<classpathentry kind="lib" path="C:/apache-tomcat-8.0.43/lib/servlet-api.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/C:/tomcat-8.0-doc/servletapi/"/>
 		</attributes>
