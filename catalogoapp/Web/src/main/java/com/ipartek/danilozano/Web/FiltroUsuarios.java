@@ -12,29 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ipartek.danilozano.Tipos.Usuario;
-
 public class FiltroUsuarios implements Filter {
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		HttpSession session = httpReq.getSession();
 
-		
-
 		String nombresesion = (String) session.getAttribute("nombre");
-		String admin = "admin"; 
-		
+		String admin = "admin";
+
 		if (admin.equals(nombresesion)) {
 			chain.doFilter(request, response);
-			
-			
+
 		} else {
-			httpResp.sendRedirect("/noadmin/login");//.forward(request, response);
-			
+			httpResp.sendRedirect("/noadmin/login");// .forward(request,
+													// response);
+
 		}
 	}
 

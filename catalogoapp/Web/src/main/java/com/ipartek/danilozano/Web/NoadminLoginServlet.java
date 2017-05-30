@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.Tipos.Producto;
+import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/noadmin/login")
 public class NoadminLoginServlet extends HttpServlet {
@@ -26,15 +27,16 @@ public class NoadminLoginServlet extends HttpServlet {
 	public static final int TIEMPO_INACTIVIDAD = 30 * 60;
 	static final String USUARIOS_DAL = "dal";
 	static final String RUTA_FORMULARIO = "/WEB-INF/vistas/nuevousuario.jsp";
+	//
+	static final String RUTA_LISTADO = "/WEB-INF/vistas/usuariocrud.jsp";
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	//
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// recoger datos del usuario en session
 		String nombresesion = request.getParameter("nombre");
 		HttpSession session = request.getSession();
@@ -55,18 +57,26 @@ public class NoadminLoginServlet extends HttpServlet {
 
 		// crear opciones de estado
 		boolean esUsuarioYaRegistrado = session.getAttribute("usuario") != null;
-		
+		//
+
+		String nombre = request.getParameter("nombre");
+		String pass = request.getParameter("pass");
+
+		Usuario usuario = new Usuario(nombre, pass);
+		boolean sinParametros = usuario.getNombre() == null;
+		//
 		// Redirigir a una nueva vista
 		if (esUsuarioYaRegistrado) {
 			log.info("Usuario enviado a catalogo sin permisos de administracion  ");
-			request.getRequestDispatcher(RUTA_CATALOGO).forward(request,
-					response);
+			request.getRequestDispatcher(RUTA_CATALOGO).forward(request, response);
 
-		} else  {
-			
+		} else if (sinParametros) {
+			log.info(nombresesion + " pasa por sinparametros  ");
+			request.getRequestDispatcher("/WEB-INF/vistas/nuevousuarioform.jsp").forward(request, response);
+		} else {
+			log.info("usuario: '" + nombre + "' pasa por no registrado");
 
 		}
-		
-		
 	}
-	}
+
+}
