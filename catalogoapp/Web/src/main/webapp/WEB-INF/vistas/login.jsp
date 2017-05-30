@@ -14,15 +14,17 @@
 			</header>
 	
 
-	<h2>Login</h2>
 	
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.danilozano.Tipos.Usuario" />
 
-	<form action="login" method="post" style="
+	<form action="login" method="post" style="text-align: right;
     width: 50%;
     display: inline-block;
 ">
+<fieldset>
+	<h1 style="text-align:  right";>Login</h1>
+		</fieldset>
 		<fieldset>
 			<label for="nombre">Nombre</label> <input id="nombre" name="nombre" required="required" minlength="4" value="">
 		</fieldset>
