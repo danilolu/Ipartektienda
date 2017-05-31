@@ -27,8 +27,7 @@ public class FiltroUsuarios implements Filter {
 			chain.doFilter(request, response);
 
 		} else {
-			httpResp.sendRedirect("/noadmin/login");// .forward(request,
-													// response);
+			httpResp.sendRedirect("/noadmin/login");
 
 		}
 	}

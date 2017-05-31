@@ -25,7 +25,7 @@
 				</td>
 				<td>${producto.id}</td>
 				<td>${producto.nombre}</td>
-				<td><IMG SRC="${producto.nombre}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;/Kg</td>
 				
