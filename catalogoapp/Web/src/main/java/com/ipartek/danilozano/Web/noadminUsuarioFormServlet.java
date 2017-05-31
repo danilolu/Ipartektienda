@@ -29,9 +29,8 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// recoger datos
 		HttpServletRequest httpReq = (HttpServletRequest) request;
-
 		HttpSession session = httpReq.getSession();
 
 		// definir ruteo
@@ -50,7 +49,7 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 		ServletContext application = request.getServletContext();
 		TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
 
-		// crear objeto Pproducto
+		// crear objeto Usuario
 		Usuario usuario = new Usuario(nombre, pass);
 
 		// actuar en consecuencia de la opcion recogida anteriormente

@@ -2,7 +2,6 @@ package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
-import com.ipartek.danilozano.DAL.DALException;
 import com.ipartek.danilozano.DAL.TiendaDALFactory;
-import com.ipartek.danilozano.DAL.IdProductoYaExistenteDALException;
-import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/login")
@@ -35,20 +31,17 @@ public class LoginServlet extends HttpServlet {
 	/* package */static final int MINIMO_CARACTERES = 4;
 	static final String USUARIOS_DAL = "dal";
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// recoger datos del usuario en session
 		String nombresesion = request.getParameter("nombre");
 		HttpSession session = request.getSession();
 		session.setAttribute("nombre", nombresesion);
 		nombresesion = (String) session.getAttribute("nombre");
-			
-		
+
 		// Recoger datos de vistas
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("pass");
@@ -67,22 +60,19 @@ public class LoginServlet extends HttpServlet {
 			usuariosDAL = TiendaDALFactory.getUsuariosDAL();
 		}
 
-		//establecer tienmpo de inactividad de sesion
-				session.setMaxInactiveInterval(TIEMPO_INACTIVIDAD);
-				Cookie cookie = new Cookie("JSESSIONID", session.getId());
-				cookie.setMaxAge(TIEMPO_INACTIVIDAD);
-				response.addCookie(cookie);
+		// establecer tienmpo de inactividad de sesion
+		session.setMaxInactiveInterval(TIEMPO_INACTIVIDAD);
+		Cookie cookie = new Cookie("JSESSIONID", session.getId());
+		cookie.setMaxAge(TIEMPO_INACTIVIDAD);
+		response.addCookie(cookie);
 
-				
-		//crear opciones de estado
+		// crear opciones de estado
 		boolean esValido = usuariosDAL.validar(usuario);
 		boolean sinParametros = usuario.getNombre() == null;
 		boolean esUsuarioYaRegistrado = session.getAttribute("usuario") != null;
 		boolean quiereSalir = "logout".equals(opcion);
-		boolean nombreValido = usuario.getNombre() != null
-				&& usuario.getNombre().length() >= MINIMO_CARACTERES;
-		boolean passValido = !(usuario.getPass() == null || usuario.getPass()
-				.length() < MINIMO_CARACTERES);
+		boolean nombreValido = usuario.getNombre() != null && usuario.getNombre().length() >= MINIMO_CARACTERES;
+		boolean passValido = !(usuario.getPass() == null || usuario.getPass().length() < MINIMO_CARACTERES);
 
 		// Redirigir a una nueva vista
 		if (quiereSalir) {
@@ -92,15 +82,13 @@ public class LoginServlet extends HttpServlet {
 
 		} else if (esUsuarioYaRegistrado) {
 			log.info(nombresesion + " pasa por es usuarioregistrado  ");
-			request.getRequestDispatcher(RUTA_PRINCIPAL).forward(request,
-					response);
+			request.getRequestDispatcher(RUTA_PRINCIPAL).forward(request, response);
 		} else if (sinParametros) {
 			log.info(nombresesion + " pasa por sinparametros  ");
 			request.getRequestDispatcher(RUTA_LOGIN).forward(request, response);
 		} else if (!nombreValido || !passValido) {
 			log.info(nombresesion + " pasa por nombre o pass no valido  ");
-			usuario.setErrores("El nombre y la pass deben tener como mínimo "
-					+ MINIMO_CARACTERES + " caracteres y son ambos requeridos");
+			usuario.setErrores("El nombre y la pass deben tener como mínimo " + MINIMO_CARACTERES + " caracteres y son ambos requeridos");
 			request.setAttribute("usuario", usuario);
 			request.getRequestDispatcher(RUTA_LOGIN).forward(request, response);
 		} else if (esValido) {

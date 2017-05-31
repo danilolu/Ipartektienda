@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-		<h1><IMG SRC="lafruterialogo.png" width="600" height="100px" /></h1>
+		<h1><IMG SRC="danilogo.png" width="500" height="100px" /></h1>
 			</header>
 	
 	<nav>

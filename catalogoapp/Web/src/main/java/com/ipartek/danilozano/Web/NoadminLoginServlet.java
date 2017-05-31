@@ -27,10 +27,8 @@ public class NoadminLoginServlet extends HttpServlet {
 	public static final int TIEMPO_INACTIVIDAD = 30 * 60;
 	static final String USUARIOS_DAL = "dal";
 	static final String RUTA_FORMULARIO = "/WEB-INF/vistas/nuevousuario.jsp";
-	//
 	static final String RUTA_LISTADO = "/WEB-INF/vistas/usuariocrud.jsp";
 
-	//
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -42,7 +40,9 @@ public class NoadminLoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("nombre", nombresesion);
 		nombresesion = (String) session.getAttribute("nombre");
-
+		// crear e iniciar variables
+		String nombre = request.getParameter("nombre");
+		String pass = request.getParameter("pass");
 		// cargar base de datos de productos cargada en context
 		ServletContext application = request.getServletContext();
 		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
@@ -54,17 +54,12 @@ public class NoadminLoginServlet extends HttpServlet {
 		Cookie cookie = new Cookie("JSESSIONID", session.getId());
 		cookie.setMaxAge(TIEMPO_INACTIVIDAD);
 		response.addCookie(cookie);
-
+		// crear un objeto de usuario
+		Usuario usuario = new Usuario(nombre, pass);
 		// crear opciones de estado
 		boolean esUsuarioYaRegistrado = session.getAttribute("usuario") != null;
-		//
-
-		String nombre = request.getParameter("nombre");
-		String pass = request.getParameter("pass");
-
-		Usuario usuario = new Usuario(nombre, pass);
 		boolean sinParametros = usuario.getNombre() == null;
-		//
+
 		// Redirigir a una nueva vista
 		if (esUsuarioYaRegistrado) {
 			log.info("Usuario enviado a catalogo sin permisos de administracion  ");

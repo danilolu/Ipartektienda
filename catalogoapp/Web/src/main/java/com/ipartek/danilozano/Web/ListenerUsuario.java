@@ -4,7 +4,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -18,7 +17,7 @@ import com.ipartek.danilozano.Tipos.Usuario;
 @WebListener
 public class ListenerUsuario implements ServletContextListener, HttpSessionListener {
 	private static Logger log = Logger.getLogger(LoginServlet.class);
-	
+
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
 
@@ -38,26 +37,23 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 
 	@Override
 	public void contextInitialized(ServletContextEvent sc) {
-		log.info( "productos y usuarios creados " ); 
+		log.info("productos y usuarios creados ");
 		ServletContext application = sc.getServletContext();
-		 TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
-			
-			 tiendaDAL = TiendaDALFactory.getProductosDAL();
-			 tiendaDAL = TiendaDALFactory.getUsuariosDAL();
-			 tiendaDAL.alta(new Producto( "sandia", "descripcion1", 1.8));
-			 tiendaDAL.alta(new Producto( "manzana", "descripcion2", 0.73));
-			 tiendaDAL.alta(new Producto( "limon", "descripcion3", 0.6));
-			 tiendaDAL.alta(new Producto( "naranja", "descripcion4", 0.69));
-			 tiendaDAL.alta(new Producto( "kiwi", "descripcion5", 1.1));
-			 tiendaDAL.alta(new Producto( "pera", "descripcion6", 0.81));
-			 tiendaDAL.alta(new Usuario("admin", "pass"));
-			 tiendaDAL.alta(new Usuario("usuario1", "pass1"));
-			 application.setAttribute("dal", tiendaDAL);
-			 
+		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 
-		
-		
-		
+		tiendaDAL = TiendaDALFactory.getProductosDAL();
+		tiendaDAL = TiendaDALFactory.getUsuariosDAL();
+		tiendaDAL.alta(new Producto("Judas", "Ale", 1.8));
+		tiendaDAL.alta(new Producto("Affligem Triple", "Abadia", 1.95));
+		tiendaDAL.alta(new Producto("Paulaner", "Trigo", 1.6));
+		tiendaDAL.alta(new Producto("Guinnes", "Negra", 1.59));
+		tiendaDAL.alta(new Producto("Murphys", "Roja", 1.53));
+		tiendaDAL.alta(new Producto("Chimay roja", "Abadia", 2.1));
+		tiendaDAL.alta(new Producto("Super Bock", "Lager ", 0.80));
+		tiendaDAL.alta(new Usuario("admin", "pass"));
+		tiendaDAL.alta(new Usuario("usuario1", "pass1"));
+		application.setAttribute("dal", tiendaDAL);
+
 	}
 
 	private ServletContext getServletContext() {

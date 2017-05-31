@@ -10,9 +10,9 @@
 </head>
 <body>
 	<header>
-		<h1 align="center"><IMG SRC="lafruterialogo.png" width="600" height="100px" /></h1>
+		<h1 align="center"><IMG SRC="danilogo.png" width="600" height="100px" /></h1>
 			</header>
-	<h2 style="text-align:center">Bienvenido a la fruteria</h2>
+	<h2 style="text-align:center">Bienvenido a Cervezas DANI</h2>
 	
 	<A href="/login"><p style="text-align:center">
 <IMG  src="index.png" ></a>
