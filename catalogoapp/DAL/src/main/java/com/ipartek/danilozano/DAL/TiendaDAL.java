@@ -12,8 +12,8 @@ public interface TiendaDAL {
 
 	public void borrar(Producto producto);
 
-	public Producto buscarPorId(int id);
-
+	public Producto buscarPorId(Integer id);
+	
 	public Producto[] buscarTodosLosProductos();
 
 	

@@ -39,9 +39,11 @@ public class TiendaDALColeccion implements TiendaDAL {
 			return productos.values().toArray(new Producto[productos.size()]);
 		}
 
-		public Producto buscarPorId(int id) {
-
-			return productos.get(id);
+		
+		@Override
+		public Producto buscarPorId(Integer idmap) {
+			// TODO Auto-generated method stub
+			return productos.get(idmap);
 		}
 
 	//Dalcoleccion de Usuarios
@@ -79,6 +81,8 @@ public class TiendaDALColeccion implements TiendaDAL {
 
 		return usuarios.values().toArray(new Usuario[usuarios.size()]);
 	}
+
+	
 	
 	
 	

@@ -12,11 +12,10 @@
 	<header>
 		<h1><IMG SRC="/danilogo.png" width="500" height="100px" /></h1>
 			</header>
-	
+	<h4>Bienvenido ${usuario.nombre} </h4>
 	<nav>
 		
 			<li><a href="/login?opcion=logout">Salir</a></li>
 			
 		</ul>
 	</nav>
-	<h4>Bienvenido ${usuario.nombre} </h4>

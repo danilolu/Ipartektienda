@@ -59,7 +59,7 @@ public class UsuariosDALUsuarioUnico implements TiendaDAL {
 	}
 
 	@Override
-	public Producto buscarPorId(int id) {
+	public Producto buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

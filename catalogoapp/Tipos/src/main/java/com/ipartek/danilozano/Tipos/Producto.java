@@ -9,6 +9,14 @@ public class Producto {
 	// constructor
 
 	// constructor
+	public Producto() {
+		super();
+		this.id = cont;
+		this.nombre = "";
+		this.descripcion = "";
+		this.precio = 0.0;
+		
+	}
 
 		public Producto(String nombre, String descripcion, double precio) {
 			super();
@@ -19,10 +27,7 @@ public class Producto {
 
 		}
 
-		public Producto() {
-			super();
-			this.id = cont;
-		}
+		
 
 	// equals y equals
 	@Override
