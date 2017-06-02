@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDALFactory;
@@ -37,6 +38,10 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 
 	@Override
 	public void contextInitialized(ServletContextEvent sc) {
+
+		// cargar la configuracion de log4j en el context
+		PropertyConfigurator.configure(ListenerUsuario.class.getClassLoader().getResource("log4j.properties"));
+		// cargar usuarios y productos en el context
 		log.info("productos y usuarios creados ");
 		ServletContext application = sc.getServletContext();
 		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
