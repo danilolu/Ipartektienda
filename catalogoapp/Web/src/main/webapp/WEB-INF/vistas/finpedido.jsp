@@ -2,8 +2,15 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-	<h2>Checkout</h2>
+<nav>
+	<ul>
+	
+	<li><a href="/carrito">Volver al catalogo</a></li>
+	<li><a href="?op=vaciar">Vaciar carrito</a></li>
+	</ul>
+	</ul>
+</nav>
+	<h2>Finalizar pedido</h2>
 
 
 <table>
@@ -34,7 +41,7 @@
 			
 			<th>Numero de productos ${sessionScope.numeroProductos}</th>
 			<th>Total a pagar:${sessionScope.precioTotal} &euro;</a></th>
-			<th><a href="?op=pagar">PAGAR </a></th>
+			<th><a href="pagado.jsp" target="_blank" onclick="window.open(this.href, this.target, 'width=600,height=200'); return false;">Pagar</a> </a></th>
 	</tbody>
 </table>
 

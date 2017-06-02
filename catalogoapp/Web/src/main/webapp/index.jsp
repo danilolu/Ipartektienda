@@ -9,10 +9,8 @@
 <script src="js/funciones.js"></script>
 </head>
 <body>
-	<header>
-		<h1 align="center"><IMG SRC="danilogo.png" width="600" height="100px" /></h1>
-			</header>
-	<h2 style="text-align:center">Bienvenido a Cervezas DANI</h2>
+	
+	<h1 style="text-align:center">Bienvenido a Cervezas <IMG SRC="danilogo.png" width="200" height="100px" /></h1>
 	
 	<A href="/login"><p style="text-align:center">
 <IMG  src="index.png" ></a>

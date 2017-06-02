@@ -7,6 +7,7 @@
 	<ul>
 	<li>Tienes ${sessionScope.numeroProductos} producto/s en el carrito</li>
 	<li><a href="/finpedido">Finalizar pedido</a></li>
+	<li><a href="/finpedido?op=vaciar">Vaciar carrito</a></li>
 	</ul>
 </nav>
 <h2>Catalogo</h2>
@@ -44,6 +45,7 @@
 	<ul>
 	<li>${sessionScope.numeroProductos} productos en el carrito</li>
 	<li><a href="/finpedido">Finalizar pedido</a></li>
+	<li><a href="/finpedido?op=vaciar">Vaciar carrito</a></li>
 	</ul>
 </nav>
 			
