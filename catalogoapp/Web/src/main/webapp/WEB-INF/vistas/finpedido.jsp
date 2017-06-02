@@ -30,9 +30,9 @@
 			<tr>
 				<td>${producto.nombre}</td>
 				<td>${producto.descripcion}</td>
-				<td><IMG SRC="/${producto.nombre}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.precio} &euro;</td>
-				<td><a href="?op=quitar&id=${producto.id}"><img src="/quitarcarrito.png" width="100" height="100px" ></a></td>
+				<td><a href="?op=quitar&id=${producto.id}"><img src="/img/quitarcarrito.png" width="100" height="100px" ></a></td>
 			</tr>
 		</c:forEach>
 		<table>

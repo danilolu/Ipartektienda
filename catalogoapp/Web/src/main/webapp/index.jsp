@@ -10,10 +10,10 @@
 </head>
 <body>
 	
-	<h1 style="text-align:center">Bienvenido a Cervezas <IMG SRC="danilogo.png" width="200" height="100px" /></h1>
+	<h1 style="text-align:center">Bienvenido a Cervezas <IMG SRC="/img/danilogo.png" width="200" height="100px" /></h1>
 	
 	<A href="/login"><p style="text-align:center">
-<IMG  src="index.png" ></a>
+<IMG  src="/img/index.png" ></a>
 	
 	
 	<jsp:useBean id="usuario" scope="request"

@@ -5,7 +5,7 @@
 
 <nav>
 	<ul>
-	<li>Tienes ${sessionScope.numeroProductos} producto/s en el carrito</li>
+	<li> ${sessionScope.numeroProductos} producto/s en el carrito</li>
 	<li><a href="/finpedido">Finalizar pedido</a></li>
 	<li><a href="/finpedido?op=vaciar">Vaciar carrito</a></li>
 	</ul>
@@ -32,10 +32,10 @@
 				
 				<td>${producto.id}</td>
 				<td>${producto.nombre}</td>
-				<td><IMG SRC="/${producto.nombre}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;/Kg</td>
-				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/anadir.png" width="100" height="100px" ></a></td>
+				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="100" height="100px" ></a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

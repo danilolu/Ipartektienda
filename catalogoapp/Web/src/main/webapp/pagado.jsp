@@ -16,7 +16,7 @@
 <p style:"text-align: center;">
 	<h4>Cargando  datos de PayPal</h4>
 	
-<h6>Cargando Pago </br><IMG SRC="/cargando.gif" width="100" height="100px"  /></h6>
+<h6>Cargando Pago </br><IMG SRC="/img/cargando.gif" width="100" height="100px"  /></h6>
 
 </p>
 </body>
