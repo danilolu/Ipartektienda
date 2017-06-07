@@ -6,16 +6,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.ipartek.formacion.ejemplojdbc.dao.DAOExcepcion;
 import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDAO;
 import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDaoMySQL;
 import com.ipartek.formacion.ejemplojdbc.tipos.Usuario;
 
 public class App {
 	public static void main(String[] args) {
-		UsuarioDAO dao = new UsuarioDaoMySQL();// crear objeto dao
-		for (Usuario u : dao.findAll())
-			// recorrer el metodo dao findall
-			System.out.println(u);
+		try {
+			UsuarioDAO dao = new UsuarioDaoMySQL();// crear objeto dao
+			// for (Usuario u : dao.findAll())//buscar todos// recorrer el
+			// metodo dao findAll
+			// System.out.println(u);
+			//
+			// int id=5;
+			// Usuario usuario = dao.findById(5);//buscarporid
+			// System.out.println("Usuario ID: "+id+ " + "+usuario);
+
+			Usuario usuarioInsert = new Usuario(0, 2, "Nuevo Nuevez", "nuevo pass", "nuevo");// insertar
+			dao.insert(usuarioInsert);
+		} catch (DAOExcepcion e) {
+			e.printStackTrace();
+			if (e.getCause() != null)
+				e.getCause().printStackTrace();
+		}
 	}
 
 	public static void mainBasico(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {

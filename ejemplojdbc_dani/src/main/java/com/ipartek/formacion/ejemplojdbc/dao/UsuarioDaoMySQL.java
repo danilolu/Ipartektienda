@@ -93,14 +93,12 @@ public class UsuarioDaoMySQL implements UsuarioDAO {
 	}
 
 	public Usuario findById(int id) {
+		Usuario usuario = null;
 
 		try {
+			psFindById.setInt(1, id);// poner en la interrogacion 1 el valor id
 			ResultSet rs = psFindById.executeQuery();
-			Usuario usuario;
-			while (rs.next()) {
-				// System.out.println(rs.getString("username"));//esto era para
-				// mostrar por consola
-
+			if (rs.next()) {
 				// crear objeto usuario
 				usuario = new Usuario();
 				// rellenar el objeto usuario
@@ -113,20 +111,27 @@ public class UsuarioDaoMySQL implements UsuarioDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new DAOExcepcion("Error en findAll", e);
-		} finally {
-			// if(con!=null)
-			// try {
-			// con.close();
-			// } catch (SQLException e) {
-			// throw new DAOExcepcion("Error al cerrar findAll" ,e);
-			// }
+			throw new DAOExcepcion("Error en findById", e);
 		}
-		return null;
+		return usuario;
 	}
 
 	public void insert(Usuario usuario) {
-		// TODO Auto-generated method stub
+
+		try {
+
+			psInsert.setString(1, usuario.getUsername());
+			psInsert.setString(2, usuario.getPassword());
+			psInsert.setString(3, usuario.getNombre_completo());
+			psInsert.setInt(4, usuario.getId_roles());
+
+			int res = psInsert.executeUpdate();
+
+			if (res != 1)
+				throw new DAOExcepcion("la insercion ha devuelto un valor distinto de 1" + res);
+		} catch (SQLException e) {
+			throw new DAOExcepcion("Error en Insert", e);
+		}
 
 	}
 
