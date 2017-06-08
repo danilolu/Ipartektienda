@@ -12,6 +12,13 @@ public class IpartekDAOMySQL implements IpartekDAO {
 	private String mysqlUser = "root";
 	private String mysqlPass = "";
 
+	public IpartekDAOMySQL(String url, String mysqlUser, String mysqlPass) {
+		this();
+		this.url = url;
+		this.mysqlUser = mysqlUser;
+		this.mysqlPass = mysqlPass;
+	}
+
 	public IpartekDAOMySQL() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();

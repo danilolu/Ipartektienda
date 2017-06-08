@@ -18,6 +18,10 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 
 	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete;
 
+	public UsuarioDAOMySQL(String url, String mysqlUser, String mysqlPass) {
+
+	}
+
 	public Usuario[] findAll() {
 
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
