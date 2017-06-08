@@ -16,7 +16,7 @@ public class App {
 
 	public static void main(String[] args) {
 		try {
-			dao = new UsuarioDAOMySQL();
+			dao = new UsuarioDAOMySQL("jdbc:mysql://localhost/ipartek", "root", "");
 
 			dao.abrir();
 
