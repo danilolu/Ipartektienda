@@ -49,7 +49,7 @@ public class App {
 			dao.cerrar();
 		}
 	}
-
+//metodo para mostrar la lista
 	private static void listado() {
 		System.out.println("\nLISTADO\n=======");
 
