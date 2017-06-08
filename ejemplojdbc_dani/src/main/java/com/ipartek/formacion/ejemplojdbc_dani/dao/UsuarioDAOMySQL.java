@@ -1,4 +1,4 @@
-package com.ipartek.formacion.ejemplojdbc.dao;
+package com.ipartek.formacion.ejemplojdbc_dani.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.ipartek.formacion.ejemplojdbc.tipos.Usuario;
+import com.ipartek.formacion.ejemplojdbc_dani.tipos.Usuario;
 
 public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 
@@ -19,9 +19,11 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 	private PreparedStatement psFindAll, psFindById, psInsert, psUpdate, psDelete;
 
 	public UsuarioDAOMySQL(String url, String mysqlUser, String mysqlPass) {
-
+		super(url, mysqlUser, mysqlPass);
 	}
-
+public UsuarioDAOMySQL() {
+		
+	}
 	public Usuario[] findAll() {
 
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
@@ -47,7 +49,7 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 				usuarios.add(usuario);
 			}
 		} catch (SQLException e) {
-			throw new DAOException("Error en findAll", e);
+			throw new DAOExcepcion("Error en findAll", e);
 		} finally {
 			cerrar(psFindAll, rs);
 		}
@@ -65,7 +67,7 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 			if (ps != null)
 				ps.close();
 		} catch (Exception e) {
-			throw new DAOException("Error en el cierre de ps o rs", e);
+			throw new DAOExcepcion("Error en el cierre de ps o rs", e);
 		}
 	}
 
@@ -90,7 +92,7 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 			}
 
 		} catch (Exception e) {
-			throw new DAOException("Error en findById", e);
+			throw new DAOExcepcion("Error en findById", e);
 		} finally {
 			cerrar(psFindById, rs);
 		}
@@ -112,17 +114,17 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 			int res = psInsert.executeUpdate();
 
 			if (res != 1)
-				throw new DAOException("La inserción ha devuelto un valor " + res);
+				throw new DAOExcepcion("La inserción ha devuelto un valor " + res);
 
 			generatedKeys = psInsert.getGeneratedKeys();
 
 			if (generatedKeys.next())
 				return generatedKeys.getInt(1);
 			else
-				throw new DAOException("No se ha recibido la clave generada");
+				throw new DAOExcepcion("No se ha recibido la clave generada");
 
 		} catch (Exception e) {
-			throw new DAOException("Error en insert", e);
+			throw new DAOExcepcion("Error en insert", e);
 		} finally {
 			cerrar(psInsert, generatedKeys);
 		}
@@ -142,10 +144,10 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 			int res = psUpdate.executeUpdate();
 
 			if (res != 1)
-				throw new DAOException("La actualización ha devuelto un valor " + res);
+				throw new DAOExcepcion("La actualización ha devuelto un valor " + res);
 
 		} catch (Exception e) {
-			throw new DAOException("Error en update", e);
+			throw new DAOExcepcion("Error en update", e);
 		} finally {
 			cerrar(psUpdate);
 		}
@@ -164,10 +166,10 @@ public class UsuarioDAOMySQL extends IpartekDAOMySQL implements UsuarioDAO {
 			int res = psDelete.executeUpdate();
 
 			if (res != 1)
-				throw new DAOException("La actualización ha devuelto un valor " + res);
+				throw new DAOExcepcion("La actualización ha devuelto un valor " + res);
 
 		} catch (Exception e) {
-			throw new DAOException("Error en update", e);
+			throw new DAOExcepcion("Error en update", e);
 		} finally {
 			cerrar(psDelete);
 		}

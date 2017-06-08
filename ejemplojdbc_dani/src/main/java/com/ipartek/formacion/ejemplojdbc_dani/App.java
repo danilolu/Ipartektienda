@@ -1,4 +1,4 @@
-package com.ipartek.formacion.ejemplojdbc;
+package com.ipartek.formacion.ejemplojdbc_dani;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ipartek.formacion.ejemplojdbc.dao.DAOException;
-import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDAO;
-import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDAOMySQL;
-import com.ipartek.formacion.ejemplojdbc.tipos.Usuario;
+import com.ipartek.formacion.ejemplojdbc_dani.dao.DAOExcepcion;
+import com.ipartek.formacion.ejemplojdbc_dani.dao.UsuarioDAO;
+import com.ipartek.formacion.ejemplojdbc_dani.dao.UsuarioDAOMySQL;
+import com.ipartek.formacion.ejemplojdbc_dani.tipos.Usuario;
 
 public class App {
 	public static UsuarioDAO dao = null;
@@ -43,7 +43,7 @@ public class App {
 
 			listado();
 
-		} catch (DAOException e) {
+		} catch (DAOExcepcion e) {
 			e.printStackTrace();
 		} finally {
 			dao.cerrar();

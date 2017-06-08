@@ -1,4 +1,4 @@
-package com.ipartek.formacion.ejemplojdbc.dao;
+package com.ipartek.formacion.ejemplojdbc_dani.dao;
 
 public interface IpartekDAO {
 	public void abrir();

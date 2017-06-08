@@ -1,4 +1,4 @@
-package com.ipartek.formacion.ejemplojdbc.tipos;
+package com.ipartek.formacion.ejemplojdbc_dani.tipos;
 
 public class Usuario {
 	private int id, id_roles;

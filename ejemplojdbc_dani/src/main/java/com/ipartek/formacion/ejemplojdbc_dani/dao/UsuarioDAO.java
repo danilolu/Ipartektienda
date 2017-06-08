@@ -1,6 +1,6 @@
-package com.ipartek.formacion.ejemplojdbc.dao;
+package com.ipartek.formacion.ejemplojdbc_dani.dao;
 
-import com.ipartek.formacion.ejemplojdbc.tipos.Usuario;
+import com.ipartek.formacion.ejemplojdbc_dani.tipos.Usuario;
 
 public interface UsuarioDAO extends IpartekDAO {
 
