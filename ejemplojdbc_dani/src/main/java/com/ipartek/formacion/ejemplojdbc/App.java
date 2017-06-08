@@ -6,31 +6,95 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.ipartek.formacion.ejemplojdbc.dao.DAOExcepcion;
+import com.ipartek.formacion.ejemplojdbc.dao.DAOException;
 import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDAO;
-import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDaoMySQL;
+import com.ipartek.formacion.ejemplojdbc.dao.UsuarioDAOMySQL;
 import com.ipartek.formacion.ejemplojdbc.tipos.Usuario;
 
 public class App {
+	public static UsuarioDAO dao = null;
+
 	public static void main(String[] args) {
 		try {
-			UsuarioDAO dao = new UsuarioDaoMySQL();// crear objeto dao
-			// for (Usuario u : dao.findAll())//buscar todos// recorrer el
-			// metodo dao findAll
-			// System.out.println(u);
-			//
-			// int id=5;
-			// Usuario usuario = dao.findById(5);//buscarporid
-			// System.out.println("Usuario ID: "+id+ " + "+usuario);
+			dao = new UsuarioDAOMySQL();
 
-			Usuario usuarioInsert = new Usuario(0, 2, "Nuevo Nuevez", "nuevo pass", "nuevo");// insertar
-			dao.insert(usuarioInsert);
-		} catch (DAOExcepcion e) {
+			dao.abrir();
+
+			listado();
+
+			Usuario usuario = new Usuario(0, 2, "Nuevo nuevez", "nuevopass", "nuevo100");
+
+			int id = dao.insert(usuario);
+			System.out.println("Se ha insertado un nuevo registro con el id " + id);
+
+			usuario = dao.findById(id);
+			System.out.println("Usuario ID:" + id + "=" + usuario);
+
+			listado();
+
+			usuario.setNombre_completo("MODIFICADO");
+			dao.update(usuario);
+			System.out.println("Se ha modificado el registro " + id);
+
+			listado();
+
+			dao.delete(usuario);
+			System.out.println("Se ha borrado el registro " + id);
+
+			listado();
+
+		} catch (DAOException e) {
 			e.printStackTrace();
-			if (e.getCause() != null)
-				e.getCause().printStackTrace();
+		} finally {
+			dao.cerrar();
 		}
 	}
+
+	private static void listado() {
+		System.out.println("\nLISTADO\n=======");
+
+		for (Usuario u : dao.findAll())
+			System.out.println(u);
+
+		System.out.println();
+	}
+
+	// try {
+	// UsuarioDAO dao = new UsuarioDAOMySQL();// crear objeto dao
+	// for (Usuario u : dao.findAll())//buscar todos// recorrer el
+	// metodo dao findAll
+	// System.out.println(u);
+	//
+	// int id=5;
+	// Usuario usuario = dao.findById(5);//buscarporid
+	// System.out.println("Usuario ID: "+id+ " + "+usuario);
+	// /////////////////////////////////////////////////////////////////////////////
+	// Usuario usuarioInsert = new Usuario(0, 2, "Nuevo2 Nuevez",
+	// "nuevo pass", "nuevo2");// insertar
+	// dao.insert(usuarioInsert);
+	// } catch (DAOExcepcion e) {
+	// e.printStackTrace();
+	// if (e.getCause() != null)
+	// e.getCause().printStackTrace();
+	// }
+	// //////////////////////////////////////////////////////////
+	// Usuario usuarioUpdate = new Usuario(6, 2, " actualizado",
+	// " actualizado", " actualizado");// update
+	// dao.update(usuarioUpdate);
+	// } catch (DAOExcepcion e) {
+	// e.printStackTrace();
+	// if (e.getCause() != null)
+	// e.getCause().printStackTrace();
+	// }
+	// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Usuario usuarioDelete = new Usuario();// //borrar
+	// usuarioDelete.setId(1);
+	// dao.delete(usuarioDelete);
+	// } catch (DAOExcepcion e) {
+	// e.printStackTrace();
+	// }
+	//
+	// }
 
 	public static void mainBasico(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();// cargar driver
