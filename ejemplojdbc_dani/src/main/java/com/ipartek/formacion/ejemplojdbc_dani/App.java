@@ -14,9 +14,49 @@ import com.ipartek.formacion.ejemplojdbc_dani.tipos.Usuario;
 public class App {
 	public static UsuarioDAO dao = null;
 
+	public static void maintransacciones(String[] args) {
+		try {
+			dao = new UsuarioDAOMySQL("jdbc:mysql://localhost/ipartek", "dani", "danipass");
+
+			dao.abrir();
+
+			dao.iniciarTransaccion();
+
+			Usuario usuario;
+			for (int i = 100; i < 200; i++) {
+
+				usuario = new Usuario();
+				usuario.setUsername("usuario" + i);
+				usuario.setPassword("usuario" + i + "pass");
+				usuario.setNombre_completo("usuario" + i + " Usuariez");
+				usuario.setId_roles(2);
+
+				// if para que no complete la insercion
+				// if (i > 150)
+				// throw new RuntimeException("casque accidental");
+				// else
+
+				// DELETE FROM `usuarios` WHERE username LIKE 'usuario1__'
+				// ///borrar los 100 usuarios
+				dao.insert(usuario);
+
+			}
+
+			dao.confirmarTransaccion();
+
+		} catch (Exception e) {
+			dao.deshacerTransaccion();
+			System.out.println("ha cascado");
+		} finally {
+			dao.cerrar();
+
+		}
+
+	}
+
 	public static void main(String[] args) {
 		try {
-			dao = new UsuarioDAOMySQL("jdbc:mysql://localhost/ipartek", "root", "");
+			dao = new UsuarioDAOMySQL("jdbc:mysql://localhost/ipartek", "dani", "danipass");
 
 			dao.abrir();
 
@@ -49,7 +89,8 @@ public class App {
 			dao.cerrar();
 		}
 	}
-//metodo para mostrar la lista
+
+	// metodo para mostrar la lista
 	private static void listado() {
 		System.out.println("\nLISTADO\n=======");
 
