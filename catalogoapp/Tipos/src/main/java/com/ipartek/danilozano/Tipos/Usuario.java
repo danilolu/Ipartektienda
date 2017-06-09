@@ -2,11 +2,14 @@ package com.ipartek.danilozano.Tipos;
 
 public class Usuario {
 	private String nombre, pass, errores;
-	
+	private int id;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((errores == null) ? 0 : errores.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((pass == null) ? 0 : pass.hashCode());
 		return result;
@@ -21,6 +24,13 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
+		if (errores == null) {
+			if (other.errores != null)
+				return false;
+		} else if (!errores.equals(other.errores))
+			return false;
+		if (id != other.id)
+			return false;
 		if (nombre == null) {
 			if (other.nombre != null)
 				return false;
@@ -34,21 +44,20 @@ public class Usuario {
 		return true;
 	}
 
-	
-
-	public Usuario(String nombre, String pass) {
+	public Usuario(int id, String nombre, String pass) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.pass = pass;
 	}
-	
+
 	public Usuario() {
-		this("", "");
+		this(0, "", "");
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", pass=" + pass + "]";
+		return "Usuario [nombre=" + nombre + ", pass=" + pass + ", errores=" + errores + ", id=" + id + "]";
 	}
 
 	public String getNombre() {
@@ -75,5 +84,12 @@ public class Usuario {
 		this.errores = errores;
 	}
 
-	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }
