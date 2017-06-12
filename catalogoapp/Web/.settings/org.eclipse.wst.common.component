@@ -5,6 +5,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="DAL-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/DAL/DAL">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="Tipos-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Tipos/Tipos">
             <dependency-type>uses</dependency-type>
         </dependent-module>

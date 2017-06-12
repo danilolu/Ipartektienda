@@ -16,7 +16,7 @@ public interface TiendaDAO extends CatalogoAppDAO {
 
 	public void delete(Usuario usuario);
 
-	public void deleteUsuario(int id);
+	public void deleteUsuario(String nombre);
 
 	// DAO productos
 	public Producto[] findAllProducto();// select

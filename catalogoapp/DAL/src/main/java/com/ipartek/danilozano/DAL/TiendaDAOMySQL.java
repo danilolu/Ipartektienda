@@ -12,7 +12,7 @@ import com.ipartek.danilozano.Tipos.Usuario;
 public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 	private final static String FIND_ALL_USUARIO = "SELECT * FROM usuarios";
-	private final static String FIND_BY_ID_USUARIO = "SELECT * FROM usuarios Where id=?";
+	private final static String FIND_BY_NOMBRE_USUARIO = "SELECT * FROM usuarios Where nombre=?";
 	private final static String INSERT_USUARIO = "INSERT INTO usuarios (nombre, password) VALUES (?,?)";
 	private final static String UPDATE_USUARIO = "UPDATE usuarios SET nombre=?, password=? WHERE id=?";
 	private final static String DELETE_USUARIO = "DELETE FROM usuarios WHERE id=?";
@@ -23,7 +23,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String UPDATE_PRODUCTO = "UPDATE productos SET nombre=?, descripcion=?, precio=?, WHERE id=?";
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
-	private PreparedStatement psFindAllUsuario, psFindByIdUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
+	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
 	private PreparedStatement psFindAllProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psDeleteProducto;
 
 	public TiendaDAOMySQL(String url, String mysqlUser, String mysqlPass) {
@@ -51,7 +51,6 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				// System.out.println(rs.getString("username"));
 				usuario = new Usuario();
 
-				usuario.setId(rs.getInt("id"));
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setPass(rs.getString("password"));
 
@@ -86,15 +85,14 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		ResultSet rs = null;
 
 		try {
-			psFindByIdUsuario = con.prepareStatement(FIND_BY_ID_USUARIO);
+			psFindByNombreUsuario = con.prepareStatement(FIND_BY_NOMBRE_USUARIO);
 
-			psFindByIdUsuario.setInt(1, id);
-			rs = psFindByIdUsuario.executeQuery();
+			psFindByNombreUsuario.setInt(1, id);
+			rs = psFindByNombreUsuario.executeQuery();
 
 			if (rs.next()) {
 				usuario = new Usuario();
 
-				usuario.setId(rs.getInt("id"));
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setPass(rs.getString("password"));
 			}
@@ -102,7 +100,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		} catch (Exception e) {
 			throw new DAOException("Error en findById", e);
 		} finally {
-			cerrarUsuario(psFindByIdUsuario, rs);
+			cerrarUsuario(psFindByNombreUsuario, rs);
 		}
 
 		return usuario;
@@ -145,8 +143,6 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			psUpdateUsuario.setString(1, usuario.getNombre());
 			psUpdateUsuario.setString(2, usuario.getPass());
 
-			psUpdateUsuario.setInt(5, usuario.getId());
-
 			int res = psUpdateUsuario.executeUpdate();
 
 			if (res != 1)
@@ -161,16 +157,16 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 	@Override
 	public void delete(Usuario usuario) {
-		deleteUsuario(usuario.getId());
+		deleteUsuario(usuario.getNombre());
 
 	}
 
 	@Override
-	public void deleteUsuario(int id) {
+	public void deleteUsuario(String nombre) {
 		try {
 			psDeleteUsuario = con.prepareStatement(DELETE_USUARIO);
 
-			psDeleteUsuario.setInt(1, id);
+			psDeleteUsuario.setString(1, nombre);
 
 			int res = psDeleteUsuario.executeUpdate();
 
