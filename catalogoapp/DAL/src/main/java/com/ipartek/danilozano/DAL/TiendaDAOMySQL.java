@@ -170,8 +170,44 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		} finally {
 			cerrarUsuario(psDeleteUsuario);
 		}
+		
 
 	}
+
+	@Override
+	public boolean validar(Usuario usuario) {
+		this.abrir();
+		Usuario[] usuariosArr = this.findAllUsuario();
+		this.cerrar();
+
+		for (Usuario u : usuariosArr) {
+			if (u.getNombre().equals(usuario.getNombre())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean validarNombre(Usuario usuario) {
+		this.abrir();
+		Usuario[] usuariosArr = this.findAllUsuario();
+		this.cerrar();
+
+		if (usuario.getNombre() != null) {
+
+			for (Usuario s : usuariosArr) {
+
+				if (usuario.getNombre().equals(s.getNombre())) {
+
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
 
 	// Producto
 	@Override
@@ -326,5 +362,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 
 	}
+
+	
 
 }

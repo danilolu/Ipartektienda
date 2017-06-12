@@ -13,7 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.DAL.TiendaDALFactory;
 import com.ipartek.danilozano.Tipos.Usuario;
 
@@ -22,6 +23,9 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(LoginServlet.class);
+	
+	public static TiendaDAO dao = null;
+	
 	/* package */static final String RUTA = "/WEB-INF/vistas/";
 	private static final String RUTA_PRINCIPAL = "/admin/productocrud";
 	private static final String RUTA_LOGIN = RUTA + "/login.jsp";
@@ -36,9 +40,16 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//conexion a la bbdd
+		
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
+		
+		
 		// recoger datos del usuario en session
-		String nombresesion = request.getParameter("nombre");
+		
 		HttpSession session = request.getSession();
+		
+		String nombresesion = request.getParameter("nombre");
 		session.setAttribute("nombre", nombresesion);
 		nombresesion = (String) session.getAttribute("nombre");
 
@@ -52,9 +63,13 @@ public class LoginServlet extends HttpServlet {
 		usuario.setNombre(nombre);
 		usuario.setPass(pass);
 
+		//abrir conexion
+		
+		dao.abrir();
+		
 		// Llamada a lógica de negocio
 		ServletContext application = request.getServletContext();
-		TiendaDAL usuariosDAL = (TiendaDAL) application.getAttribute(USUARIOS_DAL);
+		TiendaDAOMySQL usuariosDAL = (TiendaDAOMySQL) application.getAttribute(USUARIOS_DAL);
 
 		if (usuariosDAL == null) {
 			usuariosDAL = TiendaDALFactory.getUsuariosDAL();
@@ -66,6 +81,8 @@ public class LoginServlet extends HttpServlet {
 		cookie.setMaxAge(TIEMPO_INACTIVIDAD);
 		response.addCookie(cookie);
 
+		
+		
 		// crear opciones de estado
 		boolean esValido = usuariosDAL.validar(usuario);
 		boolean sinParametros = usuario.getNombre() == null;
