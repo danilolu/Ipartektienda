@@ -8,9 +8,9 @@ public interface TiendaDAO extends CatalogoAppDAO {
 	// DAO usuarios
 	public Usuario[] findAllUsuario();// select
 
-	public Usuario findByIdUsuario(int id);// select
+	public Usuario findByNombreUsuario(String nombre);// select
 
-	public int insert(Usuario usuario);
+	public void insert(Usuario usuario);
 
 	public void update(Usuario usuario);
 
