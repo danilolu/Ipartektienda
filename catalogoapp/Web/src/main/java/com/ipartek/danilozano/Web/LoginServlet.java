@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 
 		// Llamada a lógica de negocio
 		ServletContext application = request.getServletContext();
-		TiendaDAOMySQL usuariosDAL = (TiendaDAOMySQL) application.getAttribute(USUARIOS_DAL);
+		Object usuariosDAL = application.getAttribute(USUARIOS_DAL);
 
 		if (usuariosDAL == null) {
 			usuariosDAL = TiendaDALFactory.getUsuariosDAL();

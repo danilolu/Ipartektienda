@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Producto;
@@ -34,7 +33,7 @@ public class ProductoCRUDServlet extends HttpServlet {
 
 		// recoger datos de la TiendaDAL cargada en contex
 		ServletContext application = getServletContext();
-		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
+		// TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 
 		// recojer la opcion que se carga en la url
 		String op = request.getParameter("op");
