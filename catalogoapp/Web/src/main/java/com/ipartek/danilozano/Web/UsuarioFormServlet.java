@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.DALException;
+import com.ipartek.danilozano.DAL.DAOException;
 import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
-import com.ipartek.danilozano.DAL.UsuarioYaExistenteDALException;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/admin/usuarioform")
@@ -78,9 +78,9 @@ public class UsuarioFormServlet extends HttpServlet {
 					dao.insert(usuario);
 					dao.cerrar();
 					rutaListado.forward(request, response);
-				} catch (UsuarioYaExistenteDALException a) {
+				} catch (DAOException a) {
 					log.info("usuario con  '" + nombre + "' repetido, el alta no ha sido finalizada");
-					usuario.setErrores("ID ya existente");
+					usuario.setErrores("Usuario ya existente");
 					request.setAttribute("usuario", usuario);
 					rutaFormulario.forward(request, response);
 				}
