@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
@@ -22,6 +24,8 @@ public class NoadminLoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(NoadminLoginServlet.class);
+	public static TiendaDAO dao = null;
+
 	/* package */static final String RUTA = "/WEB-INF/vistas/";
 	private static final String RUTA_CATALOGO = "/WEB-INF/vistas/catalogo.jsp";
 	public static final int TIEMPO_INACTIVIDAD = 30 * 60;
@@ -34,6 +38,7 @@ public class NoadminLoginServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 
 		// recoger datos del usuario en session
 		String nombresesion = request.getParameter("nombre");
@@ -46,7 +51,10 @@ public class NoadminLoginServlet extends HttpServlet {
 		// cargar base de datos de productos cargada en context
 		ServletContext application = request.getServletContext();
 		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
-		Producto[] productos = tiendaDAL.buscarTodosLosProductos();
+		dao.abrir();
+		Producto[] productos = dao.findAllProducto();
+		dao.cerrar();
+
 		request.setAttribute("productos", productos);
 
 		// establecer tienmpo de inactividad de sesion

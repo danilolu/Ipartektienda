@@ -32,12 +32,10 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 	}
 
-	
 	public TiendaDAOMySQL(String url, String mysqlUser, String mysqlPass) {
 		super(url, mysqlUser, mysqlPass);
 	}
 
-	
 	// Usuario
 	@Override
 	public Usuario[] findAllUsuario() {
@@ -46,14 +44,13 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 		try {
 			psFindAllUsuario = con.prepareStatement(FIND_ALL_USUARIO);
-			
 
 			rs = psFindAllUsuario.executeQuery();
 
 			Usuario usuario;
 
 			while (rs.next()) {
-				
+
 				usuario = new Usuario();
 
 				usuario.setNombre(rs.getString("nombre"));
@@ -175,7 +172,6 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		} finally {
 			cerrarUsuario(psDeleteUsuario);
 		}
-		
 
 	}
 
@@ -197,42 +193,6 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 		return false;
 	}
-//		// variables necesarios.
-//				boolean usuarioValido = false;
-//				Usuario usuarioBD = null;
-//
-//				System.out.println(usuario);
-//
-//				// Sacamos el usuario de la base de datos si lo saca.
-//
-//				if (usuario.getNombre() != null) {
-//
-//					if (this.findByNombreUsuario((usuario.getNombre())) != null) {
-//
-//						usuarioBD = this.findByNombreUsuario(usuario.getNombre());
-//
-//						if (usuarioBD.getNombre() != null) {
-//
-//							// Sacamos el nombre y la contraseña.
-//							String contraseñaBD = usuarioBD.getPass();
-//							String nombreBD = usuarioBD.getNombre();
-//
-//							// Miramos si son iguales.
-//							if (contraseñaBD.equals(usuario.getPass()) && nombreBD.equals(usuario.getNombre())) {
-//								usuarioValido = true;
-//							}
-//						}
-//					}
-//				}
-//				// True si existe false si no.
-//
-//				return usuarioValido;
-	
-	
-
-	
-
-
 
 	// Producto
 	@Override
@@ -309,6 +269,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 		return producto;
 	}
+
 	@Override
 	public Producto findByNombreProducto(String nombre) {
 		Producto producto = null;
@@ -415,10 +376,5 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 
 	}
-
-
-	
-
-	
 
 }

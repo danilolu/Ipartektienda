@@ -14,11 +14,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.DAL.UsuarioYaExistenteDALException;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/noadmin/usuarioform")
 public class noadminUsuarioFormServlet extends HttpServlet {
+	public static TiendaDAO dao = null;
+
 	private static Logger log = Logger.getLogger(ProductoFormServlet.class);
 	static final String RUTA_NUEVO_FORMULARIO = "/WEB-INF/vistas/nuevousuarioform.jsp";
 
@@ -29,6 +33,8 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 		// recoger datos
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpSession session = httpReq.getSession();
@@ -73,8 +79,9 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 
 				try {
 					log.info("producto con id '" + nombre + "' dado de alta");
-					dal.alta(usuario);
-					session.invalidate();
+					dao.abrir();
+					dao.insert(usuario);
+					dao.cerrar();
 					response.sendRedirect("/login");
 				} catch (UsuarioYaExistenteDALException a) {
 					log.info("usuario con  '" + nombre + "' repetido, el alta no ha sido finalizada");

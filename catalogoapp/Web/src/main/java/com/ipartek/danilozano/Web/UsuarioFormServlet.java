@@ -14,11 +14,14 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.DALException;
 import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.DAL.UsuarioYaExistenteDALException;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/admin/usuarioform")
 public class UsuarioFormServlet extends HttpServlet {
+	public static TiendaDAO dao = null;
 	private static Logger log = Logger.getLogger(ProductoFormServlet.class);
 
 	private static final long serialVersionUID = 1L;
@@ -28,6 +31,8 @@ public class UsuarioFormServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 		// definir ruteo
 		RequestDispatcher rutaListado = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_SERVLET_LISTADO);
 		RequestDispatcher rutaFormulario = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_FORMULARIO);
@@ -69,7 +74,9 @@ public class UsuarioFormServlet extends HttpServlet {
 
 				try {
 					log.info("producto con id '" + nombre + "' dado de alta");
-					dal.alta(usuario);
+					dao.abrir();
+					dao.insert(usuario);
+					dao.cerrar();
 					rutaListado.forward(request, response);
 				} catch (UsuarioYaExistenteDALException a) {
 					log.info("usuario con  '" + nombre + "' repetido, el alta no ha sido finalizada");
@@ -106,7 +113,9 @@ public class UsuarioFormServlet extends HttpServlet {
 				try {
 					log.info("usuario: '" + nombre + "' modificado");
 
-					dal.modificar(usuario);
+					dao.abrir();
+					dao.update(usuario);
+					dao.cerrar();
 				} catch (DALException de) {
 					log.info("error al modificar el usuario: '" + nombre + "' , no se ha completado la modificacion");
 
@@ -135,7 +144,9 @@ public class UsuarioFormServlet extends HttpServlet {
 			} else {
 				log.info("usuario: '" + nombre + "' borrado");
 
-				dal.borrar(usuario);
+				dao.abrir();
+				dao.delete(usuario);
+				dao.cerrar();
 				rutaListado.forward(request, response);
 			}
 
