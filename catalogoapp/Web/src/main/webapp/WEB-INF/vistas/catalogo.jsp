@@ -34,7 +34,7 @@
 				<td>${producto.nombre}</td>
 				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
-				<td>${producto.precio} &euro;/Kg</td>
+				<td>${producto.precio} &euro;</td>
 				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="100" height="100px" ></a></td>
 			</tr>
 		</c:forEach>
