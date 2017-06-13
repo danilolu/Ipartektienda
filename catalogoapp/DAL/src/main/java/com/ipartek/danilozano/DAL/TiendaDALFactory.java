@@ -17,6 +17,7 @@ public class TiendaDALFactory {
 		public static TiendaDAOMySQL getUsuariosDAL() {
 			 
 			return new TiendaDAOMySQL();
+			
 		}
 	
 		//Dal factory de productos DAO

@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 		usuario.setNombre(nombre);
 		usuario.setPass(pass);
 
-		//abrir conexion
+		
 		
 		dao.abrir();
 		
@@ -74,14 +74,14 @@ public class LoginServlet extends HttpServlet {
 		if (usuariosDAL == null) {
 			usuariosDAL = TiendaDALFactory.getUsuariosDAL();
 		}
-
+		dao.cerrar();
 		// establecer tienmpo de inactividad de sesion
 		session.setMaxInactiveInterval(TIEMPO_INACTIVIDAD);
 		Cookie cookie = new Cookie("JSESSIONID", session.getId());
 		cookie.setMaxAge(TIEMPO_INACTIVIDAD);
 		response.addCookie(cookie);
-
 		
+		dao.abrir();
 		
 		// crear opciones de estado
 		boolean esValido = usuariosDAL.validar(usuario);
@@ -119,5 +119,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher(RUTA_LOGIN).forward(request, response);
 
 		}
+		dao.cerrar();
 	}
+	
 }

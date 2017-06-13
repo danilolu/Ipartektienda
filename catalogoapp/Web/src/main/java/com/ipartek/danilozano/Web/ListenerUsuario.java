@@ -12,13 +12,15 @@ import org.apache.log4j.PropertyConfigurator;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDALFactory;
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebListener
 public class ListenerUsuario implements ServletContextListener, HttpSessionListener {
 	private static Logger log = Logger.getLogger(LoginServlet.class);
-
+	public static TiendaDAO dao = null;
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
 
@@ -58,7 +60,12 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 //		tiendaDAL.alta(new Usuario("admin", "pass"));
 //		tiendaDAL.alta(new Usuario("usuario1", "pass1"));
 //		application.setAttribute("dal", tiendaDAL);
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 
+		dao.abrir();
+		for (Usuario u : dao.findAllUsuario())
+			log.info(u);
+		dao.cerrar();
 	}
 
 	private ServletContext getServletContext() {

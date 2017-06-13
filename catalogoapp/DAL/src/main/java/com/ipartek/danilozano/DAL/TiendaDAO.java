@@ -20,12 +20,14 @@ public interface TiendaDAO extends CatalogoAppDAO {
 	
 	public boolean validar(Usuario usuario);
 
-	public boolean validarNombre(Usuario usuario);
+
 
 	// DAO productos
 	public Producto[] findAllProducto();// select
 
 	public Producto findByIdProducto(int id);// select
+	
+	public Producto findByNombreProducto(String nombre);
 
 	public int insert(Producto producto);
 

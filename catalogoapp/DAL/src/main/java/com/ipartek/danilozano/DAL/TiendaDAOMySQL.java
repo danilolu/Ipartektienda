@@ -19,21 +19,25 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 	private final static String FIND_ALL_PRODUCTO = "SELECT * FROM productos";
 	private final static String FIND_BY_ID_PRODUCTO = "SELECT * FROM productos Where id=?";
+	private final static String FIND_BY_NOMBRE_PRODUCTO = "SELECT * FROM productos Where nombre=?";
 	private final static String INSERT_PRODUCTO = "INSERT INTO productos (nombre, descripcion, precio) VALUES (?,?,?)";
 	private final static String UPDATE_PRODUCTO = "UPDATE productos SET nombre=?, descripcion=?, precio=? WHERE id=?";
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
 	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
-	private PreparedStatement psFindAllProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psDeleteProducto;
+	private PreparedStatement psFindAllProducto, psFindByNombreProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psDeleteProducto;
 
+	public TiendaDAOMySQL() {
+		super();
+
+	}
+
+	
 	public TiendaDAOMySQL(String url, String mysqlUser, String mysqlPass) {
 		super(url, mysqlUser, mysqlPass);
 	}
 
-	public TiendaDAOMySQL() {
-
-	}
-
+	
 	// Usuario
 	@Override
 	public Usuario[] findAllUsuario() {
@@ -42,13 +46,14 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 		try {
 			psFindAllUsuario = con.prepareStatement(FIND_ALL_USUARIO);
+			
 
 			rs = psFindAllUsuario.executeQuery();
 
 			Usuario usuario;
 
 			while (rs.next()) {
-				// System.out.println(rs.getString("username"));
+				
 				usuario = new Usuario();
 
 				usuario.setNombre(rs.getString("nombre"));
@@ -180,25 +185,11 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		Usuario[] usuariosArr = this.findAllUsuario();
 		this.cerrar();
 
-		for (Usuario u : usuariosArr) {
-			if (u.getNombre().equals(usuario.getNombre())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean validarNombre(Usuario usuario) {
-		this.abrir();
-		Usuario[] usuariosArr = this.findAllUsuario();
-		this.cerrar();
-
 		if (usuario.getNombre() != null) {
 
-			for (Usuario s : usuariosArr) {
+			for (Usuario u : usuariosArr) {
 
-				if (usuario.getNombre().equals(s.getNombre())) {
+				if (usuario.getNombre().equals(u.getNombre())) {
 
 					return true;
 				}
@@ -206,6 +197,40 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 		return false;
 	}
+//		// variables necesarios.
+//				boolean usuarioValido = false;
+//				Usuario usuarioBD = null;
+//
+//				System.out.println(usuario);
+//
+//				// Sacamos el usuario de la base de datos si lo saca.
+//
+//				if (usuario.getNombre() != null) {
+//
+//					if (this.findByNombreUsuario((usuario.getNombre())) != null) {
+//
+//						usuarioBD = this.findByNombreUsuario(usuario.getNombre());
+//
+//						if (usuarioBD.getNombre() != null) {
+//
+//							// Sacamos el nombre y la contraseña.
+//							String contraseñaBD = usuarioBD.getPass();
+//							String nombreBD = usuarioBD.getNombre();
+//
+//							// Miramos si son iguales.
+//							if (contraseñaBD.equals(usuario.getPass()) && nombreBD.equals(usuario.getNombre())) {
+//								usuarioValido = true;
+//							}
+//						}
+//					}
+//				}
+//				// True si existe false si no.
+//
+//				return usuarioValido;
+	
+	
+
+	
 
 
 
@@ -280,6 +305,34 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			throw new DAOException("Error en findById", e);
 		} finally {
 			cerrarProducto(psFindByIdProducto, rs);
+		}
+
+		return producto;
+	}
+	@Override
+	public Producto findByNombreProducto(String nombre) {
+		Producto producto = null;
+		ResultSet rs = null;
+
+		try {
+			psFindByNombreProducto = con.prepareStatement(FIND_BY_NOMBRE_PRODUCTO);
+
+			psFindByNombreProducto.setString(1, nombre);
+			rs = psFindByNombreProducto.executeQuery();
+
+			if (rs.next()) {
+				producto = new Producto();
+
+				producto.setId(rs.getInt("id"));
+				producto.setNombre(rs.getString("nombre"));
+				producto.setDescripcion(rs.getString("descripcion"));
+				producto.setPrecio(rs.getDouble("precio"));
+			}
+
+		} catch (Exception e) {
+			throw new DAOException("Error en findBynombre", e);
+		} finally {
+			cerrarProducto(psFindByNombreProducto, rs);
 		}
 
 		return producto;
@@ -362,6 +415,9 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 
 	}
+
+
+	
 
 	
 
