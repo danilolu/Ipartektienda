@@ -88,9 +88,11 @@ public class ProductoFormServlet extends HttpServlet {
 			} else {
 				try {
 					log.info("producto con id '" + id + "' dado de alta");
+					tiendaDAL.alta(producto);
 					dao.abrir();
 					dao.insert(producto);
 					dao.cerrar();
+					
 					rutaListado.forward(request, response);
 				} catch (IdProductoYaExistenteDALException a) {
 					log.info("producto con id '" + id + "' repetida, el alta no ha sido finalizada");
@@ -112,6 +114,7 @@ public class ProductoFormServlet extends HttpServlet {
 			} else
 				try {
 					log.info("producto con id '" + id + "' modificado");
+					tiendaDAL.modificar(producto);
 					dao.abrir();
 					dao.update(producto);
 					dao.cerrar();
@@ -127,6 +130,7 @@ public class ProductoFormServlet extends HttpServlet {
 
 			break;
 		case "borrar":
+			tiendaDAL.borrar(producto);
 			dao.abrir();
 			dao.delete(producto);
 			dao.cerrar();
