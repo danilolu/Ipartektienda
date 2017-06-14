@@ -33,6 +33,7 @@ public class ProductoFormServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
+
 		// definir ruteo
 		RequestDispatcher rutaListado = request.getRequestDispatcher(ProductoCRUDServlet.RUTA_SERVLET_LISTADO);
 		RequestDispatcher rutaFormulario = request.getRequestDispatcher(ProductoCRUDServlet.RUTA_FORMULARIO);
@@ -88,11 +89,11 @@ public class ProductoFormServlet extends HttpServlet {
 			} else {
 				try {
 					log.info("producto con id '" + id + "' dado de alta");
-					tiendaDAL.alta(producto);
+					// tiendaDAL.alta(producto);
 					dao.abrir();
 					dao.insert(producto);
 					dao.cerrar();
-					
+
 					rutaListado.forward(request, response);
 				} catch (IdProductoYaExistenteDALException a) {
 					log.info("producto con id '" + id + "' repetida, el alta no ha sido finalizada");
@@ -114,7 +115,7 @@ public class ProductoFormServlet extends HttpServlet {
 			} else
 				try {
 					log.info("producto con id '" + id + "' modificado");
-					tiendaDAL.modificar(producto);
+					// tiendaDAL.modificar(producto);
 					dao.abrir();
 					dao.update(producto);
 					dao.cerrar();
@@ -130,7 +131,7 @@ public class ProductoFormServlet extends HttpServlet {
 
 			break;
 		case "borrar":
-			tiendaDAL.borrar(producto);
+			// tiendaDAL.borrar(producto);
 			dao.abrir();
 			dao.delete(producto);
 			dao.cerrar();

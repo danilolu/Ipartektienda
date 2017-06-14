@@ -71,7 +71,7 @@ public class NoadminLoginServlet extends HttpServlet {
 		// Redirigir a una nueva vista
 		if (esUsuarioYaRegistrado) {
 			log.info("Usuario enviado a catalogo sin permisos de administracion  ");
-			request.getRequestDispatcher(RUTA_CATALOGO).forward(request, response);
+			request.getRequestDispatcher("/carrito").forward(request, response);
 
 		} else if (sinParametros) {
 			log.info(nombresesion + " pasa por sinparametros  ");

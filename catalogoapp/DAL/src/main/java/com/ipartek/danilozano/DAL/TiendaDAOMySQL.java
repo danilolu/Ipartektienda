@@ -185,7 +185,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 			for (Usuario u : usuariosArr) {
 
-				if (usuario.getNombre().equals(u.getNombre())) {
+				if (usuario.getNombre().equals(u.getNombre()) && usuario.getPass().equals(u.getPass())) {
 
 					return true;
 				}

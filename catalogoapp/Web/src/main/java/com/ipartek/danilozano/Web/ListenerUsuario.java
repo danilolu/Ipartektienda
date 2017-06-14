@@ -51,16 +51,16 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 
 		tiendaDAL = TiendaDALFactory.getProductosDAL1();
-		tiendaDAL = TiendaDALFactory.getUsuariosDAL1();
-		tiendaDAL.alta(new Producto("Judas", "Ale", 1.8));
-		tiendaDAL.alta(new Producto("Affligem Triple", "Abadia", 1.95));
-		tiendaDAL.alta(new Producto("Paulaner", "Trigo", 1.6));
-		tiendaDAL.alta(new Producto("Guinnes", "Negra", 1.59));
-		tiendaDAL.alta(new Producto("Murphys", "Roja", 1.53));
-		tiendaDAL.alta(new Producto("Chimay roja", "Abadia", 2.1));
-		tiendaDAL.alta(new Producto("Super Bock", "Lager ", 0.80));
-		tiendaDAL.alta(new Usuario("admin", "pass"));
-		tiendaDAL.alta(new Usuario("usuario1", "pass1"));
+		// tiendaDAL = TiendaDALFactory.getUsuariosDAL1();
+		// tiendaDAL.alta(new Producto("Judas", "Ale", 1.8));
+		// tiendaDAL.alta(new Producto("Affligem Triple", "Abadia", 1.95));
+		// tiendaDAL.alta(new Producto("Paulaner", "Trigo", 1.6));
+		// tiendaDAL.alta(new Producto("Guinnes", "Negra", 1.59));
+		// tiendaDAL.alta(new Producto("Murphys", "Roja", 1.53));
+		// tiendaDAL.alta(new Producto("Chimay roja", "Abadia", 2.1));
+		// tiendaDAL.alta(new Producto("Super Bock", "Lager ", 0.80));
+		// tiendaDAL.alta(new Usuario("admin", "pass"));
+		// tiendaDAL.alta(new Usuario("usuario1", "pass1"));
 		application.setAttribute("dal", tiendaDAL);
 
 		// cargar la configuracion de log4j en el context
@@ -72,7 +72,8 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 		for (Usuario u : dao.findAllUsuario())
 			log.info(u);
 		for (Producto p : dao.findAllProducto())
-			log.info(p);
+			tiendaDAL.alta(p);
+		application.setAttribute("dal", tiendaDAL);
 		dao.cerrar();
 	}
 
