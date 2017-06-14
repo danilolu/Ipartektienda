@@ -13,17 +13,21 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDALFactory;
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Carrito;
 import com.ipartek.danilozano.Tipos.Producto;
+
 
 @WebServlet("/carrito")
 public class CarritoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static Logger log = Logger.getLogger(CarritoServlet.class);
-
+	public static TiendaDAO dao = null;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		doPost(request, response);
 	}
 
@@ -39,7 +43,22 @@ public class CarritoServlet extends HttpServlet {
 		Producto[] productosArr = productos.buscarTodosLosProductos();
 
 		application.setAttribute("productosArr", productosArr);
+/////////////////////////////////
+		//yaestaServletContext application = request.getServletContext();
+		
+		//yaestaTiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
+		tiendaDAL = TiendaDALFactory.getProductosDAL1();
+			
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 
+		dao.abrir();
+		for (Producto p : dao.findAllProducto())
+			tiendaDAL.alta(p);
+
+			application.setAttribute("dal", tiendaDAL);
+			dao.cerrar();
+		
+		///////////////////////////////
 		// crear objeto de Carrito si el carrito es null
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
 

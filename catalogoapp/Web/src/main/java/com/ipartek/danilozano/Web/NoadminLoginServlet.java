@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.TiendaDAL;
+import com.ipartek.danilozano.DAL.TiendaDALFactory;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Producto;
@@ -54,7 +55,16 @@ public class NoadminLoginServlet extends HttpServlet {
 		dao.abrir();
 		Producto[] productos = dao.findAllProducto();
 		dao.cerrar();
+		tiendaDAL = TiendaDALFactory.getProductosDAL1();
+		
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 
+		dao.abrir();
+		for (Producto p : dao.findAllProducto())
+			tiendaDAL.alta(p);
+
+			application.setAttribute("dal", tiendaDAL);
+			dao.cerrar();
 		request.setAttribute("productos", productos);
 
 		// establecer tienmpo de inactividad de sesion
