@@ -8,10 +8,18 @@
 
 	<form action="productoform" method="post">
 		<fieldset>
-			<label for="id">ID</label> 
+			<label for="id"<c:if test="${ param.op == 'alta'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				>ID</label> 
 			<input id="id"	name="id" required="required"  value="${producto.id}"
 			  	Style=background-color:lightgray; readonly="readonly" 
-			  		   />
+			  		  <c:if test="${ param.op == 'alta'}">
+			  	Type="hidden";
+			  </c:if>  
+				
+				/>
 			
 		
 		</fieldset>
