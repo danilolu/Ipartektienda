@@ -2,7 +2,7 @@ package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
+//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.TiendaDAL;
-import com.ipartek.danilozano.DAL.TiendaDALFactory;
+//import com.ipartek.danilozano.DAL.TiendaDAL;
+//import com.ipartek.danilozano.DAL.TiendaDALFactory;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
-import com.ipartek.danilozano.Tipos.Producto;
+//import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/noadmin/login")
@@ -28,7 +28,7 @@ public class NoadminLoginServlet extends HttpServlet {
 	public static TiendaDAO dao = null;
 
 	/* package */static final String RUTA = "/WEB-INF/vistas/";
-	private static final String RUTA_CATALOGO = "/WEB-INF/vistas/catalogo.jsp";
+	//private static final String RUTA_CATALOGO = "/WEB-INF/vistas/catalogo.jsp";
 	public static final int TIEMPO_INACTIVIDAD = 30 * 60;
 	static final String USUARIOS_DAL = "dal";
 	static final String RUTA_FORMULARIO = "/WEB-INF/vistas/nuevousuario.jsp";
@@ -50,22 +50,22 @@ public class NoadminLoginServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("pass");
 		// cargar base de datos de productos cargada en context
-		ServletContext application = request.getServletContext();
-		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
-		dao.abrir();
-		Producto[] productos = dao.findAllProducto();
-		dao.cerrar();
-		tiendaDAL = TiendaDALFactory.getProductosDAL1();
-		
-		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
-
-		dao.abrir();
-		for (Producto p : dao.findAllProducto())
-			tiendaDAL.alta(p);
-
-			application.setAttribute("dal", tiendaDAL);
-			dao.cerrar();
-		request.setAttribute("productos", productos);
+//		ServletContext application = request.getServletContext();
+		//TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
+//		dao.abrir();
+//		Producto[] productos = dao.findAllProducto();
+//		dao.cerrar();
+//		tiendaDAL = TiendaDALFactory.getProductosDAL1();
+//		
+//		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
+//
+//		dao.abrir();
+//		for (Producto p : dao.findAllProducto())
+//			tiendaDAL.alta(p);
+//
+//			application.setAttribute("dal", tiendaDAL);
+//			dao.cerrar();
+//		request.setAttribute("productos", productos);
 
 		// establecer tienmpo de inactividad de sesion
 		session.setMaxInactiveInterval(TIEMPO_INACTIVIDAD);

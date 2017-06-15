@@ -2,14 +2,14 @@ package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
+//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.danilozano.DAL.TiendaDAL;
+//import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Usuario;
@@ -32,8 +32,8 @@ public class UsuarioCRUDServlet extends HttpServlet {
 
 		// recoger datos de la TiendaDAL cargada en contex
 
-		ServletContext application = request.getServletContext();
-		TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
+		//ServletContext application = request.getServletContext();
+		//TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
 
 		// recojer la opcion que se carga en la url
 

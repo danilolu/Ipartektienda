@@ -2,17 +2,17 @@ package com.ipartek.danilozano.DAL;
 
 public class TiendaDALFactory {
 
-	// //Dal factory de productos usando dal antiguo
-	public static TiendaDAL getProductosDAL1() {
-
-		return new TiendaDALColeccion();
-	}
-
-	// Dal factory de Usuarios usando dal antiguo
-	public static TiendaDAL getUsuariosDAL1() {
-
-		return new TiendaDALColeccion();
-	}
+//	// //Dal factory de productos usando dal antiguo
+//	public static TiendaDAL getProductosDAL1() {
+//
+//		return new TiendaDALColeccion();
+//	}
+//
+//	// Dal factory de Usuarios usando dal antiguo
+//	public static TiendaDAL getUsuariosDAL1() {
+//
+//		return new TiendaDALColeccion();
+//	}
 
 	// Dal factory de Usuarios DAO
 	public static TiendaDAOMySQL getUsuariosDAL() {

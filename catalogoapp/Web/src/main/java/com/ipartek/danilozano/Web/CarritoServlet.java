@@ -12,8 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.TiendaDAL;
-import com.ipartek.danilozano.DAL.TiendaDALFactory;
+
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Carrito;
@@ -36,29 +35,17 @@ public class CarritoServlet extends HttpServlet {
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
 		// cargar arrays de los productos y del carrito
-		TiendaDAL productos = (TiendaDAL) application.getAttribute("dal");
-		TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
-		Producto[] productos1 = tiendaDAL.buscarTodosLosProductos();
-		request.setAttribute("productos", productos1);
-		Producto[] productosArr = productos.buscarTodosLosProductos();
-
-		application.setAttribute("productosArr", productosArr);
-/////////////////////////////////
-		//yaestaServletContext application = request.getServletContext();
-		
-		//yaestaTiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
-		tiendaDAL = TiendaDALFactory.getProductosDAL1();
-			
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
-
 		dao.abrir();
-		for (Producto p : dao.findAllProducto())
-			tiendaDAL.alta(p);
+				
+		Producto[] catalogo = dao.findAllProducto();
 
-			application.setAttribute("dal", tiendaDAL);
-			dao.cerrar();
-		
-		///////////////////////////////
+		dao.cerrar();
+
+		application.setAttribute("catalogo", catalogo);
+
+				
+
 		// crear objeto de Carrito si el carrito es null
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
 
@@ -102,9 +89,11 @@ public class CarritoServlet extends HttpServlet {
 			case "anadir":
 
 				Producto producto;
-
-				Integer idmap = Integer.parseInt(request.getParameter("id"));
-				producto = productos.buscarPorId(idmap);
+				int id = Integer.parseInt(request.getParameter("id"));
+				
+				dao.abrir();
+				producto = dao.findByIdProducto(id);
+				dao.cerrar()	;		
 				carrito.anadirAlCarrito(producto);
 
 				log.info("Añadido " + producto + " al carrito");

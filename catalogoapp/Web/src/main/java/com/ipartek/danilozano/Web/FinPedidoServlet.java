@@ -32,7 +32,7 @@ public class FinPedidoServlet extends HttpServlet {
 		String op = request.getParameter("op");
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
 
-		Producto producto;
+		
 		Producto[] carritoArr = null;
 		Integer numeroProductos = 0;
 		Double precioTotal = 0.0;
@@ -79,6 +79,7 @@ public class FinPedidoServlet extends HttpServlet {
 			case "quitar":
 				log.info("Producto  quitado del carrito");
 				int id = Integer.parseInt(request.getParameter("id"));
+				Producto producto;
 				producto = carrito.buscarPorId(id);
 				carrito.quitarDelCarrito(id);
 				session.setAttribute("carrito", carrito);

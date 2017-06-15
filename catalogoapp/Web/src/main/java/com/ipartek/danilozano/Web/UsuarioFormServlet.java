@@ -3,7 +3,7 @@ package com.ipartek.danilozano.Web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.DAL.DALException;
 import com.ipartek.danilozano.DAL.DAOException;
-import com.ipartek.danilozano.DAL.TiendaDAL;
+//import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Usuario;
@@ -47,8 +47,8 @@ public class UsuarioFormServlet extends HttpServlet {
 		String admin = "admin";
 
 		// recoger datos de la TiendaDAL cargada en contex
-		ServletContext application = request.getServletContext();
-		TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
+		//ServletContext application = request.getServletContext();
+		//TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
 
 		// crear objeto Pproducto
 		Usuario usuario = new Usuario(nombre, pass);

@@ -27,7 +27,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${requestScope.productos}" var="producto">
+		<c:forEach items="${applicationScope.catalogo}" var="producto">
 			<tr>
 				
 				<td>${producto.id}</td>

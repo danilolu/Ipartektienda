@@ -3,17 +3,17 @@ package com.ipartek.danilozano.Web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.TiendaDAL;
+//import com.ipartek.danilozano.DAL.TiendaDALb;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.DAL.UsuarioYaExistenteDALException;
@@ -36,8 +36,8 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 		// recoger datos
-		HttpServletRequest httpReq = (HttpServletRequest) request;
-		HttpSession session = httpReq.getSession();
+		//HttpServletRequest httpReq = (HttpServletRequest) request;
+		//HttpSession session = httpReq.getSession();
 
 		// definir ruteo
 		RequestDispatcher rutaListado = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_SERVLET_LISTADO);
@@ -52,8 +52,8 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 		String pass2 = request.getParameter("pass2");
 
 		// recoger datos de la TiendaDAL cargada en contex
-		ServletContext application = request.getServletContext();
-		TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
+		//ServletContext application = request.getServletContext();
+		//TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
 
 		// crear objeto Usuario
 		Usuario usuario = new Usuario(nombre, pass);

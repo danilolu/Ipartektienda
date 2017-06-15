@@ -27,7 +27,7 @@ public class FiltroUsuarios implements Filter {
 			chain.doFilter(request, response);
 
 		} else {
-			httpResp.sendRedirect("/noadmin/login");
+			httpResp.sendRedirect("/carrito");
 
 		}
 	}
