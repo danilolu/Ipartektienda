@@ -3,7 +3,6 @@ package com.ipartek.danilozano.Web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.DALException;
-import com.ipartek.danilozano.DAL.IdProductoYaExistenteDALException;
-//import com.ipartek.danilozano.DAL.TiendaDALjh;
+import com.ipartek.danilozano.DAL.DAOException;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Producto;
@@ -61,9 +58,6 @@ public class ProductoFormServlet extends HttpServlet {
 																		// double
 
 		}
-		// recoger datos de la TiendaDAL cargada en contex
-		//ServletContext application = getServletContext();
-		//TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 
 		// crear objeto Pproducto
 		Producto producto = new Producto(nombre, descripcion, precio);
@@ -95,7 +89,7 @@ public class ProductoFormServlet extends HttpServlet {
 					dao.cerrar();
 
 					rutaListado.forward(request, response);
-				} catch (IdProductoYaExistenteDALException a) {
+				} catch (DAOException a) {
 					log.info("producto con id '" + id + "' repetida, el alta no ha sido finalizada");
 					producto.setErrores("ID ya existente");
 					request.setAttribute("producto", producto);
@@ -119,7 +113,7 @@ public class ProductoFormServlet extends HttpServlet {
 					dao.abrir();
 					dao.update(producto);
 					dao.cerrar();
-				} catch (DALException de) {
+				} catch (DAOException de) {
 					log.info("Error al modificar producto con id '" + id + "', la modificacion no ha sido finalizada");
 
 					producto.setErrores(de.getMessage());

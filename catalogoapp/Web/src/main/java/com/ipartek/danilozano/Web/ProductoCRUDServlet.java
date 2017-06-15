@@ -2,7 +2,6 @@ package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
 
-//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,10 +29,6 @@ public class ProductoCRUDServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
-
-		// recoger datos de la TiendaDAL cargada en contex
-		//ServletContext application = getServletContext();
-		// TiendaDAL tiendaDAL = (TiendaDAL) application.getAttribute("dal");
 
 		// recojer la opcion que se carga en la url
 		String op = request.getParameter("op");

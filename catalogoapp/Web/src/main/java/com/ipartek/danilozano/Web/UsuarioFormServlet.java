@@ -3,7 +3,6 @@ package com.ipartek.danilozano.Web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.danilozano.DAL.DALException;
 import com.ipartek.danilozano.DAL.DAOException;
-//import com.ipartek.danilozano.DAL.TiendaDAL;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Usuario;
@@ -45,10 +42,6 @@ public class UsuarioFormServlet extends HttpServlet {
 		String pass = request.getParameter("pass");
 		String pass2 = request.getParameter("pass2");
 		String admin = "admin";
-
-		// recoger datos de la TiendaDAL cargada en contex
-		//ServletContext application = request.getServletContext();
-		//TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
 
 		// crear objeto Pproducto
 		Usuario usuario = new Usuario(nombre, pass);
@@ -116,7 +109,7 @@ public class UsuarioFormServlet extends HttpServlet {
 					dao.abrir();
 					dao.update(usuario);
 					dao.cerrar();
-				} catch (DALException de) {
+				} catch (DAOException de) {
 					log.info("error al modificar el usuario: '" + nombre + "' , no se ha completado la modificacion");
 
 					usuario.setErrores(de.getMessage());

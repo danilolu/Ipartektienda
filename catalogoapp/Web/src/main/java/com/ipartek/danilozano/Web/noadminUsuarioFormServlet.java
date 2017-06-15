@@ -3,20 +3,17 @@ package com.ipartek.danilozano.Web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-//import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-//import com.ipartek.danilozano.DAL.TiendaDALb;
+import com.ipartek.danilozano.DAL.DAOException;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
-import com.ipartek.danilozano.DAL.UsuarioYaExistenteDALException;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 @WebServlet("/noadmin/usuarioform")
@@ -35,9 +32,6 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
-		// recoger datos
-		//HttpServletRequest httpReq = (HttpServletRequest) request;
-		//HttpSession session = httpReq.getSession();
 
 		// definir ruteo
 		RequestDispatcher rutaListado = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_SERVLET_LISTADO);
@@ -50,10 +44,6 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("pass");
 		String pass2 = request.getParameter("pass2");
-
-		// recoger datos de la TiendaDAL cargada en contex
-		//ServletContext application = request.getServletContext();
-		//TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
 
 		// crear objeto Usuario
 		Usuario usuario = new Usuario(nombre, pass);
@@ -83,7 +73,7 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 					dao.insert(usuario);
 					dao.cerrar();
 					response.sendRedirect("/login");
-				} catch (UsuarioYaExistenteDALException a) {
+				} catch (DAOException a) {
 					log.info("usuario con  '" + nombre + "' repetido, el alta no ha sido finalizada");
 					usuario.setErrores("ID ya existente");
 					request.setAttribute("usuario", usuario);

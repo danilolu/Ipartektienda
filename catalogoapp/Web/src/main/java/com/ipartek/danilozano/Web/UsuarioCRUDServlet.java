@@ -30,13 +30,6 @@ public class UsuarioCRUDServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 
-		// recoger datos de la TiendaDAL cargada en contex
-
-		//ServletContext application = request.getServletContext();
-		//TiendaDAL dal = (TiendaDAL) application.getAttribute("dal");
-
-		// recojer la opcion que se carga en la url
-
 		String op = request.getParameter("op");
 
 		// actuar en consecuencia de la opcion
