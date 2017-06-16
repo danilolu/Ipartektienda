@@ -24,16 +24,41 @@
 		
 		</fieldset>
 		<fieldset>
-			<label for="nombre">Nombre</label>
-			 <input id="nombre" name="nombre"	/>
+			<label for="nombre"<c:if test="${ param.op == 'borrar'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				>Nombre</label>
+			 <input id="nombre" name="nombre"<c:if test="${ param.op == 'borrar'}">
+			  	Type="hidden";
+			  </c:if>  
+				
+				/>
 		</fieldset>
 		<fieldset>
-			<label for="descripcion">Descripcion</label> <input type="descripcion" id="descripcion"
-				name="descripcion" >
+			<label for="descripcion"<c:if test="${ param.op == 'borrar'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				>Descripcion</label> 
+				<input  id="descripcion"
+				name="descripcion"<c:if test="${ param.op == 'borrar'}">
+			  	Type="hidden";
+			  </c:if>  
+				
+				/>
 		</fieldset>
 		<fieldset>
-			<label for="precio">Precio</label> <input type="number" step="any" id="precio"
-				name="precio" />
+			<label for="precio"<c:if test="${ param.op == 'borrar'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				>Precio</label> <input type="number" step="any" id="precio"
+				name="precio" <c:if test="${ param.op == 'borrar'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				/>
 		</fieldset>
 		<fieldset>
 				<input type="submit" value="${fn:toUpperCase(param.op)}" 
@@ -52,4 +77,4 @@
 		
 	</c:if>
 	
-<%@ include file="includes/pie.jsp" %>>
+<%@ include file="includes/pie.jsp" %>

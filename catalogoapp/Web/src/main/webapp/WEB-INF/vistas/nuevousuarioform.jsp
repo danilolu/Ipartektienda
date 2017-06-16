@@ -13,20 +13,15 @@
 			<label for="nombre">Nombre</label> 
 			
 			<input id="nombre" name="nombre"
-			  required="required" minlength="4" value="${usuario.nombre}" 
-			  
-			  <c:if test="${param.op == 'modificar' or param.op == 'borrar'}">
-			  	readonly="readonly"
-			  </c:if>   
-		  	/>
+			  required="required" minlength="4" value="${usuario.nombre}"/>
 		</fieldset>
 		<fieldset>
 			<label for="pass">Contraseña</label> <input type="password" id="pass"
-				name="pass" />
+				name="pass" minlength="4" />
 		</fieldset>
 		<fieldset>
 			<label for="pass2">Contraseña otra vez</label> <input type="password" id="pass2"
-				name="pass2" />
+				name="pass2" minlength="4" />
 		</fieldset>
 		<fieldset>
 			<input type="submit" value="${fn:toUpperCase(param.op)}"
