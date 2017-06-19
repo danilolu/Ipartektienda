@@ -20,8 +20,8 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String FIND_ALL_PRODUCTO = "SELECT * FROM productos";
 	private final static String FIND_BY_ID_PRODUCTO = "SELECT * FROM productos Where id=?";
 	private final static String FIND_BY_NOMBRE_PRODUCTO = "SELECT * FROM productos Where nombre=?";
-	private final static String INSERT_PRODUCTO = "INSERT INTO productos (nombre, descripcion, precio) VALUES (?,?,?)";
-	private final static String UPDATE_PRODUCTO = "UPDATE productos SET nombre=?, descripcion=?, precio=? WHERE id=?";
+	private final static String INSERT_PRODUCTO = "INSERT INTO productos (nombre, descripcion, precio, stock) VALUES (?,?,?,?)";
+	private final static String UPDATE_PRODUCTO = "UPDATE productos SET nombre=?, descripcion=?, precio=?, stock=? WHERE id=?";
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
 	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
@@ -215,6 +215,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				producto.setNombre(rs.getString("nombre"));
 				producto.setDescripcion(rs.getString("descripcion"));
 				producto.setPrecio(rs.getDouble("precio"));
+				producto.setStock(rs.getInt("stock"));
 
 				productos.add(producto);
 			}
@@ -259,6 +260,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				producto.setNombre(rs.getString("nombre"));
 				producto.setDescripcion(rs.getString("descripcion"));
 				producto.setPrecio(rs.getDouble("precio"));
+				producto.setStock(rs.getInt("stock"));
 			}
 
 		} catch (Exception e) {
@@ -288,6 +290,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				producto.setNombre(rs.getString("nombre"));
 				producto.setDescripcion(rs.getString("descripcion"));
 				producto.setPrecio(rs.getDouble("precio"));
+				producto.setStock(rs.getInt("stock"));
 			}
 
 		} catch (Exception e) {
@@ -309,7 +312,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			psInsertProducto.setString(1, producto.getNombre());
 			psInsertProducto.setString(2, producto.getDescripcion());
 			psInsertProducto.setDouble(3, producto.getPrecio());
-
+			psInsertProducto.setInt(4, producto.getStock());
 			int res = psInsertProducto.executeUpdate();
 
 			if (res != 1)
@@ -337,8 +340,9 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			psUpdateProducto.setString(1, producto.getNombre());
 			psUpdateProducto.setString(2, producto.getDescripcion());
 			psUpdateProducto.setDouble(3, producto.getPrecio());
+			psUpdateProducto.setInt(4, producto.getStock());
 
-			psUpdateProducto.setInt(4, producto.getId());
+			psUpdateProducto.setInt(5, producto.getId());
 
 			int res = psUpdateProducto.executeUpdate();
 

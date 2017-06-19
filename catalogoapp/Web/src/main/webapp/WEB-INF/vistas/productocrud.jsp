@@ -13,6 +13,7 @@
 			<th>Imagen</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
+			<th>Stock</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,6 +29,7 @@
 				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
+				<td>${producto.stock}</td>
 				
 			</tr>
 		</c:forEach>

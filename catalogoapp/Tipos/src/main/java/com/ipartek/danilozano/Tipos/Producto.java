@@ -2,11 +2,9 @@ package com.ipartek.danilozano.Tipos;
 
 public class Producto {
 	private String nombre, descripcion, errores;
-	private int id;
+	private int id, stock;
 	private double precio;
 	public static int cont = 1;
-
-	// constructor
 
 	// constructor
 	public Producto() {
@@ -15,25 +13,26 @@ public class Producto {
 		this.nombre = "";
 		this.descripcion = "";
 		this.precio = 0.0;
-
+		this.stock = 0;
 	}
 
-	public Producto(String nombre, String descripcion, double precio) {
+	public Producto(String nombre, String descripcion, double precio, int stock) {
 		super();
-		this.id = cont;
+
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.stock = stock;
 
 	}
 
-	public Producto(int id, String nombre, String descripcion, double precio) {
+	public Producto(int id, String nombre, String descripcion, double precio, int stock) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
-
+		this.stock = stock;
 	}
 
 	// equals y equals
@@ -48,6 +47,7 @@ public class Producto {
 		long temp;
 		temp = Double.doubleToLongBits(precio);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + stock;
 		return result;
 	}
 
@@ -78,6 +78,8 @@ public class Producto {
 		} else if (!nombre.equals(other.nombre))
 			return false;
 		if (Double.doubleToLongBits(precio) != Double.doubleToLongBits(other.precio))
+			return false;
+		if (stock != other.stock)
 			return false;
 		return true;
 	}
@@ -123,10 +125,19 @@ public class Producto {
 		this.errores = errores;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
 	// tostring
+
 	@Override
 	public String toString() {
-		return "Productos [nombre=" + nombre + ", descripcion=" + descripcion + ", id=" + id + ", precio=" + precio + "]";
+		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", errores=" + errores + ", id=" + id + ", stock=" + stock + ", precio=" + precio + "]";
 	}
 
 }

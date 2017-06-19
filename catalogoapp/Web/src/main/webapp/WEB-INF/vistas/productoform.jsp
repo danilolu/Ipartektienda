@@ -61,6 +61,18 @@
 				/>
 		</fieldset>
 		<fieldset>
+			<label for="stock"<c:if test="${ param.op == 'borrar'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				>Stock</label> <input type="number" step="any" id="stock"
+				name="stock" <c:if test="${ param.op == 'borrar'}">
+			  	Style="display:none";
+			  </c:if>  
+				
+				/>
+		</fieldset>
+		<fieldset>
 				<input type="submit" value="${fn:toUpperCase(param.op)}" 
 				<c:if test="${param.op == null or param.op == ''}">
 			  	Style="display:none;"

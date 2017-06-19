@@ -21,6 +21,8 @@
 			<th>Descripción</th>
 			<th>Imagen</th>
 			<th>Precio</th>
+			<th>Cantidad</th>
+			
 			<th>Quitar de carrito</th>
 			
 			</tr>
@@ -32,6 +34,7 @@
 				<td>${producto.descripcion}</td>
 				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.precio} &euro;</td>
+				
 				<td><a href="?op=quitar&id=${producto.id}"><img src="/img/quitarcarrito.png" width="100" height="100px" ></a></td>
 			</tr>
 		</c:forEach>

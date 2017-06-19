@@ -41,6 +41,7 @@ public class ProductoFormServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String descripcion = request.getParameter("descripcion");
 		double precio;
+		int stock;
 		// recoger valores para inicializar variables
 		if (request.getParameter("id") == null || request.getParameter("id") == "") {
 			id = 0;
@@ -59,8 +60,14 @@ public class ProductoFormServlet extends HttpServlet {
 
 		}
 
+		if (request.getParameter("stock") == null || request.getParameter("stock") == "") {
+			stock = 0;
+		} else {
+			stock = Integer.parseInt(request.getParameter("stock"));
+		}
+
 		// crear objeto Pproducto
-		Producto producto = new Producto(nombre, descripcion, precio);
+		Producto producto = new Producto(nombre, descripcion, precio, stock);
 		producto.setId(id);
 
 		// actuar en consecuencia de la opcion recogida anteriormente
@@ -82,8 +89,7 @@ public class ProductoFormServlet extends HttpServlet {
 
 			} else {
 				try {
-					log.info("producto con id '" + id + "' dado de alta");
-					// tiendaDAL.alta(producto);
+					log.info("producto  '" + nombre + "' dado de alta");
 					dao.abrir();
 					dao.insert(producto);
 					dao.cerrar();
@@ -108,11 +114,11 @@ public class ProductoFormServlet extends HttpServlet {
 
 			} else
 				try {
-					log.info("producto con id '" + id + "' modificado");
-					// tiendaDAL.modificar(producto);
+
 					dao.abrir();
 					dao.update(producto);
 					dao.cerrar();
+					log.info("producto con id '" + id + "' modificado");
 				} catch (DAOException de) {
 					log.info("Error al modificar producto con id '" + id + "', la modificacion no ha sido finalizada");
 
@@ -125,7 +131,6 @@ public class ProductoFormServlet extends HttpServlet {
 
 			break;
 		case "borrar":
-			// tiendaDAL.borrar(producto);
 			dao.abrir();
 			dao.delete(producto);
 			dao.cerrar();

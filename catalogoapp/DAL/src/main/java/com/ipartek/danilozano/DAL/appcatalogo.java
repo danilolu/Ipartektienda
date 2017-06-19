@@ -53,7 +53,7 @@ public class appcatalogo {
 
 			listado();
 
-			Producto producto = new Producto("producto1", "descripcion 1", 3);
+			Producto producto = new Producto("producto1", "descripcion 1", 3, 8);
 
 			int id = dao.insert(producto);
 			System.out.println("Se ha insertado un nuevo registro con el id: " + id);
