@@ -25,7 +25,7 @@ public class Producto {
 		this.stock = stock;
 
 	}
-
+	
 	public Producto(int id, String nombre, String descripcion, double precio, int stock) {
 		super();
 		this.id = id;
@@ -34,6 +34,8 @@ public class Producto {
 		this.precio = precio;
 		this.stock = stock;
 	}
+
+	
 
 	// equals y equals
 	@Override

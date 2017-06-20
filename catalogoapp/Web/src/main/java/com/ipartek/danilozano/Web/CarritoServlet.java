@@ -12,12 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Carrito;
 import com.ipartek.danilozano.Tipos.Producto;
-
 
 @WebServlet("/carrito")
 public class CarritoServlet extends HttpServlet {
@@ -25,8 +23,9 @@ public class CarritoServlet extends HttpServlet {
 
 	private static Logger log = Logger.getLogger(CarritoServlet.class);
 	public static TiendaDAO dao = null;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doPost(request, response);
 	}
 
@@ -37,14 +36,12 @@ public class CarritoServlet extends HttpServlet {
 		// cargar arrays de los productos y del carrito
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 		dao.abrir();
-				
+
 		Producto[] catalogo = dao.findAllProducto();
 
 		dao.cerrar();
 
 		application.setAttribute("catalogo", catalogo);
-
-				
 
 		// crear objeto de Carrito si el carrito es null
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
@@ -90,10 +87,12 @@ public class CarritoServlet extends HttpServlet {
 
 				Producto producto;
 				int id = Integer.parseInt(request.getParameter("id"));
-				
+
 				dao.abrir();
 				producto = dao.findByIdProducto(id);
-				dao.cerrar()	;		
+				dao.updateStockAnadido(producto);
+				dao.cerrar();
+
 				carrito.anadirAlCarrito(producto);
 
 				log.info("Añadido " + producto + " al carrito");

@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.danilozano.DAL.TiendaDAO;
+import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Carrito;
 import com.ipartek.danilozano.Tipos.Producto;
 
 @WebServlet("/finpedido")
 public class FinPedidoServlet extends HttpServlet {
-
+	public static TiendaDAO dao = null;
 	private static final long serialVersionUID = 1L;
 	private static Logger log = Logger.getLogger(Carrito.class);
 
@@ -27,12 +29,11 @@ public class FinPedidoServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
 		HttpSession session = request.getSession();
 		String op = request.getParameter("op");
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
 
-		
 		Producto[] carritoArr = null;
 		Integer numeroProductos = 0;
 		Double precioTotal = 0.0;
@@ -69,7 +70,7 @@ public class FinPedidoServlet extends HttpServlet {
 
 			switch (op) {
 			case "vaciar":
-				log.info("Pedido pagado, Carrito reseteadoo");
+				log.info(" Carrito reseteadoo");
 				carrito = new Carrito();
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
@@ -79,7 +80,12 @@ public class FinPedidoServlet extends HttpServlet {
 			case "quitar":
 				log.info("Producto  quitado del carrito");
 				int id = Integer.parseInt(request.getParameter("id"));
+
 				Producto producto;
+				dao.abrir();
+				producto = dao.findByIdProducto(id);
+				dao.updateStockQuitado(producto);
+				dao.cerrar();
 				producto = carrito.buscarPorId(id);
 				carrito.quitarDelCarrito(id);
 				session.setAttribute("carrito", carrito);

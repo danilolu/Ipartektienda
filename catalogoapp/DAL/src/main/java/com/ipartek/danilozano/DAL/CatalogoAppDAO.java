@@ -1,5 +1,6 @@
 package com.ipartek.danilozano.DAL;
 
+
 public interface CatalogoAppDAO {
 	public void abrir();
 

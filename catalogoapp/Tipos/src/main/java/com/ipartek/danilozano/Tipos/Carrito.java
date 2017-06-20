@@ -31,6 +31,7 @@ public class Carrito {
 	public void anadirAlCarrito(Producto producto) {
 
 		carritoLista.put(producto.getId(), producto);
+
 	}
 
 	public void quitarDelCarrito(Integer id) {

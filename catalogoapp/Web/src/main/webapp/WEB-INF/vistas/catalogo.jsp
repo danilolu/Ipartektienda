@@ -22,8 +22,7 @@
 			<th>Imagen</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
-			<th>Stock</th>
-			<th>cantidad</th>			
+			<th>Stock</th>		
 			<th>Meter al carrito</th>
 			
 		</tr>
@@ -38,11 +37,7 @@
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
 				<td>${producto.stock}</td>
-				<td><form action="catalogo" method="post">
-		<fieldset>
-			<label for="cant">ID</label> 
-			<input id="cant"	name="cant"   value="cant"/>
-		</fieldset></form></td>			
+						
 				
 				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="100" height="100px" ></a></td>
 			</tr>
