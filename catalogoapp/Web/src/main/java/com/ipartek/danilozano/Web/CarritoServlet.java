@@ -92,7 +92,13 @@ public class CarritoServlet extends HttpServlet {
 				producto = dao.findByIdProducto(id);
 				dao.updateStockAnadido(producto);
 				dao.cerrar();
+				dao.abrir();
 
+				catalogo = dao.findAllProducto();
+
+				dao.cerrar();
+
+				application.setAttribute("catalogo", catalogo);
 				carrito.anadirAlCarrito(producto);
 
 				log.info("Añadido " + producto + " al carrito");
