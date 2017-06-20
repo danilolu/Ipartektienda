@@ -40,6 +40,11 @@ public class Carrito {
 
 	}
 
+	public void quitarDelCarrito(Producto p) {
+		carritoLista.remove(p.getId());
+
+	}
+
 	public Producto[] buscarTodosLosProductos() {
 		return carritoLista.values().toArray(new Producto[carritoLista.size()]);
 	}
@@ -97,5 +102,4 @@ public class Carrito {
 			return false;
 		return true;
 	}
-
 }

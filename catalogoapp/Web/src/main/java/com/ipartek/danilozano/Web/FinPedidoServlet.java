@@ -68,10 +68,21 @@ public class FinPedidoServlet extends HttpServlet {
 
 		} else {
 
+			Producto producto;
 			switch (op) {
 			case "vaciar":
-				log.info(" Carrito reseteadoo");
-				carrito = new Carrito();
+				log.info("Pedido pagado, Carrito reseteadoo");
+
+				for (Producto p : carrito.buscarTodosLosProductos()) {
+					int id = p.getId();
+					carrito.quitarDelCarrito(p);
+
+					dao.abrir();
+					producto = dao.findByIdProducto(id);
+					dao.updateStockQuitado(producto);
+					dao.cerrar();
+				}
+				// carrito = new Carrito();
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
@@ -80,8 +91,6 @@ public class FinPedidoServlet extends HttpServlet {
 			case "quitar":
 				log.info("Producto  quitado del carrito");
 				int id = Integer.parseInt(request.getParameter("id"));
-
-				Producto producto;
 				dao.abrir();
 				producto = dao.findByIdProducto(id);
 				dao.updateStockQuitado(producto);
@@ -99,5 +108,4 @@ public class FinPedidoServlet extends HttpServlet {
 		}
 
 	}
-
 }
