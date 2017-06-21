@@ -2,7 +2,8 @@ package com.ipartek.danilozano.Tipos;
 
 public class Producto {
 	private String nombre, descripcion, errores;
-	private int id, stock;
+	private int id, stock, cant;
+
 	private double precio;
 	public static int cont = 1;
 
@@ -14,6 +15,8 @@ public class Producto {
 		this.descripcion = "";
 		this.precio = 0.0;
 		this.stock = 0;
+		this.cant = 0;
+
 	}
 
 	public Producto(String nombre, String descripcion, double precio, int stock) {
@@ -25,7 +28,7 @@ public class Producto {
 		this.stock = stock;
 
 	}
-	
+
 	public Producto(int id, String nombre, String descripcion, double precio, int stock) {
 		super();
 		this.id = id;
@@ -35,13 +38,23 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	
+	public Producto(int id, String nombre, String descripcion, double precio, int stock, int cant) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.stock = stock;
+		this.cant = cant;
+
+	}
 
 	// equals y equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + cant;
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((errores == null) ? 0 : errores.hashCode());
 		result = prime * result + id;
@@ -62,6 +75,8 @@ public class Producto {
 		if (getClass() != obj.getClass())
 			return false;
 		Producto other = (Producto) obj;
+		if (cant != other.cant)
+			return false;
 		if (descripcion == null) {
 			if (other.descripcion != null)
 				return false;
@@ -135,11 +150,18 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	// tostring
+	public int getCant() {
+		return cant;
+	}
 
+	public void setCant(int cant) {
+		this.cant = cant;
+	}
+
+	// tostring
 	@Override
 	public String toString() {
-		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", errores=" + errores + ", id=" + id + ", stock=" + stock + ", precio=" + precio + "]";
+		return "Producto [nombre=" + nombre + ", descripcion=" + descripcion + ", errores=" + errores + ", id=" + id + ", stock=" + stock + ", cant=" + cant + ", precio=" + precio + "]";
 	}
 
 }

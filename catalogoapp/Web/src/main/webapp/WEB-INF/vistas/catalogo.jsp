@@ -11,6 +11,8 @@
 	</ul>
 </nav>
 <h2>Catalogo</h2>
+<p class="errores" >${producto.errores}</p>
+<p class="errores">${producto.errores}</p>
 <table border="1" style="margin: 0 auto;
    
 ">
@@ -22,13 +24,16 @@
 			<th>Imagen</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
-			<th>Stock</th>		
+			<th>Stock</th>
+			
+			
 			<th>Meter al carrito</th>
 			
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${applicationScope.catalogo}" var="producto">
+			
 			<tr>
 				
 				<td>${producto.id}</td>
@@ -37,7 +42,7 @@
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
 				<td>${producto.stock}</td>
-						
+				
 				
 				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="100" height="100px" ></a></td>
 			</tr>

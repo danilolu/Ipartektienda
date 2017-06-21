@@ -30,6 +30,42 @@ public class CarritoServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int id;
+		String nombre = request.getParameter("nombre");
+		String descripcion = request.getParameter("descripcion");
+		double precio;
+		int stock;
+		int cant;
+		// recoger valores para inicializar variables
+		if (request.getParameter("id") == null || request.getParameter("id") == "") {
+			id = 0;
+		} else {
+			id = Integer.parseInt(request.getParameter("id"));// pasar de String
+																// a int
+		}
+		if (request.getParameter("precio") == null || request.getParameter("precio") == "") {
+			precio = 0;
+		} else {
+			precio = Double.parseDouble(request.getParameter("precio"));// pasar
+																		// de
+																		// String
+																		// a
+																		// double
+
+		}
+
+		if (request.getParameter("stock") == null || request.getParameter("stock") == "") {
+			stock = 0;
+		} else {
+			stock = Integer.parseInt(request.getParameter("stock"));
+		}
+		if (request.getParameter("cant") == null || request.getParameter("cant") == "") {
+			cant = 0;
+		} else {
+			cant = Integer.parseInt(request.getParameter("cant"));
+		}
+
 		// recoger dados cargados en context y en sesion
 		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
@@ -85,20 +121,30 @@ public class CarritoServlet extends HttpServlet {
 
 			case "anadir":
 
-				Producto producto;
-				int id = Integer.parseInt(request.getParameter("id"));
+				Producto producto = new Producto(id, nombre, descripcion, precio, stock, cant);
 
 				dao.abrir();
 				producto = dao.findByIdProducto(id);
+
+				if (carrito.carritoLista.containsKey(producto.getId())) {// if
+																			// para
+																			// buscar
+																			// elementos
+																			// repetidos
+					log.info(" repetido");
+					producto.setErrores("Ya has añadido este producto, ve al finalizar carrito para modificarlo");
+					request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
+					break;
+				}
+
 				dao.updateStockAnadido(producto);
-				dao.cerrar();
-				dao.abrir();
 
 				catalogo = dao.findAllProducto();
 
 				dao.cerrar();
 
 				application.setAttribute("catalogo", catalogo);
+
 				carrito.anadirAlCarrito(producto);
 
 				log.info("Añadido " + producto + " al carrito");

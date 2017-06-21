@@ -8,7 +8,7 @@ public class Carrito {
 
 	private static Logger log = Logger.getLogger(Carrito.class);
 
-	TreeMap<Integer, Producto> carritoLista;
+	public TreeMap<Integer, Producto> carritoLista;
 
 	public Carrito() {
 		super();
