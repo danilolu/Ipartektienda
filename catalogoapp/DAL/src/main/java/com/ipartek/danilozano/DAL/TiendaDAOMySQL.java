@@ -22,7 +22,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String FIND_BY_NOMBRE_PRODUCTO = "SELECT * FROM productos Where nombre=?";
 	private final static String INSERT_PRODUCTO = "INSERT INTO productos (nombre, descripcion, precio, stock) VALUES (?,?,?,?)";
 	private final static String UPDATE_PRODUCTO = "UPDATE productos SET nombre=?, descripcion=?, precio=?, stock=? WHERE id=?";
-	private final static String UPDATE_PRODUCTO_ANADIDO = "UPDATE productos SET  stock=?, cant=? WHERE id=?";
+	private final static String UPDATE_PRODUCTO_ANADIDO = "UPDATE productos SET  stock=?  WHERE id=?";
 
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
@@ -365,9 +365,8 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 			psUpdateProductoAnadido.setInt(1, producto.getStock() - 1);
 
-			psUpdateProductoAnadido.setInt(2, producto.getCant() + 1);
 
-			psUpdateProductoAnadido.setInt(3, producto.getId());
+			psUpdateProductoAnadido.setInt(2, producto.getId());
 
 			int res = psUpdateProductoAnadido.executeUpdate();
 
@@ -375,7 +374,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				throw new DAOException("La actualización ha devuelto un valor " + res);
 
 		} catch (Exception e) {
-			throw new DAOException("Error en update", e);
+			throw new DAOException("Error en StockAnadido ", e);
 		} finally {
 			cerrarProducto(psUpdateProducto);
 		}
@@ -396,7 +395,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				throw new DAOException("La actualización ha devuelto un valor " + res);
 
 		} catch (Exception e) {
-			throw new DAOException("Error en update", e);
+			throw new DAOException("Error en update StockQuitado", e);
 		} finally {
 			cerrarProducto(psUpdateProducto);
 		}
