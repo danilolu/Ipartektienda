@@ -26,9 +26,9 @@
 			<th>Descripcion</th>
 			<th>Precio</th>
 			<th>Stock</th>
-			<th>cant</th>
+			<th>Cantidad</th>
 			
-			<th>Meter al carrito</th>
+			<!--  <th>Meter al carrito</th>-->
 			
 		</tr>
 	</thead>
@@ -51,10 +51,10 @@
 						   style="width: 3em" />
 						   
 						   <input type="submit" 
-						   value="confirmar" />
+						   value="Meter al carrito" />
 						   </form></td>
 				
-				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="100" height="100px" ></a></td>
+				<!--  <td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="50" height="50px" ></a></td>-->
 			</tr>
 		</c:forEach>
 	</tbody>

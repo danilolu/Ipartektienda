@@ -80,9 +80,9 @@ public class FinPedidoServlet extends HttpServlet {
 					dao.abrir();
 					producto = dao.findByIdProducto(id);
 					dao.updateStockQuitado(producto);
-					
+
 					dao.resetCant(producto);
-					
+
 					dao.cerrar();
 				}
 				// carrito = new Carrito();
@@ -104,18 +104,22 @@ public class FinPedidoServlet extends HttpServlet {
 				dao.cerrar();
 				producto = carrito.buscarPorId(id);
 				carrito.quitarDelCarrito(id);
-				
+
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 				session.setAttribute("numeroProductostotal", carrito.totalProductos());
 
 				session.setAttribute("precioTotal", carrito.precioTotal());
+				break;
+			case "pagar":
+				request.getRequestDispatcher("/WEB-INF/vistas/pagado.jsp").forward(request, response);
+				break;
 			default:
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
+
 			}
 
 		}
-
 	}
 }
