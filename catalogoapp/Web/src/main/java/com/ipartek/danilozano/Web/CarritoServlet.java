@@ -100,11 +100,14 @@ public class CarritoServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
 
 		} else {
+			Producto producto = new Producto(id, nombre, descripcion, precio, stock, cant);
 
 			switch (op) {
-
 			case "logout":
-
+				
+				dao.abrir();
+				dao.resetCant(producto);
+				dao.cerrar();
 				session.invalidate();
 
 				session = request.getSession();
@@ -121,9 +124,10 @@ public class CarritoServlet extends HttpServlet {
 
 			case "anadir":
 
-				Producto producto = new Producto(id, nombre, descripcion, precio, stock, cant);
+				
 
 				dao.abrir();
+				dao.updateCant(producto);
 				producto = dao.findByIdProducto(id);
 
 				if (carrito.carritoLista.containsKey(producto.getId())) {// if
@@ -141,7 +145,7 @@ public class CarritoServlet extends HttpServlet {
 
 				catalogo = dao.findAllProducto();
 
-				dao.cerrar();
+				
 
 				application.setAttribute("catalogo", catalogo);
 
@@ -154,7 +158,7 @@ public class CarritoServlet extends HttpServlet {
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 
 				request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
-
+				dao.cerrar();
 				break;
 
 			default:

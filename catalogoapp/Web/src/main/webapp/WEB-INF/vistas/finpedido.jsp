@@ -34,18 +34,7 @@
 				<td>${producto.descripcion}</td>
 				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.precio} &euro;</td>
-				<td>
-				<form action="carrito/finpedido.jsp" method="post">
-			<input type="hidden" name="id" value="${producto.id}"/>
-				<input type="number" name="cant" 
-						   value="${producto.cant}" 
-						   min="0" max="${producto.stock}"
-						   style="width: 3em" />
-						   
-						   <input type="submit" 
-						   value="confirmar" />
-						   </form>
-				</td>
+				<td>${producto.cant}</td>
 				
 				<td><a href="?op=quitar&id=${producto.id}"><img src="/img/quitarcarrito.png" width="100" height="100px" ></a></td>
 			</tr>

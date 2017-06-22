@@ -80,6 +80,9 @@ public class FinPedidoServlet extends HttpServlet {
 					dao.abrir();
 					producto = dao.findByIdProducto(id);
 					dao.updateStockQuitado(producto);
+					
+					dao.resetCant(producto);
+					
 					dao.cerrar();
 				}
 				// carrito = new Carrito();
@@ -93,6 +96,8 @@ public class FinPedidoServlet extends HttpServlet {
 				int id = Integer.parseInt(request.getParameter("id"));
 				dao.abrir();
 				producto = dao.findByIdProducto(id);
+				dao.resetCant(producto);
+
 				dao.updateStockQuitado(producto);
 				dao.cerrar();
 				producto = carrito.buscarPorId(id);

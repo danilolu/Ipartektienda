@@ -39,4 +39,8 @@ public interface TiendaDAO extends CatalogoAppDAO {
 
 	public void updateStockQuitado(Producto producto);
 
+	void updateCant(Producto producto);
+
+	void resetCant(Producto producto);
+
 }

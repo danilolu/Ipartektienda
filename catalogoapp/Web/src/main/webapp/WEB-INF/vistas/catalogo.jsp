@@ -25,7 +25,7 @@
 			<th>Descripcion</th>
 			<th>Precio</th>
 			<th>Stock</th>
-			
+			<th>cant</th>
 			
 			<th>Meter al carrito</th>
 			
@@ -42,7 +42,16 @@
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
 				<td>${producto.stock}</td>
-				
+				<td><form action="/carrito?op=anadir&id=${producto.id}" method="post">
+			<input type="hidden" name="id" value="${producto.id}"/>
+				<input type="number" name="cant" 
+						   value="${producto.cant}" 
+						   min="0" max="${producto.stock}"
+						   style="width: 3em" />
+						   
+						   <input type="submit" 
+						   value="confirmar" />
+						   </form></td>
 				
 				<td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="100" height="100px" ></a></td>
 			</tr>
