@@ -43,7 +43,7 @@
 	<thead>
 		<tr>
 			
-			<th>Numero de productos ${sessionScope.numeroProductos}</th>
+			<th>Numero de productos ${sessionScope.numeroProductostotal}</th>
 			<th>Total a pagar:${sessionScope.precioTotal} &euro;</a></th>
 			<th><a href="pagado.jsp" target="_blank" onclick="window.open(this.href, this.target, 'width=600,height=200'); return false;">Pagar</a> </a></th>
 	</tbody>

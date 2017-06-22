@@ -5,13 +5,14 @@
 
 <nav>
 	<ul>
-	<li> ${sessionScope.numeroProductos} producto/s en el carrito</li>
+	<li > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
+	En total :${sessionScope.numeroProductostotal}</B></li>
 	<li><a href="/finpedido">Finalizar pedido</a></li>
 	<li><a href="/finpedido?op=vaciar">Vaciar carrito</a></li>
 	</ul>
 </nav>
 <h2>Catalogo</h2>
-<p class="errores" >${producto.errores}</p>
+
 <p class="errores">${producto.errores}</p>
 <table border="1" style="margin: 0 auto;
    

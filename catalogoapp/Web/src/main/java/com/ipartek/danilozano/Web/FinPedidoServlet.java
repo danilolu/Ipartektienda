@@ -89,6 +89,8 @@ public class FinPedidoServlet extends HttpServlet {
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
+				session.setAttribute("numeroProductostotal", carrito.totalProductos());
+
 				request.getRequestDispatcher("/carrito").forward(request, response);
 				break;
 			case "quitar":
@@ -102,9 +104,12 @@ public class FinPedidoServlet extends HttpServlet {
 				dao.cerrar();
 				producto = carrito.buscarPorId(id);
 				carrito.quitarDelCarrito(id);
+				
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
+				session.setAttribute("numeroProductostotal", carrito.totalProductos());
+
 				session.setAttribute("precioTotal", carrito.precioTotal());
 			default:
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);

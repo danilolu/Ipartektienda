@@ -49,6 +49,20 @@ public class Carrito {
 		return carritoLista.values().toArray(new Producto[carritoLista.size()]);
 	}
 
+	public int totalProductos() {
+
+		Producto[] carritoArr = this.buscarTodosLosProductos();
+
+		int tolalProductos = 0;
+
+		for (Producto p : carritoArr) {
+			
+			tolalProductos += p.getCant();
+
+		}
+
+		return tolalProductos;
+	}
 	public Double precioTotal() {
 
 		Producto[] carritoArr = this.buscarTodosLosProductos();
@@ -56,8 +70,8 @@ public class Carrito {
 		Double precioTotal = 0.0;
 
 		for (Producto p : carritoArr) {
-
-			precioTotal += p.getPrecio();
+			Double precio=p.getPrecio()*p.getCant();
+			precioTotal += precio;
 
 		}
 

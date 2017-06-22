@@ -96,6 +96,8 @@ public class CarritoServlet extends HttpServlet {
 			session.setAttribute("carrito", carrito);
 
 			session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
+			
+			session.setAttribute("numeroProductostotal", carrito.totalProductos());
 
 			request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
 
@@ -115,6 +117,7 @@ public class CarritoServlet extends HttpServlet {
 				carrito = new Carrito();
 
 				session.setAttribute("carrito", carrito);
+				
 
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 
@@ -156,6 +159,7 @@ public class CarritoServlet extends HttpServlet {
 				session.setAttribute("carrito", carrito);
 
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
+				session.setAttribute("numeroProductostotal", carrito.totalProductos());
 
 				request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
 				dao.cerrar();
