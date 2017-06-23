@@ -1,5 +1,6 @@
 package com.ipartek.danilozano.DAL;
 
+import com.ipartek.danilozano.Tipos.Carrito;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
@@ -42,5 +43,11 @@ public interface TiendaDAO extends CatalogoAppDAO {
 	void updateCant(Producto producto);
 
 	void resetCant(Producto producto);
+
+	// DAO carrito
+
+	public int insertfactura(Carrito carrito);
+
+	public int insertFacturasProductos(Carrito carrito);
 
 }

@@ -1,6 +1,7 @@
 package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +39,24 @@ public class FinPedidoServlet extends HttpServlet {
 		Integer numeroProductos = 0;
 		Double precioTotal = 0.0;
 
+		int idcarrito;
+		String nombre_usuarios = (String) session.getAttribute("nombre");
+		Date fecha = new Date();
+
+		if (request.getParameter("idcarrito") == null || request.getParameter("idcarrito") == "") {
+			idcarrito = 0;
+		} else {
+			idcarrito = Integer.parseInt(request.getParameter("idcarrito"));// pasar
+																			// de
+																			// String
+																			// a
+																			// int
+		}
+
+		for (Producto p : carrito.buscarTodosLosProductos()) {
+
+		}
+
 		try {
 			carritoArr = carrito.buscarTodosLosProductos();
 			numeroProductos = carritoArr.length;
@@ -58,7 +77,7 @@ public class FinPedidoServlet extends HttpServlet {
 			try {
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 			} catch (NullPointerException npe) {
-				carrito = new Carrito();
+				carrito = new Carrito(idcarrito, nombre_usuarios, fecha);
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
@@ -74,6 +93,7 @@ public class FinPedidoServlet extends HttpServlet {
 				log.info("Pedido pagado, Carrito reseteadoo");
 
 				for (Producto p : carrito.buscarTodosLosProductos()) {
+
 					int id = p.getId();
 					carrito.quitarDelCarrito(p);
 
@@ -111,8 +131,13 @@ public class FinPedidoServlet extends HttpServlet {
 				session.setAttribute("numeroProductostotal", carrito.totalProductos());
 
 				session.setAttribute("precioTotal", carrito.precioTotal());
+				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
 				break;
 			case "pagar":
+				dao.abrir();
+
+				dao.insertFacturasProductos(carrito);
+				dao.cerrar();
 				request.getRequestDispatcher("/WEB-INF/vistas/pagado.jsp").forward(request, response);
 				break;
 			default:

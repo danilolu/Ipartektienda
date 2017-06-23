@@ -6,10 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.danilozano.Tipos.Carrito;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
 public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
+	private static Logger log = Logger.getLogger(Carrito.class);
 
 	private final static String FIND_ALL_USUARIO = "SELECT * FROM usuarios";
 	private final static String FIND_BY_NOMBRE_USUARIO = "SELECT * FROM usuarios Where nombre=?";
@@ -24,11 +28,15 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String UPDATE_PRODUCTO = "UPDATE productos SET nombre=?, descripcion=?, precio=?, stock=? WHERE id=?";
 	private final static String UPDATE_PRODUCTO_ANADIDO = "UPDATE productos SET  stock=?  WHERE id=?";
 	private final static String UPDATE_CANT = "UPDATE productos SET  cant=?  WHERE id=?";
-	
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
+	private final static String INSERT_FACTURA = "INSERT INTO facturas (nombre_usuario, fecha) VALUES (?,?)";
+	private final static String INSERT_FACTURA_PRODUCTOS = "INSERT INTO facturas_productos (id_facturas, id_productos, cant) VALUES (?,?,?)";
+
 	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
-	private PreparedStatement psUpdateCant, psFindAllProducto, psFindByNombreProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psUpdateProductoAnadido, psUpdateProductoQuitado, psDeleteProducto;
+	private PreparedStatement psUpdateCant, psFindAllProducto, psFindByNombreProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psUpdateProductoAnadido, psUpdateProductoQuitado,
+			psDeleteProducto;
+	private PreparedStatement psInsertFacturas, psInsertFacturasProductos;
 
 	public TiendaDAOMySQL() {
 		super();
@@ -367,7 +375,6 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 			psUpdateProductoAnadido.setInt(1, producto.getStock() - producto.getCant());
 
-
 			psUpdateProductoAnadido.setInt(2, producto.getId());
 
 			int res = psUpdateProductoAnadido.executeUpdate();
@@ -402,12 +409,13 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			cerrarProducto(psUpdateProducto);
 		}
 	}
+
 	@Override
 	public void updateCant(Producto producto) {
 		try {
 			psUpdateCant = con.prepareStatement(UPDATE_CANT);
 
-			psUpdateCant.setInt(1, producto.getCant() );
+			psUpdateCant.setInt(1, producto.getCant());
 
 			psUpdateCant.setInt(2, producto.getId());
 
@@ -421,14 +429,15 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		} finally {
 			cerrarProducto(psUpdateProducto);
 		}
-		
+
 	}
+
 	@Override
 	public void resetCant(Producto producto) {
 		try {
 			psUpdateCant = con.prepareStatement(UPDATE_CANT);
 
-			psUpdateCant.setInt(1, 0 );
+			psUpdateCant.setInt(1, 0);
 
 			psUpdateCant.setInt(2, producto.getId());
 
@@ -442,7 +451,8 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		} finally {
 			cerrarProducto(psUpdateProducto);
 		}
-}
+	}
+
 	@Override
 	public void delete(Producto producto) {
 		deleteProducto(producto.getId());
@@ -468,4 +478,70 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 	}
 
+	@Override
+	public int insertfactura(Carrito carrito) {
+		ResultSet generatedKeys = null;
+
+		try {
+			psInsertFacturas = con.prepareStatement(INSERT_FACTURA, Statement.RETURN_GENERATED_KEYS);
+
+			psInsertFacturas.setString(1, carrito.getNombre_usuarios());
+			psInsertFacturas.setDate(2, new java.sql.Date(carrito.getFecha().getTime()));
+
+			int res = psInsertFacturas.executeUpdate();
+
+			if (res != 1)
+				throw new DAOException("La inserción ha devuelto un valor " + res);
+
+			generatedKeys = psInsertFacturas.getGeneratedKeys();
+
+			if (generatedKeys.next())
+				return generatedKeys.getInt(1);
+			else
+				throw new DAOException("No se ha recibido la clave generada");
+
+		} catch (Exception e) {
+			throw new DAOException("Error en insert", e);
+		} finally {
+			cerrarProducto(psInsertFacturas, generatedKeys);
+		}
+	}
+
+	@Override
+	public int insertFacturasProductos(Carrito carrito) {
+
+		insertfactura(carrito);
+		ResultSet generatedKeys = null;
+
+		try {
+			psInsertFacturasProductos = con.prepareStatement(INSERT_FACTURA_PRODUCTOS, Statement.RETURN_GENERATED_KEYS);
+
+			for (Producto p : carrito.buscarTodosLosProductos()) {
+
+				psInsertFacturasProductos.setInt(1, carrito.getIdCarrito());
+				psInsertFacturasProductos.setInt(2, p.getId());
+				psInsertFacturasProductos.setInt(3, p.getCant());
+				log.info("carritoid= " + carrito.getIdCarrito());
+				log.info("productoid= " + p.getId());
+				log.info("productoid= " + p.getCant());
+
+			}
+			int res = psInsertFacturasProductos.executeUpdate();
+
+			if (res != 1)
+				throw new DAOException("La inserción ha devuelto un valor " + res);
+
+			generatedKeys = psInsertFacturasProductos.getGeneratedKeys();
+
+			if (generatedKeys.next())
+				return generatedKeys.getInt(1);
+			else
+				throw new DAOException("No se ha recibido la clave generada");
+
+		} catch (Exception e) {
+			throw new DAOException("Error en insert", e);
+		} finally {
+			cerrarProducto(psInsertFacturas, generatedKeys);
+		}
+	}
 }
