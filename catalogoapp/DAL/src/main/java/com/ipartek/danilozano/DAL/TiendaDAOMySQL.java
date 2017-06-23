@@ -519,18 +519,21 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 
 				psInsertFacturasProductos.setInt(1, id);
 				psInsertFacturasProductos.setInt(2, p.getId());
+				resetCant(p);
 				psInsertFacturasProductos.setInt(3, p.getCant());
+				int res = psInsertFacturasProductos.executeUpdate();
 				log.info("carritoid= " + id);
 				log.info("productoid= " + p.getId());
 				log.info("productoid= " + p.getCant());
 
-			}
-			int res = psInsertFacturasProductos.executeUpdate();
+			
+			
+
 
 			if (res != 1)
 				throw new DAOException("La inserción ha devuelto un valor " + res);
 
-		} catch (Exception e) {
+		}} catch (Exception e) {
 			throw new DAOException("Error en insert", e);
 		} finally {
 			cerrarProducto(psInsertFacturas);

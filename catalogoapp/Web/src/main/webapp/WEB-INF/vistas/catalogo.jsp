@@ -47,7 +47,7 @@
 			<input type="hidden" name="id" value="${producto.id}"/>
 				<input type="number" name="cant" 
 						   value="${producto.cant}" 
-						   min="0" max="${producto.stock}"
+						   min="1" max="${producto.stock}"
 						   style="width: 3em" />
 						   
 						   <input type="submit" 

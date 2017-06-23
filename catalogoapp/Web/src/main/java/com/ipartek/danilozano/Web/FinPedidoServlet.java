@@ -134,11 +134,25 @@ public class FinPedidoServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
 				break;
 			case "pagar":
+				if(precioTotal==0){
+					request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
+				}else{
 				dao.abrir();
 
 				dao.insertFacturasProductos(carrito);
+				
 				dao.cerrar();
+				carrito = new Carrito(idcarrito, nombre_usuarios, fecha);
+				carrito.buscarTodosLosProductos();
+				session.setAttribute("carrito", carrito);
+				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
+				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
+				session.setAttribute("numeroProductostotal", carrito.totalProductos());
+				
+				
 				request.getRequestDispatcher("/WEB-INF/vistas/pagado.jsp").forward(request, response);
+				}
+				
 				break;
 			default:
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
