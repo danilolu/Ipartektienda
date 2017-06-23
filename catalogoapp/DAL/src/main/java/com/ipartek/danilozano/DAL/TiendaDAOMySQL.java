@@ -510,18 +510,17 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	@Override
 	public int insertFacturasProductos(Carrito carrito) {
 
-		insertfactura(carrito);
-		ResultSet generatedKeys = null;
+		int id = insertfactura(carrito);
 
 		try {
-			psInsertFacturasProductos = con.prepareStatement(INSERT_FACTURA_PRODUCTOS, Statement.RETURN_GENERATED_KEYS);
+			psInsertFacturasProductos = con.prepareStatement(INSERT_FACTURA_PRODUCTOS);
 
 			for (Producto p : carrito.buscarTodosLosProductos()) {
 
-				psInsertFacturasProductos.setInt(1, carrito.getIdCarrito());
+				psInsertFacturasProductos.setInt(1, id);
 				psInsertFacturasProductos.setInt(2, p.getId());
 				psInsertFacturasProductos.setInt(3, p.getCant());
-				log.info("carritoid= " + carrito.getIdCarrito());
+				log.info("carritoid= " + id);
 				log.info("productoid= " + p.getId());
 				log.info("productoid= " + p.getCant());
 
@@ -531,17 +530,11 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			if (res != 1)
 				throw new DAOException("La inserción ha devuelto un valor " + res);
 
-			generatedKeys = psInsertFacturasProductos.getGeneratedKeys();
-
-			if (generatedKeys.next())
-				return generatedKeys.getInt(1);
-			else
-				throw new DAOException("No se ha recibido la clave generada");
-
 		} catch (Exception e) {
 			throw new DAOException("Error en insert", e);
 		} finally {
-			cerrarProducto(psInsertFacturas, generatedKeys);
+			cerrarProducto(psInsertFacturas);
 		}
+		return id;
 	}
 }
