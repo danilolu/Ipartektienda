@@ -5,94 +5,84 @@ import java.util.HashMap;
 
 public class Factura {
 	// Constructores, getters y setters, hashCode y equals y toString
-	private int id;
-	private String nombre_usuarios;
+	private int  id_facturas,cant;
+	private double precio,total;
+	private String nombre_usuario,nombre_producto;
 	private Date fecha;
-
-	
-
-	private HashMap<Integer, Producto> listaProductos = new HashMap<>();
-
-	public Double getPrecioTotal() {
-		Double precioTotal = 0.0;
-		if (listaProductos != null) {
-			for (Producto p : listaProductos.values()) {
-				precioTotal += p.getPrecio();
-			}
-		}
-		return precioTotal;
-	}
-
-	public Factura(String nombre_usuarios, Date fecha) {
-		super();
-		
-		this.nombre_usuarios = nombre_usuarios;
-		this.fecha = fecha;
-	}
-
-	public Factura(int id,  String nombre_usuarios, Date fecha) {
-		super();
-		this.id = id;
-		
-		this.nombre_usuarios = nombre_usuarios;
-		this.fecha = fecha;
-	}
-
 	
 	
-
+	//constructores
 	public Factura() {
-
+		super();
+		
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	//getters y setters
 	
-	
-
-	public String getNombre_usuarios() {
-		return nombre_usuarios;
+	public int getCant() {
+		return cant;
+	}
+	public double getPrecio() {
+		return precio;
 	}
 
-	public void setNombre_usuarios(String nombre_usuarios) {
-		this.nombre_usuarios = nombre_usuarios;
-		}
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public void setCant(int cant) {
+		this.cant = cant;
+	}
+	public int getId_facturas() {
+		return id_facturas;
+	}
+	public void setId_facturas(int id_facturas) {
+		this.id_facturas = id_facturas;
+	}
+	public String getNombre_usuario() {
+		return nombre_usuario;
+	}
+	public void setNombre_usuario(String nombre_usuario) {
+		this.nombre_usuario = nombre_usuario;
+	}
+	public String getNombre_producto() {
+		return nombre_producto;
+	}
+	public void setNombre_producto(String nombre_producto) {
+		this.nombre_producto = nombre_producto;
+	}
+	
 	public Date getFecha() {
 		return fecha;
 	}
-
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
-	public HashMap<Integer, Producto> getListaProductos() {
-		return listaProductos;
-	}
-
-	public void setListaProductos(HashMap<Integer, Producto> listaProductos) {
-		this.listaProductos = listaProductos;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + cant;
 		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-		result = prime * result + id;
+		result = prime * result + id_facturas;
 		result = prime * result
-				+ ((listaProductos == null) ? 0 : listaProductos.hashCode());
+				+ ((nombre_producto == null) ? 0 : nombre_producto.hashCode());
 		result = prime * result
-				+ ((nombre_usuarios == null) ? 0 : nombre_usuarios.hashCode());
+				+ ((nombre_usuario == null) ? 0 : nombre_usuario.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(precio);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(total);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -102,33 +92,46 @@ public class Factura {
 		if (getClass() != obj.getClass())
 			return false;
 		Factura other = (Factura) obj;
+		if (cant != other.cant)
+			return false;
 		if (fecha == null) {
 			if (other.fecha != null)
 				return false;
 		} else if (!fecha.equals(other.fecha))
 			return false;
-		if (id != other.id)
+		if (id_facturas != other.id_facturas)
 			return false;
-		if (listaProductos == null) {
-			if (other.listaProductos != null)
+		if (nombre_producto == null) {
+			if (other.nombre_producto != null)
 				return false;
-		} else if (!listaProductos.equals(other.listaProductos))
+		} else if (!nombre_producto.equals(other.nombre_producto))
 			return false;
-		if (nombre_usuarios == null) {
-			if (other.nombre_usuarios != null)
+		if (nombre_usuario == null) {
+			if (other.nombre_usuario != null)
 				return false;
-		} else if (!nombre_usuarios.equals(other.nombre_usuarios))
+		} else if (!nombre_usuario.equals(other.nombre_usuario))
+			return false;
+		if (Double.doubleToLongBits(precio) != Double
+				.doubleToLongBits(other.precio))
+			return false;
+		if (Double.doubleToLongBits(total) != Double
+				.doubleToLongBits(other.total))
 			return false;
 		return true;
 	}
+	//tostring
 
 	@Override
 	public String toString() {
-		return "Factura [id=" + id + ", nombre_usuarios=" + nombre_usuarios
-				+ ", fecha=" + fecha + ", listaProductos=" + listaProductos
-				+ "]";
+		return "Factura [id_facturas=" + id_facturas + ", cant=" + cant
+				+ ", precio=" + precio + ", total=" + total
+				+ ", nombre_usuario=" + nombre_usuario + ", nombre_producto="
+				+ nombre_producto + ", fecha=" + fecha + "]";
 	}
-
 	
+	
+
 }
+
+	 
 

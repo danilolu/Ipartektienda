@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ipartek.danilozano.Tipos.Carrito;
+import com.ipartek.danilozano.Tipos.Factura;
 import com.ipartek.danilozano.Tipos.Producto;
 import com.ipartek.danilozano.Tipos.Usuario;
 
@@ -30,13 +31,18 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String UPDATE_CANT = "UPDATE productos SET  cant=?  WHERE id=?";
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
+	
+
 	private final static String INSERT_FACTURA = "INSERT INTO facturas (nombre_usuario, fecha) VALUES (?,?)";
-	private final static String INSERT_FACTURA_PRODUCTOS = "INSERT INTO facturas_productos (id_facturas, id_productos, cant) VALUES (?,?,?)";
+	private final static String INSERT_FACTURA_PRODUCTOS = "INSERT INTO facturas_productos (id_facturas, id_productos, cantidad) VALUES (?,?,?)";
+	private final static String FIND_ALL_FACTURAS="select id_facturas,nombre_usuario, nombre, precio, cantidad, precio*cantidad as total from facturas, facturas_productos, productos where facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos ORDER BY `facturas_productos`.`id_facturas` ASC ";
+	private final static String FIND_ALL_FACTURAS_TOTAL="select id_facturas, nombre_usuario, SUM(precio*cantidad) as total from facturas, facturas_productos, productos WHERE facturas.id=facturas_productos.id_facturas and productos.id=facturas_productos.id_productos GROUP BY facturas_productos.id_facturas";
+	private final static String FIND_BY_ID_FACTURAS="SELECT id_facturas, facturas.nombre_usuario,productos.nombre,productos.precio,cantidad,precio*cantidad as total FROM facturas_productos,productos, facturas WHERE id_facturas = ? AND facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos";
 
 	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
 	private PreparedStatement psUpdateCant, psFindAllProducto, psFindByNombreProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psUpdateProductoAnadido, psUpdateProductoQuitado,
 			psDeleteProducto;
-	private PreparedStatement psInsertFacturas, psInsertFacturasProductos;
+	private PreparedStatement psInsertFacturas, psInsertFacturasProductos, psFindAllFacturas, psFindAllFacturasTotal, psFindByFacturas;
 
 	public TiendaDAOMySQL() {
 		super();
@@ -477,7 +483,21 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 
 	}
+	//Facturas
+	private void cerrarFactura(PreparedStatement ps) {
+		cerrarFactura(ps, null);
+	}
 
+	private void cerrarFactura(PreparedStatement ps, ResultSet rs) {
+		try {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+		} catch (Exception e) {
+			throw new DAOException("Error en el cierre de ps o rs", e);
+		}
+	}
 	@Override
 	public int insertfactura(Carrito carrito) {
 		ResultSet generatedKeys = null;
@@ -503,7 +523,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		} catch (Exception e) {
 			throw new DAOException("Error en insert", e);
 		} finally {
-			cerrarProducto(psInsertFacturas, generatedKeys);
+			cerrarFactura(psInsertFacturas, generatedKeys);
 		}
 	}
 
@@ -536,8 +556,105 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}} catch (Exception e) {
 			throw new DAOException("Error en insert", e);
 		} finally {
-			cerrarProducto(psInsertFacturas);
+			cerrarFactura(psInsertFacturas);
 		}
 		return id;
+	}
+	
+	@Override
+	public Factura[] findallfacturas(){
+		ArrayList<Factura> facturas = new ArrayList<Factura>();
+		ResultSet rs = null;
+
+		try {
+			psFindAllFacturas = con.prepareStatement(FIND_ALL_FACTURAS);
+
+			rs = psFindAllFacturas.executeQuery();
+
+			Factura factura;
+
+			while (rs.next()) {
+				// System.out.println(rs.getString("username"));
+				factura = new Factura();
+				 
+				factura.setId_facturas(rs.getInt("id_facturas"));
+				factura.setNombre_usuario(rs.getString("nombre_usuario"));
+				factura.setNombre_producto(rs.getString("nombre"));
+				factura.setPrecio(rs.getDouble("precio"));
+				factura.setCant(rs.getInt("cantidad"));
+				factura.setTotal(rs.getDouble("total"));
+				
+				
+				facturas.add(factura);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Error en findAll", e);
+		} finally {
+			cerrarProducto(psFindAllFacturas, rs);
+		}
+		return facturas.toArray(new Factura[facturas.size()]);
+	}
+
+	@Override
+	public Factura[] findallfacturastotal(){
+		ArrayList<Factura> facturas = new ArrayList<Factura>();
+		ResultSet rs = null;
+
+		try {
+			psFindAllFacturasTotal = con.prepareStatement(FIND_ALL_FACTURAS_TOTAL);
+
+			rs = psFindAllFacturasTotal.executeQuery();
+
+			Factura factura;
+
+			while (rs.next()) {
+				// System.out.println(rs.getString("username"));
+				factura = new Factura();
+				factura.setId_facturas(rs.getInt("id_facturas"));
+				factura.setNombre_usuario(rs.getString("nombre_usuario"));
+				factura.setTotal(rs.getDouble("total"));
+				
+				
+				facturas.add(factura);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Error en findAll", e);
+		} finally {
+			cerrarProducto(psFindAllFacturasTotal, rs);
+		}
+		return facturas.toArray(new Factura[facturas.size()]);
+	}
+
+	@Override
+	public Factura findByIdFactura(int id_facturas) {
+		ArrayList<Factura> facturas = new ArrayList<Factura>();
+		Factura factura = null;
+		ResultSet rs = null;
+
+		try {
+			psFindByFacturas= con.prepareStatement(FIND_BY_ID_FACTURAS);
+
+			psFindByFacturas.setInt(1, id_facturas);
+			rs = psFindByFacturas.executeQuery();
+
+			if (rs.next()) {
+				factura = new Factura();
+				factura.setId_facturas(rs.getInt("id_facturas"));
+				factura.setNombre_usuario(rs.getString("nombre_usuario"));
+				factura.setNombre_producto(rs.getString("nombre"));
+				factura.setPrecio(rs.getDouble("precio"));
+				factura.setCant(rs.getInt("cantidad"));
+				factura.setTotal(rs.getDouble("total"));
+				
+				facturas.add(factura);
+			}
+
+		} catch (Exception e) {
+			throw new DAOException("Error en findById", e);
+		} finally {
+			cerrarFactura(psFindByFacturas, rs);
+		}
+
+		return factura;
 	}
 }
