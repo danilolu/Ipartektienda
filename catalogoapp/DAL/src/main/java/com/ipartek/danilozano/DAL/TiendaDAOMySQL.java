@@ -31,13 +31,11 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String UPDATE_CANT = "UPDATE productos SET  cant=?  WHERE id=?";
 	private final static String DELETE_PRODUCTO = "DELETE FROM productos WHERE id=?";
 
-	
-
 	private final static String INSERT_FACTURA = "INSERT INTO facturas (nombre_usuario, fecha) VALUES (?,?)";
-	private final static String INSERT_FACTURA_PRODUCTOS = "INSERT INTO facturas_productos (id_facturas, id_productos, cantidad) VALUES (?,?,?)";
-	private final static String FIND_ALL_FACTURAS="select id_facturas,nombre_usuario, nombre, precio, cantidad, precio*cantidad as total from facturas, facturas_productos, productos where facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos ORDER BY `facturas_productos`.`id_facturas` ASC ";
-	private final static String FIND_ALL_FACTURAS_TOTAL="select id_facturas, nombre_usuario, SUM(precio*cantidad) as total from facturas, facturas_productos, productos WHERE facturas.id=facturas_productos.id_facturas and productos.id=facturas_productos.id_productos GROUP BY facturas_productos.id_facturas";
-	private final static String FIND_BY_ID_FACTURAS="SELECT id_facturas, facturas.nombre_usuario,productos.nombre,productos.precio,cantidad,precio*cantidad as total FROM facturas_productos,productos, facturas WHERE id_facturas = ? AND facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos";
+	private final static String INSERT_FACTURA_PRODUCTOS = "INSERT INTO facturas_productos (id_facturas, id_productos, cant) VALUES (?,?,?)";
+	private final static String FIND_ALL_FACTURAS = "select id_facturas,nombre_usuario, nombre, precio, cantidad, precio*cantidad as total from facturas, facturas_productos, productos where facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos ORDER BY `facturas_productos`.`id_facturas` ASC ";
+	private final static String FIND_ALL_FACTURAS_TOTAL = "select id_facturas, nombre_usuario, SUM(precio*cantidad) as total from facturas, facturas_productos, productos WHERE facturas.id=facturas_productos.id_facturas and productos.id=facturas_productos.id_productos GROUP BY facturas_productos.id_facturas";
+	private final static String FIND_BY_ID_FACTURAS = "SELECT id_facturas, facturas.nombre_usuario,productos.nombre,productos.precio,cantidad,precio*cantidad as total FROM facturas_productos,productos, facturas WHERE id_facturas = ? AND facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos";
 
 	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
 	private PreparedStatement psUpdateCant, psFindAllProducto, psFindByNombreProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psUpdateProductoAnadido, psUpdateProductoQuitado,
@@ -483,7 +481,8 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		}
 
 	}
-	//Facturas
+
+	// Facturas
 	private void cerrarFactura(PreparedStatement ps) {
 		cerrarFactura(ps, null);
 	}
@@ -498,6 +497,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			throw new DAOException("Error en el cierre de ps o rs", e);
 		}
 	}
+
 	@Override
 	public int insertfactura(Carrito carrito) {
 		ResultSet generatedKeys = null;
@@ -546,23 +546,20 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				log.info("productoid= " + p.getId());
 				log.info("productoid= " + p.getCant());
 
-			
-			
+				if (res != 1)
+					throw new DAOException("La inserción ha devuelto un valor " + res);
 
-
-			if (res != 1)
-				throw new DAOException("La inserción ha devuelto un valor " + res);
-
-		}} catch (Exception e) {
+			}
+		} catch (Exception e) {
 			throw new DAOException("Error en insert", e);
 		} finally {
 			cerrarFactura(psInsertFacturas);
 		}
 		return id;
 	}
-	
+
 	@Override
-	public Factura[] findallfacturas(){
+	public Factura[] findallfacturas() {
 		ArrayList<Factura> facturas = new ArrayList<Factura>();
 		ResultSet rs = null;
 
@@ -576,15 +573,14 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 			while (rs.next()) {
 				// System.out.println(rs.getString("username"));
 				factura = new Factura();
-				 
+
 				factura.setId_facturas(rs.getInt("id_facturas"));
 				factura.setNombre_usuario(rs.getString("nombre_usuario"));
 				factura.setNombre_producto(rs.getString("nombre"));
 				factura.setPrecio(rs.getDouble("precio"));
 				factura.setCant(rs.getInt("cantidad"));
 				factura.setTotal(rs.getDouble("total"));
-				
-				
+
 				facturas.add(factura);
 			}
 		} catch (SQLException e) {
@@ -596,7 +592,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	}
 
 	@Override
-	public Factura[] findallfacturastotal(){
+	public Factura[] findallfacturastotal() {
 		ArrayList<Factura> facturas = new ArrayList<Factura>();
 		ResultSet rs = null;
 
@@ -613,8 +609,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				factura.setId_facturas(rs.getInt("id_facturas"));
 				factura.setNombre_usuario(rs.getString("nombre_usuario"));
 				factura.setTotal(rs.getDouble("total"));
-				
-				
+
 				facturas.add(factura);
 			}
 		} catch (SQLException e) {
@@ -632,7 +627,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		ResultSet rs = null;
 
 		try {
-			psFindByFacturas= con.prepareStatement(FIND_BY_ID_FACTURAS);
+			psFindByFacturas = con.prepareStatement(FIND_BY_ID_FACTURAS);
 
 			psFindByFacturas.setInt(1, id_facturas);
 			rs = psFindByFacturas.executeQuery();
@@ -645,7 +640,7 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 				factura.setPrecio(rs.getDouble("precio"));
 				factura.setCant(rs.getInt("cantidad"));
 				factura.setTotal(rs.getDouble("total"));
-				
+
 				facturas.add(factura);
 			}
 
