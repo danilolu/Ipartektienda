@@ -31,5 +31,11 @@
 			
 			<li><a href="usuariocrud">Mantenimiento usuarios</a></li>
 		</ul>
+		<ul>
+			
+			<li><a href="facturacrud?op=factotal">Facturas</a></li>
+			
+			
+		</ul>
 	</nav>
 	<h5 >Bienvenido ${usuario.nombre} </h5>
