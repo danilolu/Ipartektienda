@@ -1,6 +1,7 @@
 package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.danilozano.DAL.TiendaDAO;
 import com.ipartek.danilozano.DAL.TiendaDAOMySQL;
 import com.ipartek.danilozano.Tipos.Carrito;
+import com.ipartek.danilozano.Tipos.Factura;
 import com.ipartek.danilozano.Tipos.Producto;
 
 @WebServlet("/finpedido")
@@ -154,6 +156,39 @@ public class FinPedidoServlet extends HttpServlet {
 				}
 				
 				break;
+			case "facturas":
+				
+				ArrayList<Factura> facturaspornombre = new ArrayList<Factura>();
+				dao.abrir();
+				String nombre_usuario=request.getParameter("nombre_usuario");
+
+				
+
+				for (Factura f : dao.findallfacturastotal())
+					if (f.getNombre_usuario().equals(nombre_usuario)) {
+						facturaspornombre.add(f);
+					}
+				dao.cerrar();
+				request.setAttribute("facturaspornombre", facturaspornombre);
+				request.getRequestDispatcher("/WEB-INF/vistas/facturasusuariopornombre.jsp").forward(request, response);
+			break;
+			case "desglosar":
+
+				ArrayList<Factura> facturasporid = new ArrayList<Factura>();
+				dao.abrir();
+				int id_facturas;
+
+				id_facturas = Integer.parseInt(request.getParameter("id_facturas"));
+
+				for (Factura f : dao.findallfacturas())
+					if (f.getId_facturas() == id_facturas) {
+						facturasporid.add(f);
+					}
+				dao.cerrar();
+				request.setAttribute("facturasporid", facturasporid);
+				request.getRequestDispatcher("/WEB-INF/vistas/facturasusuario.jsp").forward(request, response);
+				break;
+
 			default:
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
 

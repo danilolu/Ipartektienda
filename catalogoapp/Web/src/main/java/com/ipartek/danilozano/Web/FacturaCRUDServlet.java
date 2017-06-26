@@ -75,7 +75,7 @@ public class FacturaCRUDServlet extends HttpServlet {
 				dao.cerrar();
 				request.setAttribute("facturasporid", facturasporid);
 				request.getRequestDispatcher(RUTA_LISTADO).forward(request, response);
-
+break;
 			default:
 				request.getRequestDispatcher(RUTA_LISTADO).forward(request, response);
 			}

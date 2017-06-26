@@ -15,14 +15,14 @@
 <table>
 	<thead>
 	<tr>
-		<th style="text-align: left">Factura ${factura.id}</th>
+		<th style="text-align: left">Factura ${factura.id_facturas}</th>
 		<th style="text-align: right">${factura.fecha}</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
 		<td>Driver, S.A.</td>
-		<td style="text-align: right">${usuario.nombre_completo}</td>
+		<td style="text-align: right">${usuario.nombre}</td>
 	</tr>
 	<tr>
 		<td>A-12345678</td>
@@ -46,7 +46,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${sessionScope.productosFactura}" var="producto">
+		<c:forEach items="${sessionScope.imprimirporid}" var="factura">
 				<tr>
 				<td>${producto.nombre}</td>
 				<td style="text-align: right">${producto.precio} €</td>
