@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 	<td>Cliente:</td>
-	<td >${usuario.nombre}</td>
+	<td >${factura.nombre_usuario}</td>
 	</tr>
 	</tbody>
 </table>

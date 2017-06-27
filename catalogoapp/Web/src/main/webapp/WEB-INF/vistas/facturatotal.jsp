@@ -2,7 +2,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<h2>Mantenimiento de Productos</h2>
+<h2>Todos los pedidos</h2>
 
 <table border="1" style="margin: 0 auto;">
 	<thead>
@@ -11,7 +11,7 @@
 			<th>Nombre Usuario</th>
 			<th>Total</th>
 			<th>Fecha</th>
-			
+			<th>Imprimir Factura</th>
 			
 		</tr>
 	</thead>
@@ -24,6 +24,7 @@
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.total} &euro;</td>
 				<td>${factura.fecha} </td>
+				<td><a href="facturacrud?op=imprimir&id_facturas=${factura.id_facturas}"target="_blank" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;"><img src="/img/print.png" width="50" height="50px" > </a></td>
 				
 				
 			</tr>

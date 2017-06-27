@@ -8,7 +8,7 @@
 	
 	</ul>
 </nav>
-<h2>Mantenimiento de Productos</h2>
+<h2>Pedido desglosado</h2>
 <table border="1" style="margin: 0 auto;">
 	<thead>
 		<tr>

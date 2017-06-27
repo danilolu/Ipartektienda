@@ -75,7 +75,35 @@ public class FacturaCRUDServlet extends HttpServlet {
 				dao.cerrar();
 				request.setAttribute("facturasporid", facturasporid);
 				request.getRequestDispatcher(RUTA_LISTADO).forward(request, response);
-break;
+				break;
+			case "imprimir":
+
+				ArrayList<Factura> facturasid = new ArrayList<Factura>();
+				dao.abrir();
+				int id_facturas2;
+
+				id_facturas2 = Integer.parseInt(request.getParameter("id_facturas"));
+
+				for (Factura f : dao.findallfacturas())
+					if (f.getId_facturas() == id_facturas2) {
+						facturasid.add(f);
+					}
+				dao.cerrar();
+
+				request.setAttribute("facturasid", facturasid);
+				ArrayList<Factura> facturasnombre = new ArrayList<Factura>();
+				dao.abrir();
+
+				for (Factura f : dao.findallfacturastotal())
+					if (f.getId_facturas() == id_facturas2) {
+						facturasnombre.add(f);
+					}
+				dao.cerrar();
+				request.setAttribute("facturasnombre", facturasnombre);
+
+				request.getRequestDispatcher("/WEB-INF/vistas/factura.jsp").forward(request, response);
+				break;
+
 			default:
 				request.getRequestDispatcher(RUTA_LISTADO).forward(request, response);
 			}

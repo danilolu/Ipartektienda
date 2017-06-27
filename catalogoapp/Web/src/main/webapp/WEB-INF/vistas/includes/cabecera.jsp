@@ -33,7 +33,7 @@
 		</ul>
 		<ul>
 			
-			<li><a href="facturacrud?op=factotal">Facturas</a></li>
+			<li><a href="facturacrud?op=factotal">Pedidos</a></li>
 			
 			
 		</ul>
