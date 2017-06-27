@@ -45,7 +45,8 @@
 			
 			<th>Numero de productos ${sessionScope.numeroProductostotal}</th>
 			<th>Total a pagar:${sessionScope.precioTotal} &euro;</a></th>
-			<th><a href="?op=pagar" target="_blank" onclick="window.open(this.href, this.target, 'width=600,height=200'); return false;">Pagar</a> </a></th>
+			<th><a href="/carrito" target="_blank" onclick="window.open('/carrito', '_self'); window.open('?op=pagar', '_blank', 'width=400,height=400')"; return false;">Pagar</a> </a></th>
+	
 	</tbody>
 </table>
 

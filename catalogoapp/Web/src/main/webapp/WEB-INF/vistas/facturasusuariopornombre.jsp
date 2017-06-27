@@ -32,9 +32,7 @@
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.total} &euro;</td>
 				<td>${factura.fecha} </td>
-				<td><a href="finpedido?op=imprimir&id_facturas=${factura.id_facturas}">imprimir </a></td>
-				
-				
+				<td><a href="finpedido?op=imprimir&id_facturas=${factura.id_facturas}"target="_blank" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;"><img src="/img/print.png" width="50" height="50px" > </a></td>
 				
 			</tr>
 		</c:forEach>

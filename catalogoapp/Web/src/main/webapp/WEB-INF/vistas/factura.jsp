@@ -10,31 +10,28 @@
 <title>Su factura</title>
 </head>
 <body>
-<div id="factura">
-<div>
+
+<c:forEach items="${requestScope.facturasnombre}" var="factura">
 <table>
 	<thead>
 	<tr>
 		<th style="text-align: left">Factura ${factura.id_facturas}</th>
 		<th style="text-align: right">${factura.fecha}</th>
+		
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-		<td>Driver, S.A.</td>
-		<td style="text-align: right">${usuario.nombre}</td>
+		<td>Cervezas DANI S.L</td><td></td>
+		<td>CIF A46103884</td>
 	</tr>
 	<tr>
-		<td>A-12345678</td>
-		<td style="text-align: right">98765432-X</td>
-	</tr>
-	<tr>
-		<td>c/ Kalea, 4 - 9ºB</td>
-		<td style="text-align: right">c/ del Usuario s/n</td>
+	<td>Cliente:</td>
+	<td >${usuario.nombre}</td>
 	</tr>
 	</tbody>
 </table>
-</div>
+</c:forEach>
 
 
 <div>
@@ -43,19 +40,29 @@
 		<tr>
 			<th>Producto</th>
 			<th style="text-align: right">Precio</th>
+			<th style="text-align: right">Cantidad</th>
+			<th style="text-align: right">Total</th>
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${sessionScope.imprimirporid}" var="factura">
+		<c:forEach items="${requestScope.facturasid}" var="factura">
 				<tr>
-				<td>${producto.nombre}</td>
-				<td style="text-align: right">${producto.precio} €</td>
+				<td>${factura.nombre_producto}</td>
+				<td style="text-align: right">${factura.precio} €</td>
+				<td style="text-align: right">${factura.cant} €</td>
+				<td style="text-align: right">${factura.total} €</td>
 				</tr>
-		</c:forEach>
 		
-		<tr>
+		</c:forEach>
+		</br>
+		<tr></tr><tr>
+		<td> </td>
+		<td></td>
+		
 			<td>Total: </td>
-			<td style="text-align: right">${sessionScope.precioFactura} €</td>
+			<c:forEach items="${requestScope.facturasnombre}" var="factura">
+			<td> ${factura.total} €</td>
+			</c:forEach>
 		</tr>
 	</tbody>
 </table>

@@ -136,33 +136,30 @@ public class FinPedidoServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
 				break;
 			case "pagar":
-				if(precioTotal==0){
+				if (precioTotal == 0) {
 					request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
-				}else{
-				dao.abrir();
+				} else {
+					dao.abrir();
 
-				dao.insertFacturasProductos(carrito);
-				
-				dao.cerrar();
-				carrito = new Carrito(idcarrito, nombre_usuarios, fecha);
-				carrito.buscarTodosLosProductos();
-				session.setAttribute("carrito", carrito);
-				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
-				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
-				session.setAttribute("numeroProductostotal", carrito.totalProductos());
-				
-				
-				request.getRequestDispatcher("/WEB-INF/vistas/pagado.jsp").forward(request, response);
+					dao.insertFacturasProductos(carrito);
+
+					dao.cerrar();
+					carrito = new Carrito(idcarrito, nombre_usuarios, fecha);
+					carrito.buscarTodosLosProductos();
+					session.setAttribute("carrito", carrito);
+					session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
+					session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
+					session.setAttribute("numeroProductostotal", carrito.totalProductos());
+
+					request.getRequestDispatcher("/WEB-INF/vistas/pagado.jsp").forward(request, response);
 				}
-				
+
 				break;
 			case "facturas":
-				
+
 				ArrayList<Factura> facturaspornombre = new ArrayList<Factura>();
 				dao.abrir();
-				String nombre_usuario=request.getParameter("nombre_usuario");
-
-				
+				String nombre_usuario = request.getParameter("nombre_usuario");
 
 				for (Factura f : dao.findallfacturastotal())
 					if (f.getNombre_usuario().equals(nombre_usuario)) {
@@ -171,7 +168,7 @@ public class FinPedidoServlet extends HttpServlet {
 				dao.cerrar();
 				request.setAttribute("facturaspornombre", facturaspornombre);
 				request.getRequestDispatcher("/WEB-INF/vistas/facturasusuariopornombre.jsp").forward(request, response);
-			break;
+				break;
 			case "desglosar":
 
 				ArrayList<Factura> facturasporid = new ArrayList<Factura>();
@@ -187,6 +184,33 @@ public class FinPedidoServlet extends HttpServlet {
 				dao.cerrar();
 				request.setAttribute("facturasporid", facturasporid);
 				request.getRequestDispatcher("/WEB-INF/vistas/facturasusuario.jsp").forward(request, response);
+				break;
+			case "imprimir":
+
+				ArrayList<Factura> facturasid = new ArrayList<Factura>();
+				dao.abrir();
+				int id_facturas2;
+
+				id_facturas2 = Integer.parseInt(request.getParameter("id_facturas"));
+
+				for (Factura f : dao.findallfacturas())
+					if (f.getId_facturas() == id_facturas2) {
+						facturasid.add(f);
+					}
+				dao.cerrar();
+
+				request.setAttribute("facturasid", facturasid);
+				ArrayList<Factura> facturasnombre = new ArrayList<Factura>();
+				dao.abrir();
+
+				for (Factura f : dao.findallfacturastotal())
+					if (f.getId_facturas() == id_facturas2) {
+						facturasnombre.add(f);
+					}
+				dao.cerrar();
+				request.setAttribute("facturasnombre", facturasnombre);
+
+				request.getRequestDispatcher("/WEB-INF/vistas/factura.jsp").forward(request, response);
 				break;
 
 			default:
