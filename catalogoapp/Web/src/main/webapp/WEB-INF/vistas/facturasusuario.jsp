@@ -4,7 +4,7 @@
 <nav>
 	<ul>
 	
-	<li><a href="/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Facturas</a></li>
+	<li><a href="/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
 	
 	</ul>
 </nav>

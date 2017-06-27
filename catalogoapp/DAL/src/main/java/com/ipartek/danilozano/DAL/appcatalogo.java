@@ -20,10 +20,6 @@ public class appcatalogo {
 
 			Factura factura = new Factura();
 
-			int id_facturas = 15;
-			factura = dao.findByIdFactura(id_facturas);
-			System.out.println("factura: " + id_facturas + " = " + factura);
-
 		} catch (DAOException e) {
 			e.printStackTrace();
 		} finally {
@@ -146,14 +142,5 @@ public class appcatalogo {
 		System.out.println();
 
 	}
-	// private static void listadofacturas3() {
-	// System.out.println("\nLISTADO\n=======");
-	// int id_facturas=15;
-	// for (Factura f3 : dao.findByIdFactura(_))
-	// System.out.println(f3);
-	//
-	// System.out.println();
-	//
-	// }
 
 }

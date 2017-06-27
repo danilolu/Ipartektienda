@@ -35,12 +35,11 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 	private final static String INSERT_FACTURA_PRODUCTOS = "INSERT INTO facturas_productos (id_facturas, id_productos, cantidad) VALUES (?,?,?)";
 	private final static String FIND_ALL_FACTURAS = "select id_facturas,nombre_usuario, nombre, precio, cantidad, precio*cantidad as total,fecha from facturas, facturas_productos, productos where facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos ORDER BY `facturas_productos`.`id_facturas` ASC ";
 	private final static String FIND_ALL_FACTURAS_TOTAL = "select id_facturas, nombre_usuario, SUM(precio*cantidad) as total,fecha from facturas, facturas_productos, productos WHERE facturas.id=facturas_productos.id_facturas and productos.id=facturas_productos.id_productos GROUP BY facturas_productos.id_facturas";
-	private final static String FIND_BY_ID_FACTURAS = "SELECT id_facturas, facturas.nombre_usuario,productos.nombre,productos.precio,cantidad,precio*cantidad as total FROM facturas_productos,productos, facturas WHERE id_facturas = ? AND facturas.id=facturas_Productos.id_facturas and productos.id=facturas_productos.id_productos";
 
 	private PreparedStatement psFindAllUsuario, psFindByNombreUsuario, psInsertUsuario, psUpdateUsuario, psDeleteUsuario;
 	private PreparedStatement psUpdateCant, psFindAllProducto, psFindByNombreProducto, psFindByIdProducto, psInsertProducto, psUpdateProducto, psUpdateProductoAnadido, psUpdateProductoQuitado,
 			psDeleteProducto;
-	private PreparedStatement psInsertFacturas, psInsertFacturasProductos, psFindAllFacturas, psFindAllFacturasTotal, psFindByFacturas;
+	private PreparedStatement psInsertFacturas, psInsertFacturasProductos, psFindAllFacturas, psFindAllFacturasTotal;
 
 	public TiendaDAOMySQL() {
 		super();
@@ -622,36 +621,4 @@ public class TiendaDAOMySQL extends CatalogoAppDAOMySQL implements TiendaDAO {
 		return facturas.toArray(new Factura[facturas.size()]);
 	}
 
-	@Override
-	public Factura findByIdFactura(int id_facturas) {
-		ArrayList<Factura> facturas = new ArrayList<Factura>();
-		Factura factura = null;
-		ResultSet rs = null;
-
-		try {
-			psFindByFacturas = con.prepareStatement(FIND_BY_ID_FACTURAS);
-
-			psFindByFacturas.setInt(1, id_facturas);
-			rs = psFindByFacturas.executeQuery();
-
-			if (rs.next()) {
-				factura = new Factura();
-				factura.setId_facturas(rs.getInt("id_facturas"));
-				factura.setNombre_usuario(rs.getString("nombre_usuario"));
-				factura.setNombre_producto(rs.getString("nombre"));
-				factura.setPrecio(rs.getDouble("precio"));
-				factura.setCant(rs.getInt("cantidad"));
-				factura.setTotal(rs.getDouble("total"));
-
-				facturas.add(factura);
-			}
-
-		} catch (Exception e) {
-			throw new DAOException("Error en findById", e);
-		} finally {
-			cerrarFactura(psFindByFacturas, rs);
-		}
-
-		return factura;
-	}
 }

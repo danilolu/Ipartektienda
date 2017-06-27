@@ -30,7 +30,7 @@
 			<th>Stock</th>
 			<th>Cantidad</th>
 			
-			<!--  <th>Meter al carrito</th>-->
+			
 			
 		</tr>
 	</thead>

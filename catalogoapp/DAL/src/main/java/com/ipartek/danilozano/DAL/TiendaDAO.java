@@ -50,11 +50,9 @@ public interface TiendaDAO extends CatalogoAppDAO {
 	public int insertfactura(Carrito carrito);
 
 	public int insertFacturasProductos(Carrito carrito);
-	
+
 	public Factura[] findallfacturas();
 
 	public Factura[] findallfacturastotal();
-
-	public Factura findByIdFactura(int id);
 
 }
