@@ -6,7 +6,7 @@
 	<jsp:useBean id="producto" scope="request"
 		class="com.ipartek.danilozano.Tipos.Producto" />
 
-	<form action="productoform" method="post">
+	<form action="${applicationScope.rutaBase}/admin/productoform" method="post">
 		<fieldset>
 			<label for="id"<c:if test="${ param.op == 'alta'}">
 			  	Style="display:none";

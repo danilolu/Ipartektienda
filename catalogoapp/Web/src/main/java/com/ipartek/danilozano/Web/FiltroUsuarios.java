@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 public class FiltroUsuarios implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
+		ServletContext application = request.getServletContext();
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		HttpSession session = httpReq.getSession();
@@ -27,7 +28,7 @@ public class FiltroUsuarios implements Filter {
 			chain.doFilter(request, response);
 
 		} else {
-			httpResp.sendRedirect("/carrito");
+			httpResp.sendRedirect(application.getAttribute("rutaBase") + "/carrito");
 
 		}
 	}

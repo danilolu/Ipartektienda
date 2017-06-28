@@ -1,6 +1,7 @@
 package com.ipartek.danilozano.Web;
 
 //import javax.servlet.ServletContext;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -41,7 +42,11 @@ public class ListenerUsuario implements ServletContextListener, HttpSessionListe
 
 	@Override
 	public void contextInitialized(ServletContextEvent sc) {
+		ServletContext application = sc.getServletContext();
 
+		String path = sc.getServletContext().getContextPath();
+		application.setAttribute("rutaBase", path);
+		log.info("El path es:      " + path);
 		// cargar la configuracion de log4j en el context cuando no usabamos
 		// base de datos
 

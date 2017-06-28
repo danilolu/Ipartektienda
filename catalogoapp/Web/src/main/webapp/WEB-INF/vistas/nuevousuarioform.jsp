@@ -8,7 +8,7 @@
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.danilozano.Tipos.Usuario" />
 
-	<form action="usuarioform" method="post">
+	<form action="${applicationScope.rutaBase}/noadmin/usuarioform" method="post">
 		<fieldset>
 			<label for="nombre">Nombre</label> 
 			
@@ -16,7 +16,7 @@
 			  required="required" minlength="4" value="${usuario.nombre}"/>
 		</fieldset>
 		<fieldset>
-			<label for="pass">Contraseña</label> <input type="password" id="pass"
+			<label for="pass">Contraseñaaaaaaaa</label> <input type="password" id="pass"
 				name="pass" minlength="4" />
 		</fieldset>
 		<fieldset>

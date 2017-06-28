@@ -3,6 +3,7 @@ package com.ipartek.danilozano.Web;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +33,8 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
-
-		// definir ruteo
+		ServletContext application = request.getServletContext(); // definir
+																	// ruteo
 		RequestDispatcher rutaListado = request.getRequestDispatcher(UsuarioCRUDServlet.RUTA_SERVLET_LISTADO);
 		RequestDispatcher rutaFormulario = request.getRequestDispatcher(RUTA_NUEVO_FORMULARIO);
 
@@ -72,7 +73,7 @@ public class noadminUsuarioFormServlet extends HttpServlet {
 					dao.abrir();
 					dao.insert(usuario);
 					dao.cerrar();
-					response.sendRedirect("/login");
+					response.sendRedirect(application.getAttribute("rutaBase") + "/login");
 				} catch (DAOException a) {
 					log.info("usuario con  '" + nombre + "' repetido, el alta no ha sido finalizada");
 					usuario.setErrores("ID ya existente");

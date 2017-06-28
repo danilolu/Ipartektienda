@@ -16,8 +16,8 @@
 		<c:forEach items="${requestScope.usuarios}" var="usuario">
 			<tr>
 				<td>
-					<a href="?op=modificar&nombre=${usuario.nombre}">Modificar</a>
-					<a href="?op=borrar&nombre=${usuario.nombre}">Borrar</a>
+					<a href="${applicationScope.rutaBase}/admin/usuarioform?op=modificar&nombre=${usuario.nombre}">Modificar</a>
+					<a href="${applicationScope.rutaBase}/admin/usuarioform?op=borrar&nombre=${usuario.nombre}">Borrar</a>
 				</td>
 				<td>${usuario.nombre}</td>
 				<td>${usuario.pass}</td>

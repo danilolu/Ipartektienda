@@ -27,7 +27,7 @@
 				<td>${factura.id_facturas}</td>
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.nombre_producto}</td>
-				<td><IMG SRC="/img/${factura.nombre_producto}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="${applicationScope.rutaBase}/img/${factura.nombre_producto}.jpg" width="100" height="100px" /></td>
 				<td>${factura.precio} &euro;</td>
 				<td>${factura.cant} </td>
 				<td>${factura.total} &euro;</td>

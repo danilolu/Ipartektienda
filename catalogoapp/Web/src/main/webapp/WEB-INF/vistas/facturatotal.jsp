@@ -20,11 +20,11 @@
 			<tr>
 				
 				</td>
-				<td><a href="facturacrud?op=desglosar&id_facturas=${factura.id_facturas}">Desglosar </a>${factura.id_facturas}</td>
+				<td><a href="${applicationScope.rutaBase}/admin/facturacrud?op=desglosar&id_facturas=${factura.id_facturas}">Desglosar </a>${factura.id_facturas}</td>
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.total} &euro;</td>
 				<td>${factura.fecha} </td>
-				<td><a href="facturacrud?op=imprimir&id_facturas=${factura.id_facturas}"target="_blank" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;"><img src="/img/print.png" width="50" height="50px" > </a></td>
+				<td><a href="${applicationScope.rutaBase}/admin/facturacrud?op=imprimir&id_facturas=${factura.id_facturas}"target="_blank" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;"><img src="${applicationScope.rutaBase}/img/print.png" width="50" height="50px" > </a></td>
 				
 				
 			</tr>

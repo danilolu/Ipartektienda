@@ -20,13 +20,13 @@
 		<c:forEach items="${requestScope.productos}" var="producto">
 			<tr>
 				<td>
-					<a href="?op=modificar&id=${producto.id}">Modificar</a></br></br>
+					<a href="${applicationScope.rutaBase}/admin/productoform?op=modificar&id=${producto.id}">Modificar</a></br></br>
 					
-					<a href="?op=borrar&id=${producto.id}">Borrar</a>
+					<a href="${applicationScope.rutaBase}/admin/productoform?op=borrar&id=${producto.id}">Borrar</a>
 				</td>
 				<td>${producto.id}</td>
 				<td>${producto.nombre}</td>
-				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="${applicationScope.rutaBase}/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
 				<td>${producto.stock}</td>

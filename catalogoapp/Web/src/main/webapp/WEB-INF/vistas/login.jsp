@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-		<h1 align="center"><IMG SRC="/img/danilogo.png" width="500" height="100px" /></h1>
+		<h1 align="center"><IMG SRC="${applicationScope.rutaBase}/img/danilogo.png" width="500" height="100px" /></h1>
 			</header>
 	
 
@@ -18,7 +18,7 @@
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.danilozano.Tipos.Usuario" />
 
-	<form action="login" method="post" style="text-align: right;
+	<form action="${applicationScope.rutaBase}/login" method="post" style="text-align: right;
     width: 50%;
     display: inline-block;
 ">
@@ -39,8 +39,8 @@
 	
 	
 	
-<p style="text-align: left;width: 50%;display: inline;"><a href="noadmin/login?op=alta">
-<img src="/img/registrate.png" width="300px" height="150px" ></a>
+<p style="text-align: left;width: 50%;display: inline;"><a href="${applicationScope.rutaBase}/noadmin/login?op=alta">
+<img src="${applicationScope.rutaBase}/img/registrate.png" width="300px" height="150px" ></a>
 	
 
 	</p>

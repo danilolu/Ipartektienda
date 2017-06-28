@@ -7,9 +7,9 @@
 	<ul>
 	<li > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
 	En total :${sessionScope.numeroProductostotal}</B></li>
-	<li><a href="/finpedido">Finalizar pedido</a></li>
-	<li><a href="/finpedido?op=vaciar">Vaciar carrito</a></li>
-	<li><a href="/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido">Finalizar pedido</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar">Vaciar carrito</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
 	
 	</ul>
 </nav>
@@ -41,11 +41,11 @@
 				
 				<td>${producto.id}</td>
 				<td>${producto.nombre}</td>
-				<td><IMG SRC="/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="${applicationScope.rutaBase}/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
 				<td>${producto.stock}</td>
-				<td><form action="/carrito?op=anadir&id=${producto.id}" method="post">
+				<td><form action="${applicationScope.rutaBase}/carrito?op=anadir&id=${producto.id}" method="post">
 			<input type="hidden" name="id" value="${producto.id}"/>
 				<input type="number" name="cant" 
 						   value="${producto.cant}" 
@@ -65,8 +65,8 @@
 <nav>
 	<ul>
 	<li>${sessionScope.numeroProductos} productos en el carrito</li>
-	<li><a href="/finpedido">Finalizar pedido</a></li>
-	<li><a href="/finpedido?op=vaciar">Vaciar carrito</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido">Finalizar pedido</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar">Vaciar carrito</a></li>
 	</ul>
 </nav>
 			

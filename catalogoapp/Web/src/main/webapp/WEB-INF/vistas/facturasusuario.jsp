@@ -4,7 +4,7 @@
 <nav>
 	<ul>
 	
-	<li><a href="/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
 	
 	</ul>
 </nav>
@@ -32,7 +32,7 @@
 				<td>${factura.id_facturas}</td>
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.nombre_producto}</td>
-				<td><IMG SRC="/img/${factura.nombre_producto}.jpg" width="100" height="100px" /></td>
+				<td><IMG SRC="${applicationScope.rutaBase}/img/${factura.nombre_producto}.jpg" width="100" height="100px" /></td>
 				<td>${factura.precio} &euro;</td>
 				<td>${factura.cant} </td>
 				<td>${factura.total} &euro;</td>

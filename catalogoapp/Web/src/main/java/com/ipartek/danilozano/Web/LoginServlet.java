@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 
 	public static TiendaDAO dao = null;
 
-	/* package */static final String RUTA = "/WEB-INF/vistas/";
+	/* package */static final String RUTA = "/WEB-INF/vistas";
 	private static final String RUTA_PRINCIPAL = "/admin/productocrud";
 	private static final String RUTA_LOGIN = RUTA + "/login.jsp";
 	static final String RUTA_SERVLET_LISTADO = "/login";
@@ -108,7 +108,7 @@ public class LoginServlet extends HttpServlet {
 		} else if (esValido) {
 			log.info(nombresesion + " ha iniciado sesion ");
 			session.setAttribute("usuario", usuario);
-			response.sendRedirect(RUTA_PRINCIPAL);
+			response.sendRedirect(application.getAttribute("rutaBase") + RUTA_PRINCIPAL);
 		} else {
 			log.info("inicio de sesion erronea");
 			usuario.setErrores("El usuario y contraseña introducidos no son válidos");
