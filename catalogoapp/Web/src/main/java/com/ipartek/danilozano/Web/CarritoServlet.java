@@ -46,9 +46,10 @@ public class CarritoServlet extends HttpServlet {
 		int cant;
 		int idcarrito;
 		String nombre_usuarios = (String) session.getAttribute("nombre");
+
 		log.info("nombre usuario = " + nombre_usuarios);
 		Date fecha = new Date();
-		log.info("fecha = " + fecha);
+
 		// recoger valores para inicializar variables
 		if (request.getParameter("id") == null || request.getParameter("id") == "") {
 			id = 0;
@@ -103,7 +104,7 @@ public class CarritoServlet extends HttpServlet {
 		if (carrito == null) {
 
 			carrito = new Carrito(idcarrito, nombre_usuarios, fecha);
-
+			log.info(" carritoservlet descripcion carrito = " + carrito.getNombre_usuarios() + "  " + carrito);
 		}
 
 		String op = request.getParameter("op");

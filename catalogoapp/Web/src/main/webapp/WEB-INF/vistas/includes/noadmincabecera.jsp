@@ -7,6 +7,7 @@
 <title>tienda</title>
 <link rel="stylesheet" href="${applicationScope.rutaBase}/css/estilo.css" />
 <script src="js/funciones.js"></script>
+<link rel="shortcut icon" href="${applicationScope.rutaBase}/img/favicon.png" type="image/png">
 </head>
 <body>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

@@ -36,6 +36,7 @@ public class FinPedidoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String op = request.getParameter("op");
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
+		log.info(" finpedido descripcion carrito = " + carrito.getNombre_usuarios() + "  " + carrito);
 
 		Producto[] carritoArr = null;
 		Integer numeroProductos = 0;

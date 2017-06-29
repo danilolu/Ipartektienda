@@ -36,8 +36,12 @@
 			<th>Imagen</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
-			<th>Stock</th>
-			<th>Cantidad</th>
+			<th<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if>>Stock</th>
+			<th<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if>>Cantidad</th>
 			
 			
 			
@@ -53,8 +57,12 @@
 				<td><IMG SRC="${applicationScope.rutaBase}/img/${producto.nombre}.jpg" width="100" height="100px" /></td>
 				<td>${producto.descripcion}</td>
 				<td>${producto.precio} &euro;</td>
-				<td>${producto.stock}</td>
-				<td><form action="${applicationScope.rutaBase}/carrito?op=anadir&id=${producto.id}" method="post">
+				<td<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if>>${producto.stock}</td>
+				<td<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if>><form action="${applicationScope.rutaBase}/carrito?op=anadir&id=${producto.id}" method="post">
 			<input type="hidden" name="id" value="${producto.id}"/>
 				<input type="number" name="cant" 
 						   value="${producto.cant}" 

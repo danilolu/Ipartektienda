@@ -8,7 +8,8 @@
 <title>tienda</title>
 <link rel="stylesheet" href="css/estilo.css" />
 <script src="js/funciones.js"></script>
-
+<link rel="shortcut icon" href="${applicationScope.rutaBase}/img/favicon.png" type="image/png">
+</head>
 <body>
 
 
