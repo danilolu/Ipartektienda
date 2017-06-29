@@ -12,7 +12,7 @@
 	
 	<h1 style="text-align:center">Bienvenido a Cervezas <IMG SRC="${applicationScope.rutaBase}/img/danilogo.png" width="200" height="100px" /></h1>
 	
-	<A href="${applicationScope.rutaBase}/login"><p style="text-align:center">
+	<A href="${applicationScope.rutaBase}/carrito"><p style="text-align:center">
 <IMG  src="${applicationScope.rutaBase}/img/index.png" ></a>
 	
 	

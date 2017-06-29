@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>tienda</title>
-<link rel="stylesheet" href="css/estilo.css" />
+<link rel="stylesheet" href="${applicationScope.rutaBase}/css/estilo.css" />
 <script src="js/funciones.js"></script>
 </head>
 <body>
@@ -42,7 +42,14 @@
 <p style="text-align: left;width: 50%;display: inline;"><a href="${applicationScope.rutaBase}/noadmin/login?op=alta">
 <img src="${applicationScope.rutaBase}/img/registrate.png" width="300px" height="150px" ></a>
 	
+</p>
 
-	</p>
+<nav>
+		
+	<li><a href="${applicationScope.rutaBase}/carrito">Ver catalogo como invitado</a></li>
+			
+</nav>
+
+
 	
 <%@ include file="includes/pie.jsp" %>

@@ -107,7 +107,7 @@ public class FinPedidoServlet extends HttpServlet {
 
 					dao.cerrar();
 				}
-				// carrito = new Carrito();
+
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);

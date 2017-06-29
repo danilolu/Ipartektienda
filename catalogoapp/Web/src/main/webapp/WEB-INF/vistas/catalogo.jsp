@@ -5,14 +5,23 @@
 
 <nav>
 	<ul>
-	<li > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
+	<li <c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
 	En total :${sessionScope.numeroProductostotal}</B></li>
-	<li><a href="${applicationScope.rutaBase}/finpedido">Finalizar pedido</a></li>
-	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar">Vaciar carrito</a></li>
-	<li><a href="${applicationScope.rutaBase}/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido"<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> >Finalizar pedido</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar"<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> >Vaciar carrito</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=facturas&nombre_usuario=${usuario.nombre}"<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> >Mis Pedidos</a></li>
 	
 	</ul>
 </nav>
+
 <h2>Catalogo</h2>
 
 <p class="errores">${producto.errores}</p>
@@ -53,7 +62,9 @@
 						   style="width: 3em" />
 						   
 						   <input type="submit" 
-						   value="Meter al carrito" />
+						   value="Meter al carrito" <c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> />
 						   </form></td>
 				
 				<!--  <td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="50" height="50px" ></a></td>-->
@@ -64,9 +75,16 @@
 
 <nav>
 	<ul>
-	<li>${sessionScope.numeroProductos} productos en el carrito</li>
-	<li><a href="${applicationScope.rutaBase}/finpedido">Finalizar pedido</a></li>
-	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar">Vaciar carrito</a></li>
+	<li<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if>  > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
+	En total :${sessionScope.numeroProductostotal}</B></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido"<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> >Finalizar pedido</a></li>
+	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar"<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if> >Vaciar carrito</a></li>
 	</ul>
 </nav>
 			
