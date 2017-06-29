@@ -23,7 +23,7 @@
 			<li><a href="${applicationScope.rutaBase}/login?opcion=logout"<c:if test="${usuario.nombre == null }">
 			  	Style="display:none";
 			  </c:if> >Salir</a></li>
-			<li><a href="${applicationScope.rutaBase}/login"<c:if test="${usuario.nombre != null }">
+			<li><a href="${applicationScope.rutaBase}/login?opcion=logout"<c:if test="${usuario.nombre != null }">
 			  	Style="display:none";
 			  </c:if> >Log in/ Sign in</a></li>
 			

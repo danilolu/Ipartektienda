@@ -154,6 +154,7 @@ public class CarritoServlet extends HttpServlet {
 																			// buscar
 																			// elementos
 																			// repetidos
+
 					log.info(" repetido");
 					producto.setErrores("Ya has añadido este producto, ve al finalizar carrito para modificarlo");
 					request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);

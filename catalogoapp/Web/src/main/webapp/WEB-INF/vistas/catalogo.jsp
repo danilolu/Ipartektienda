@@ -65,17 +65,18 @@
 			  </c:if>><form action="${applicationScope.rutaBase}/carrito?op=anadir&id=${producto.id}" method="post">
 			<input type="hidden" name="id" value="${producto.id}"/>
 				<input type="number" name="cant" 
-						   value="${producto.cant}" 
+						   value="0" 
 						   min="1" max="${producto.stock}"
 						   style="width: 3em" />
 						   
 						   <input type="submit" 
-						   value="Meter al carrito" <c:if test="${usuario.nombre == null }">
+						   value="Meter al carrito" <c:if test="${producto.stock == 0 }">
 			  	Style="display:none";
-			  </c:if> />
+			  </c:if> /><h4<c:if test="${producto.stock != 0 }">
+			  	Style="display:none";
+			  </c:if>>Producto agotado</h4>
 						   </form></td>
 				
-				<!--  <td><a href="/carrito?op=anadir&id=${producto.id}"><img src="/img/anadir.png" width="50" height="50px" ></a></td>-->
 			</tr>
 		</c:forEach>
 	</tbody>
