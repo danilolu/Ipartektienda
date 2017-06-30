@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,8 @@ public class FinPedidoServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dao = new TiendaDAOMySQL("jdbc:mysql://localhost/catalogoapp", "root", "");
+
+		ServletContext application = getServletContext();
 		HttpSession session = request.getSession();
 		String op = request.getParameter("op");
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
@@ -138,8 +141,12 @@ public class FinPedidoServlet extends HttpServlet {
 				break;
 			case "pagar":
 				if (precioTotal == 0) {
-					request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
+					carrito.setErrores("El carrito esta vacio");
+					request.setAttribute("carrito", carrito);
+					request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);
+
 				} else {
+
 					dao.abrir();
 
 					dao.insertFacturasProductos(carrito);

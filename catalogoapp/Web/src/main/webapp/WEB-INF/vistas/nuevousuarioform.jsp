@@ -16,7 +16,7 @@
 			  required="required" minlength="4" value="${usuario.nombre}"/>
 		</fieldset>
 		<fieldset>
-			<label for="pass">Contraseñaaaaaaaa</label> <input type="password" id="pass"
+			<label for="pass">Contraseña</label> <input type="password" id="pass"
 				name="pass" minlength="4" />
 		</fieldset>
 		<fieldset>

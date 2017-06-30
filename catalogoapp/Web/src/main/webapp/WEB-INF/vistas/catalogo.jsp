@@ -1,7 +1,8 @@
 <%@ include file="includes/noadmincabecera.jsp"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<jsp:useBean id="producto" scope="request"
+		class="com.ipartek.danilozano.Tipos.Producto" />
 
 <nav>
 	<ul>
@@ -23,8 +24,8 @@
 </nav>
 
 <h2>Catalogo</h2>
+<p class="errores" >${producto.errores}</p>
 
-<p class="errores">${producto.errores}</p>
 <table border="1" style="margin: 0 auto;
    
 ">

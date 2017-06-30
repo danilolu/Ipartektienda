@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 public class Carrito {
 
 	private int idcarrito;
-	private String nombre_usuarios;
+	private String nombre_usuarios, errores;
 	private Date fecha = new Date();
 
 	private static Logger log = Logger.getLogger(Carrito.class);
@@ -164,5 +164,13 @@ public class Carrito {
 
 	public void setIdCarrito(int id) {
 		this.idcarrito = id;
+	}
+
+	public String getErrores() {
+		return errores;
+	}
+
+	public void setErrores(String errores) {
+		this.errores = errores;
 	}
 }

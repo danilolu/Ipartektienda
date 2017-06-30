@@ -144,20 +144,21 @@ public class CarritoServlet extends HttpServlet {
 				break;
 
 			case "anadir":
-
+				carrito.setErrores("");
+				request.setAttribute("carrito", carrito);
 				dao.abrir();
 				dao.updateCant(producto);
 				producto = dao.findByIdProducto(id);
 
-				if (carrito.carritoLista.containsKey(producto.getId())) {// if
-																			// para
-																			// buscar
+				if (carrito.carritoLista.containsKey(producto.getId())) {// buscar
 																			// elementos
 																			// repetidos
 
 					log.info(" repetido");
-					producto.setErrores("Ya has añadido este producto, ve al finalizar carrito para modificarlo");
+					producto.setErrores("Ya has añadido este producto, si quieres modificar la cantidad debes quitarlo del carrito");
+					request.setAttribute("producto", producto);
 					request.getRequestDispatcher("/WEB-INF/vistas/catalogo.jsp").forward(request, response);
+					dao.cerrar();
 					break;
 				}
 

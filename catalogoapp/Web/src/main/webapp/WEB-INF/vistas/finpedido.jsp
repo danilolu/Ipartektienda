@@ -1,7 +1,8 @@
 <%@ include file="includes/noadmincabecera.jsp"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<jsp:useBean id="producto" scope="request"
+		class="com.ipartek.danilozano.Tipos.Carrito" />
 <nav>
 	<ul>
 	
@@ -11,7 +12,7 @@
 	</ul>
 </nav>
 	<h2>Finalizar pedido</h2>
-
+<p class="errores" >${carrito.errores}</p>
 
 <table>
 	<thead>
@@ -22,7 +23,6 @@
 			<th>Imagen</th>
 			<th>Precio</th>
 			<th>Cantidad</th>
-			
 			<th>Quitar de carrito</th>
 			
 			</tr>
