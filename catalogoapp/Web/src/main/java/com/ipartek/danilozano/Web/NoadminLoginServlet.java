@@ -24,8 +24,7 @@ public class NoadminLoginServlet extends HttpServlet {
 	public static TiendaDAO dao = null;
 
 	/* package */static final String RUTA = "/WEB-INF/vistas/";
-	// private static final String RUTA_CATALOGO =
-	// "/WEB-INF/vistas/catalogo.jsp";
+
 	public static final int TIEMPO_INACTIVIDAD = 30 * 60;
 	static final String USUARIOS_DAL = "dal";
 	static final String RUTA_FORMULARIO = "/WEB-INF/vistas/nuevousuario.jsp";
