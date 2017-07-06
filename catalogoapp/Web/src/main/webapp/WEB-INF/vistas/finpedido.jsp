@@ -21,7 +21,13 @@
 
 
 	<h2>Finalizar pedido</h2>
-<p class="errores" >${carrito.errores}</p>
+	<p class="errores">
+			<div class="alert alert-danger"<c:if test="${carrito.errores == null or carrito.errores == ''}">
+			  	Style="display:none;"</strong>
+			  </c:if>  >
+    <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${carrito.errores}
+  </div>
+
 
 <table id="myTable" class="table table-hover">
 	<thead>

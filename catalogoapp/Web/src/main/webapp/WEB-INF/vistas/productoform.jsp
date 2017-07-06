@@ -94,8 +94,13 @@
 			  </c:if>  
 				
 				/>
-			<p class="errores" >${producto.errores}</p>
 			
+			<p class="errores">
+			<div class="alert alert-danger"<c:if test="${producto.errores == null or producto.errores == ''}">
+			  	Style="display:none;"</strong>
+			  </c:if>  >
+    <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${producto.errores}
+  </div>
 			<input type="hidden" name="opform" value="${param.op}" />
 		</div></div>
 	</form>

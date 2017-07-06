@@ -51,7 +51,12 @@
 				
 				/>
 				</div>
-			<p class="errores">${usuario.errores}</p>
+			<p class="errores">
+			<div class="alert alert-danger"<c:if test="${usuario.errores == null or usuario.errores == ''}">
+			  	Style="display:none;"</strong>
+			  </c:if>  >
+    <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${usuario.errores}
+  </div>
 			
 			<input type="hidden" name="opform" value="${param.op}" />
 		</div>

@@ -8,7 +8,7 @@
 <title>tienda</title>
 <link rel="stylesheet" href="${applicationScope.rutaBase}/css/estilo.css" />
 <link rel="stylesheet" href="${applicationScope.rutaBase}/bootstrap/bootstrap.min.css" />
-
+<link rel="stylesheet" type="text/css" href="${applicationScope.rutaBase}/bootstrap/datatables.min.css">
 <script src="js/funciones.js"></script>
 <link rel="shortcut icon" href="${applicationScope.rutaBase}/img/favicon.png" type="image/png">
 </head>
@@ -17,11 +17,17 @@
 		<h1 align="center"><IMG SRC="${applicationScope.rutaBase}/img/danilogo.png" width="500" height="100px" /></h1>
 			</header>
 	
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.danilozano.Tipos.Usuario" />
-
+<p class="errores">
+			<div class="alert alert-danger"<c:if test="${usuario.errores == null or usuario.errores == ''}">
+			  	Style="display:none;"</strong>
+			  </c:if>  >
+    <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${usuario.errores}
+  </div>
 
 	<form action="${applicationScope.rutaBase}/login" method="post" style="text-align: right;
     width: 50%;

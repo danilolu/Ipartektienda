@@ -38,9 +38,14 @@
 			  	Style="display:none";
 			  </c:if>  > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
 	En total :${sessionScope.numeroProductostotal}</B></h4>
+<p class="errores">
+			<div class="alert alert-danger"<c:if test="${producto.errores == null or producto.errores == ''}">
+			  	Style="display:none;"</strong>
+			  </c:if>  >
+    <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${producto.errores}
+  </div>
 
 
-<p class="errores" >${producto.errores}</p>
 
 <table id="myTable" class="table table-hover">
 	<thead>

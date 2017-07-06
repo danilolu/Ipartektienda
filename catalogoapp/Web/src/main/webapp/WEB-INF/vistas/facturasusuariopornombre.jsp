@@ -28,7 +28,9 @@
 			<tr>
 				
 				</td>
-				<td><a href="${applicationScope.rutaBase}/finpedido?op=desglosar&id_facturas=${factura.id_facturas}">Desglosar </a>${factura.id_facturas}</td>
+				<td>
+				<a  button type="button" class="btn btn-success" href="${applicationScope.rutaBase}/finpedido?op=desglosar&id_facturas=${factura.id_facturas}">Desglosar factura ${factura.id_facturas}
+				</td>
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.total} &euro;</td>
 				<td>${factura.fecha} </td>
