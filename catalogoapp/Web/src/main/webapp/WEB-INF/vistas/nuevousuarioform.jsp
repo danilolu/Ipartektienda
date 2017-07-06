@@ -7,35 +7,37 @@
 	
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.danilozano.Tipos.Usuario" />
-
+<div class="container-fluid">
 	<form action="${applicationScope.rutaBase}/noadmin/usuarioform" method="post">
-		<fieldset>
-			<label for="nombre">Nombre</label> 
+		
+				<div class="form-group">
+			<label for="nombre">Nombre</label></br> 
 			
 			<input id="nombre" name="nombre"
 			  required="required" minlength="4" value="${usuario.nombre}"/>
-		</fieldset>
-		<fieldset>
-			<label for="pass">Contraseña</label> <input type="password" id="pass"
+		</div>
+				<div class="form-group">
+			<label for="pass">Contraseña</label> </br> <input type="password" id="pass"
 				name="pass" minlength="4" />
-		</fieldset>
-		<fieldset>
-			<label for="pass2">Contraseña otra vez</label> <input type="password" id="pass2"
+		</div>
+				<div class="form-group">
+			<label for="pass2">Contraseña otra vez</label></br>  <input type="password" id="pass2"
 				name="pass2" minlength="4" />
-		</fieldset>
-		<fieldset>
-			<input type="submit" value="${fn:toUpperCase(param.op)}"
+		</div>
+				<div class="form-group">
+			<input type="submit" class="btn btn-success"value="${fn:toUpperCase(param.op)}"
 <c:if test="${param.op == null or param.op == ''}">
 			  	Style="display:none;"
 			  </c:if>  
-				
+					
 				/>
 			<p class="errores">${usuario.errores}</p>
 			
 			<input type="hidden" name="opform" value="${param.op}" />
-		</fieldset>
+		</div>
+				
 	</form>
-	
+	</div>
 	
 	
 <%@ include file="includes/pie.jsp" %>

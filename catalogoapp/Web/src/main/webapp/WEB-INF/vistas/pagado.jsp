@@ -11,7 +11,7 @@
 <link rel="shortcut icon" href="${applicationScope.rutaBase}/img/favicon.png" type="image/png">
 </head>
 <body>
-
+<body background="${applicationScope.rutaBase}/img/beer.jpg">
 
 
 <p style:"text-align: center;">

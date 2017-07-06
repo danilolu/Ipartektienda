@@ -2,9 +2,17 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
+
+
+<script>$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
+
 <h2>Pedido desglosado</h2>
 
-<table border="1" style="margin: 0 auto;">
+<table id="myTable" class="display">
 	<thead>
 		<tr>
 			<th>Id Factura</th>

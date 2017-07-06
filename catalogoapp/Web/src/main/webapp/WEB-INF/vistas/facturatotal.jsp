@@ -2,9 +2,17 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<h2>Todos los pedidos</h2>
 
-<table border="1" style="margin: 0 auto;">
+
+
+<script>$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
+<h2>Todos los pedidos</h2>
+<div class="container-fluid">
+  
+<table id="myTable" class="table table-hover">
 	<thead>
 		<tr>
 			<th>Id Factura</th>
@@ -20,7 +28,7 @@
 			<tr>
 				
 				</td>
-				<td><a href="${applicationScope.rutaBase}/admin/facturacrud?op=desglosar&id_facturas=${factura.id_facturas}">Desglosar </a>${factura.id_facturas}</td>
+				<td><a  button type="button" class="btn btn-success" href="${applicationScope.rutaBase}/admin/facturacrud?op=desglosar&id_facturas=${factura.id_facturas}">Desglosar factura ${factura.id_facturas}</td>
 				<td>${factura.nombre_usuario}</td>
 				<td>${factura.total} &euro;</td>
 				<td>${factura.fecha} </td>
@@ -32,6 +40,7 @@
 	</tbody>
 </table>
 
+</div>
 
 					
 

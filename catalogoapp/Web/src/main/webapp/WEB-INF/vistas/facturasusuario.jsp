@@ -1,15 +1,20 @@
 <%@ include file="includes/noadmincabecera.jsp"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<nav>
-	<ul>
+
 	
-	<li><a href="${applicationScope.rutaBase}/finpedido?op=facturas&nombre_usuario=${usuario.nombre}">Mis Pedidos</a></li>
+	<a href="${applicationScope.rutaBase}/finpedido?op=facturas&nombre_usuario=${usuario.nombre}" class="btn btn-success">Mis Pedidos</a>
 	
-	</ul>
-</nav>
+<script type="text/javascript" charset="utf8" src="${applicationScope.rutaBase}/bootstrap/datatables.min.js"></script>
+
+
+
+<script>$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
 <h2>Pedido desglosado</h2>
-<table border="1" style="margin: 0 auto;">
+<table id="myTable" class="table table-hover">
 	<thead>
 		<tr>
 			<th>Id Factura</th>

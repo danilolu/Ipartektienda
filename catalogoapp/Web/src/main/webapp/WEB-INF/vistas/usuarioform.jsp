@@ -7,10 +7,11 @@
 	
 	<jsp:useBean id="usuario" scope="request"
 		class="com.ipartek.danilozano.Tipos.Usuario" />
-
-	<form action="${applicationScope.rutaBase}/admin/usuarioform" method="post">
-		<fieldset>
-			<label for="nombre">Nombre</label> 
+<div class="container-fluid">
+	<form  action="${applicationScope.rutaBase}/admin/usuarioform" method="post">
+		
+  <div class="form-group">
+			<label for="nombre">Nombre</label> </br>
 			
 			<input id="nombre" name="nombre"
 			  required="required" minlength="4" value="${usuario.nombre}" 
@@ -19,40 +20,41 @@
 			  	readonly="readonly"Style=background-color:lightgray;
 			  </c:if>   
 		  	/>
-		</fieldset>
-		<fieldset>
+		</div>
+  <div class="form-group">
 			<label for="pass"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
 			  </c:if>  
 				
-				>Contraseña</label> <input type="password" id="pass"
+				>Contraseña</label></br> <input type="password" id="pass"
 				name="pass" minlength="4"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
 			  </c:if>  
 				
 				/>
-		</fieldset>
-		<fieldset>
+		</div>
+  <div class="form-group">
 			<label for="pass2"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
-			  </c:if>  >Contraseña otra vez</label> <input type="password" id="pass2"
+			  </c:if>  >Contraseña otra vez</label></br> <input type="password" id="pass2"
 				name="pass2" minlength="4"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
 			  </c:if>  
 				
 				/>
-		</fieldset>
-		<fieldset>
-			<input type="submit" value="${fn:toUpperCase(param.op)}"
+		</div>
+  <div class="form-group">
+			<input type="submit" class="btn btn-success"value="${fn:toUpperCase(param.op)}"
 <c:if test="${param.op == null or param.op == ''}">
 			  	Style="display:none;"
 			  </c:if>  
 				
 				/>
+				</div>
 			<p class="errores">${usuario.errores}</p>
 			
 			<input type="hidden" name="opform" value="${param.op}" />
-		</fieldset>
+		</div>
 	</form>
 	
 	

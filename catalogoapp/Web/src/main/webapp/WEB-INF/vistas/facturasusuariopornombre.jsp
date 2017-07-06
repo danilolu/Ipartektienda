@@ -1,16 +1,16 @@
 <%@ include file="includes/noadmincabecera.jsp"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<nav>
-	<ul>
+
+	<a href="${applicationScope.rutaBase}/carrito" class="btn btn-success">Catalogo</a>
 	
-	<li><a href="${applicationScope.rutaBase}/carrito">Catalogo</a></li>
-	
-	</ul>
-</nav>
+<script>$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
 <h2>Todos mis pedidos</h2>
 
-<table border="1" style="margin: 0 auto;">
+<table id="myTable" class="table table-hover">
 	<thead>
 		<tr>
 			<th>Id Factura</th>

@@ -3,18 +3,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="producto" scope="request"
 		class="com.ipartek.danilozano.Tipos.Carrito" />
-<nav>
-	<ul>
-	
-	<li><a href="${applicationScope.rutaBase}/carrito">Volver al catalogo</a></li>
-	<li><a href="${applicationScope.rutaBase}/finpedido?op=vaciar">Vaciar carrito</a></li>
-	</ul>
-	</ul>
-</nav>
+		<link rel="stylesheet" type="text/css" href="${applicationScope.rutaBase}/bootstrap/datatables.min.css">
+  
+<script type="text/javascript" charset="utf8" src="${applicationScope.rutaBase}/bootstrap/datatables.min.js"></script>
+
+
+
+<script>$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
+<div class="btn-group btn-group-">
+  <a href="${applicationScope.rutaBase}/carrito" class="btn btn-success">Volver al catalogo</a>
+  <a href="${applicationScope.rutaBase}/finpedido?op=vaciar" class="btn btn-success">Vaciar carrito</a>
+  
+</div>
+
+
 	<h2>Finalizar pedido</h2>
 <p class="errores" >${carrito.errores}</p>
 
-<table>
+<table id="myTable" class="table table-hover">
 	<thead>
 		<tr>
 			
@@ -45,7 +54,7 @@
 			
 			<th>Numero de productos ${sessionScope.numeroProductostotal}</th>
 			<th>Total a pagar:${sessionScope.precioTotal} &euro;</a></th>
-			<th><a href="${applicationScope.rutaBase}/carrito" target="_blank" onclick="window.open('${applicationScope.rutaBase}/carrito', '_self'); window.open('${applicationScope.rutaBase}/finpedido?op=pagar', '_blank', 'width=400,height=400')"; return false;">Pagar</a> </a></th>
+			<th><a type="button" class="btn btn-warning" href="${applicationScope.rutaBase}/carrito" target="_blank" onclick="window.open('${applicationScope.rutaBase}/carrito', '_self'); window.open('${applicationScope.rutaBase}/finpedido?op=pagar', '_blank', 'width=400,height=400')"; return false;">Pagar</a> </a></th>
 	
 	</tbody>
 </table>
