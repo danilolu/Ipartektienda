@@ -13,6 +13,19 @@
 <script type="text/javascript" charset="utf8" src="${applicationScope.rutaBase}/bootstrap/datatables.min.js"></script>
 <link rel="shortcut icon" href="${applicationScope.rutaBase}/img/favicon.png" type="image/png"></head>
 <body>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <body background="${applicationScope.rutaBase}/img/beer.jpg">
 	<header>
 		<h1><IMG  SRC="${applicationScope.rutaBase}/img/danilogo.png" width="500" height="100px" /></h1>

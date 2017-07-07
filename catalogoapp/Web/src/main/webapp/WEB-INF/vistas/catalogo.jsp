@@ -14,7 +14,7 @@
 });
 </script>
 
-<div class="btn-group btn-group-">
+<div align="center" class="btn-group btn-group-" >
   <a href="${applicationScope.rutaBase}/finpedido"<c:if test="${usuario.nombre == null }">
 			  	Style="display:none";
 			  </c:if>  class="btn btn-success">Finalizar pedido</a>
@@ -38,12 +38,9 @@
 			  	Style="display:none";
 			  </c:if>  > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
 	En total :${sessionScope.numeroProductostotal}</B></h4>
-<p class="errores">
-			<div class="alert alert-danger"<c:if test="${producto.errores == null or producto.errores == ''}">
-			  	Style="display:none;"</strong>
-			  </c:if>  >
-    <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${producto.errores}
-  </div>
+
+			
+    
 
 
 
