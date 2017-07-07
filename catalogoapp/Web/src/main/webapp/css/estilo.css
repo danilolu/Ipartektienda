@@ -39,6 +39,7 @@ header, footer {
 	background-color: #315205;
 	text-align: center;
 	padding: 1em;
+	text-shadow: 3px 2px orange;
 }
 
 fieldset {

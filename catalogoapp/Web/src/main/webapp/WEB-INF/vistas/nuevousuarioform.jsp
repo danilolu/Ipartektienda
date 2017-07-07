@@ -36,11 +36,13 @@
 			  	Style="display:none;"</strong>
 			  </c:if>  >
     <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${usuario.errores}
-  </div>
-			
-			<input type="hidden" name="opform" value="${param.op}" />
+  <a href="${applicationScope.rutaBase}/noadmin/login?op=alta">
+ 
+			<a href="${applicationScope.rutaBase}/noadmin/login?op=alta"  class="btn btn-info"><span class="glyphicon glyphicon-repeat"> Reintentar</a>
 		</div>
-				
+			 </div>	
+			 			<input type="hidden" name="opform" value="${param.op}" />
+			 
 	</form>
 	</div>
 	

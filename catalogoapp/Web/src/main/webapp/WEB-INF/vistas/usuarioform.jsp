@@ -56,6 +56,7 @@
 			  	Style="display:none;"</strong>
 			  </c:if>  >
     <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${usuario.errores}
+  <a href="javascript:history.back()"  class="btn btn-info"><span class="glyphicon glyphicon-repeat"> Reintentar</a>
   </div>
 			
 			<input type="hidden" name="opform" value="${param.op}" />

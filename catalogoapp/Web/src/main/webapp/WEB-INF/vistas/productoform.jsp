@@ -20,7 +20,7 @@
 				
 			<input id="id"	name="id" required="required"  value="${producto.id}"
 			  	Style=background-color:lightgray; readonly="readonly" 
-			  		  <c:if test="${ param.op == 'alta'}">
+			  		  <c:if test="${ param.op == 'alta' || param.op == null}">
 			  	Type="hidden";
 			  </c:if>  
 				
@@ -100,6 +100,7 @@
 			  	Style="display:none;"</strong>
 			  </c:if>  >
     <strong>Error <span class="glyphicon glyphicon-exclamation-sign"> ${producto.errores}
+ <a href="javascript:history.back()"  class="btn btn-info"><span class="glyphicon glyphicon-repeat"> Reintentar</a>
   </div>
 			<input type="hidden" name="opform" value="${param.op}" />
 		</div></div>
