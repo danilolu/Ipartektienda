@@ -10,7 +10,7 @@ label {
 	
 }
 input {
-	width: 10em;
+	
 text-align:center;
 }
 .errores {
@@ -30,7 +30,7 @@ h4 {
 nav {
     	background-image: url("/Web/img/background.jpg");
 
-    padding: 1em;
+   
 text-align:center;}
 
 
@@ -39,7 +39,7 @@ header, footer {
 	background-color: #315205;
 	text-align: center;
 	padding: 1em;
-	text-shadow: 3px 2px orange;
+	;
 }
 
 fieldset {

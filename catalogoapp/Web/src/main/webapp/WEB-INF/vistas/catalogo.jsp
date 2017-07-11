@@ -14,7 +14,28 @@
 });
 </script>
 
-<div align="center" class="btn-group btn-group-" >
+
+<h2 style="
+    margin-bottom: 0px;
+    margin-top: 0px;
+">Catalogo </h2>
+
+
+<h4<c:if test="${usuario.nombre != null }">
+			  	Style="display:none";
+			  </c:if> style="
+    margin-top: 0px;"
+ >Invitado, para iniciar una compra debes iniciar sesion en la tienda</h4>
+<h4
+<c:if test="${usuario.nombre == null }">
+			  	Style="display:none";
+			  </c:if>  style="
+    margin-top: 0px;margin-bottom: 0px;text-align:right" > <B><span class="glyphicon glyphicon-shopping-cart">${sessionScope.numeroProductostotal} Productos 
+     
+	</B></h4>
+<div class="row">
+<div class="col-md-4 col-md-offset-4">
+			<div class="btn-group btn-group-" >
   <a href="${applicationScope.rutaBase}/finpedido"<c:if test="${usuario.nombre == null }">
 			  	Style="display:none";
 			  </c:if>  class="btn btn-success">Finalizar pedido</a>
@@ -25,21 +46,8 @@
 			  	Style="display:none";
 			  </c:if> class="btn btn-success">Mis pedidos</a>
 </div>
-
-
-
-
-
-<h2>Catalogo </h2>
-<h4<c:if test="${usuario.nombre != null }">
-			  	Style="display:none";
-			  </c:if>>Invitado, para iniciar una compra debes iniciar sesion en la tienda</h4>
-<h4 <c:if test="${usuario.nombre == null }">
-			  	Style="display:none";
-			  </c:if>  > <B>${sessionScope.numeroProductos} producto/s diferentes en el carrito</br>
-	En total :${sessionScope.numeroProductostotal}</B></h4>
-
-			
+   </div>
+    </div>
     
 
 
