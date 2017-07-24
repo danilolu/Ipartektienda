@@ -176,6 +176,7 @@ public class CarritoServlet extends HttpServlet {
 
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 				session.setAttribute("numeroProductostotal", carrito.totalProductos());
+				session.setAttribute("precioTotal", carrito.precioTotal());
 
 				request.getRequestDispatcher("/carrito").forward(request, response);
 				dao.cerrar();

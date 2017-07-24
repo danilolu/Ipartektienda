@@ -56,18 +56,6 @@
 			
 </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <body background="${applicationScope.rutaBase}/img/beer.jpg">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

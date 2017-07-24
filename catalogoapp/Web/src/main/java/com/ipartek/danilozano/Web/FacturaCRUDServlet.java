@@ -52,7 +52,7 @@ public class FacturaCRUDServlet extends HttpServlet {
 
 			switch (op) {
 			case "factotal":
-				log.info("paso por factoal");
+				log.info("paso por factotal");
 				Factura[] facturastotal = dao.findallfacturastotal();
 
 				dao.cerrar();

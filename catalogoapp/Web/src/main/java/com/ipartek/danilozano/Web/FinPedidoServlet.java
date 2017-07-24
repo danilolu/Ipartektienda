@@ -111,12 +111,14 @@ public class FinPedidoServlet extends HttpServlet {
 					dao.resetCant(producto);
 
 					dao.cerrar();
+
 				}
 
 				session.setAttribute("carrito", carrito);
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 				session.setAttribute("numeroProductostotal", carrito.totalProductos());
+				session.setAttribute("precioTotal", carrito.precioTotal());
 
 				request.getRequestDispatcher("/carrito").forward(request, response);
 				break;
@@ -136,6 +138,7 @@ public class FinPedidoServlet extends HttpServlet {
 				session.setAttribute("productosArr", carrito.buscarTodosLosProductos());
 				session.setAttribute("numeroProductos", carrito.buscarTodosLosProductos().length);
 				session.setAttribute("numeroProductostotal", carrito.totalProductos());
+				session.setAttribute("precioTotal", precioTotal);
 
 				session.setAttribute("precioTotal", carrito.precioTotal());
 				request.getRequestDispatcher("/WEB-INF/vistas/finpedido.jsp").forward(request, response);

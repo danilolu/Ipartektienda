@@ -34,13 +34,23 @@ nav {
 text-align:center;}
 
 
-header, footer {
+header {
 	
 	background-color: #315205;
 	text-align: center;
 	padding: 1em;
 	;
 }
+
+footer {
+	 
+   left:0px;
+   bottom:0px;
+   height:50px;
+   width:100%;
+background-color: #315205;
+}
+
 
 fieldset {
 	border: 0;

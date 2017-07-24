@@ -31,7 +31,7 @@
 			  	Style="display:none";
 			  </c:if>  style="
     margin-top: 0px;margin-bottom: 0px;text-align:right" > <B><span class="glyphicon glyphicon-shopping-cart">${sessionScope.numeroProductostotal} Productos 
-     
+     Total ${sessionScope.precioTotal}&euro;    
 	</B></h4>
 <div class="row">
 <div class="col-md-4 col-md-offset-4">
