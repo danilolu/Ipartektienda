@@ -27,7 +27,7 @@
 			  </c:if>  
 				
 				>Comentarios</label></br> <input  id="comentarios"
-				name="comentarios" minlength="4"<c:if test="${ param.op == 'borrar'}">
+				name="comentarios" minlength="4" required="required" value="${proveedor.comentarios}"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
 			  </c:if>  
 				
@@ -36,8 +36,8 @@
   <div class="form-group">
 			<label for="telefono"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
-			  </c:if>  >Telefono</label></br> <input type="number" id="telefono"
-				name="telefono" minlength="4"<c:if test="${ param.op == 'borrar'}">
+			  </c:if>  >Telefono</label></br> <input type="text" id="telefono"
+				pattern="^[9|8|7|6]\d{8}$" name="telefono"  required="required" value="${proveedor.telefono}"<c:if test="${ param.op == 'borrar'}">
 			  	Style="display:none";
 			  </c:if>  
 				
