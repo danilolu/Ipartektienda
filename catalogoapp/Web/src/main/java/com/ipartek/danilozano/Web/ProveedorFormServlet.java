@@ -2,9 +2,6 @@ package com.ipartek.danilozano.Web;
 
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,9 +18,7 @@ import com.ipartek.danilozano.Tipos.Proveedor;
 public class ProveedorFormServlet extends HttpServlet {
 
 	private static Logger log = Logger.getLogger(ProductoFormServlet.class);
-	private static EntityManager manager;
 
-	private static EntityManagerFactory emf;
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +26,7 @@ public class ProveedorFormServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		emf = Persistence.createEntityManagerFactory("persistencia");
-		manager = emf.createEntityManager();
+		// instanciar el dal hibernate
 		ProveedorDalHibernate provedorDAL = new ProveedorDalHibernate();
 		// definir ruteo
 		RequestDispatcher rutaListado = request.getRequestDispatcher(ProveedorCRUDServlet.RUTA_SERVLET_LISTADO);
@@ -63,10 +57,8 @@ public class ProveedorFormServlet extends HttpServlet {
 		switch (op) {
 		case "alta":
 			if (nombre_p != null || comentarios != null || telefono != 0) {
-				manager.getTransaction().begin();
-				manager.persist(new Proveedor(nombre_p, comentarios, telefono));
-				manager.getTransaction().commit();
-				// provedorDAL.alta(proveedor);
+
+				provedorDAL.alta(proveedor);
 				rutaListado.forward(request, response);
 
 			} else {
@@ -79,22 +71,18 @@ public class ProveedorFormServlet extends HttpServlet {
 
 		case "modificar":
 
-			proveedor = manager.find(Proveedor.class, nombre_p);
-			manager.getTransaction().begin();
-			proveedor.setNombre_p(nombre_p);
+			proveedor = provedorDAL.buscarPorNombre(nombre_p);
 			proveedor.setComentarios(comentarios);
 			proveedor.setTelefono(telefono);
-			manager.getTransaction().commit();
-			rutaListado.forward(request, response);
+			log.info("PROVEEDORUPDATE es: " + proveedor);
+			provedorDAL.modificar(proveedor);
 
+			rutaListado.forward(request, response);
 			break;
 		case "borrar":
-			// proveedor = provedorDAL.buscarPorNombre(proveedor.getNombre_p());
-			// provedorDAL.borrar(proveedor.getNombre_p());
-			proveedor = manager.find(Proveedor.class, nombre_p);
-			manager.getTransaction().begin();
-			manager.remove(proveedor);
-			manager.getTransaction().commit();
+
+			provedorDAL.borrar(nombre_p);
+
 			rutaListado.forward(request, response);
 
 			break;

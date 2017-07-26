@@ -1,41 +1,52 @@
 package com.ipartek.danilozano.DAL;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.danilozano.Tipos.Proveedor;
 
 public class ProveedorDalHibernate implements ProveedorDAL {
+	private static Logger log = Logger.getLogger(ProveedorDalHibernate.class);
 	private static EntityManager manager;
 
 	private static EntityManagerFactory emf;
 
-	@Override
-	public void alta(Proveedor proveedor) {
+	public void abrir() {
 		emf = Persistence.createEntityManagerFactory("persistencia");
 		manager = emf.createEntityManager();
-
 		manager.getTransaction().begin();
-		manager.merge(proveedor);
+
+	}
+
+	public void cerrar() {
 		manager.getTransaction().commit();
+	}
+
+	@Override
+	public void alta(Proveedor proveedor) {
+
+		abrir();
+		manager.merge(proveedor);
+		cerrar();
 
 	}
 
 	@Override
 	public void modificar(Proveedor proveedor) {
-		// TODO Auto-generated method stub
 
+		abrir();
+		manager.merge(proveedor);
+		cerrar();
+		log.info("telefono: " + proveedor.getTelefono());
 	}
 
 	@Override
 	public void borrar(Proveedor proveedor) {
-
-		// manager.getTransaction().begin();
-		// manager.remove(proveedor);
-		// manager.getTransaction().commit();
 
 		manager.getTransaction().begin();
 		manager.remove(proveedor);
@@ -53,14 +64,19 @@ public class ProveedorDalHibernate implements ProveedorDAL {
 
 	@Override
 	public Proveedor buscarPorNombre(String nombre_p) {
-		// TODO Auto-generated method stub
-		return manager.find(Proveedor.class, nombre_p);
+		abrir();
+		Proveedor proveedor = manager.find(Proveedor.class, nombre_p);
+		cerrar();
+		log.info("el proveedor buscado por nombre es: " + proveedor);
+		return proveedor;
 	}
 
 	@Override
-	public Proveedor[] buscarTodosLosUsuarios() {
+	public Proveedor[] buscarTodosLosProveedores() {
+		abrir();
 		@SuppressWarnings("unchecked")
-		List<Proveedor> proveedores = (List<Proveedor>) manager.createQuery("FROM Proveedor").getResultList();
+		ArrayList<Proveedor> proveedores = (ArrayList<Proveedor>) manager.createQuery("FROM Proveedor").getResultList();
+		cerrar();
 		return proveedores.toArray(new Proveedor[proveedores.size()]);
 	}
 

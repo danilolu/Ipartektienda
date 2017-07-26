@@ -13,6 +13,6 @@ public interface ProveedorDAL {
 
 	public Proveedor buscarPorNombre(String nombre);
 
-	public Proveedor[] buscarTodosLosUsuarios();
+	public Proveedor[] buscarTodosLosProveedores();
 
 }
